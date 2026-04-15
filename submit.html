@@ -166,7 +166,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="contribution-type">Type of Contribution</label>
-                                <select name="type" id="contribution-type" data-testid="submit-type">
+                                <select name="type" id="contribution-type" required data-testid="submit-type">
                                     <option value="photograph">Photograph</option>
                                     <option value="oral-history">Oral History / Memory</option>
                                     <option value="flyer">Flyer / Document</option>
@@ -177,15 +177,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="title">Title / Caption</label>
-                                <input type="text" name="title" id="title" placeholder="Brief title for your submission" data-testid="submit-title">
+                                <input type="text" name="title" id="title" placeholder="Brief title for your submission" required data-testid="submit-title">
                             </div>
                             <div class="form-group">
                                 <label for="description">Description *</label>
                                 <textarea name="description" id="description" rows="4" placeholder="Tell us about the item(s) you are sharing..." required data-testid="submit-desc"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="submission-link">Link to Files (Optional)</label>
-                                <input type="text" name="link" id="submission-link" placeholder="Google Drive, Dropbox, or Box link" data-testid="submit-link">
+                                <label for="submission-link">Link to Files</label>
+                                <input type="text" name="link" id="submission-link" placeholder="Google Drive, Dropbox, or Box link" required data-testid="submit-link">
                             </div>
                             <button type="submit" class="cta-button" id="submit-btn" data-testid="submit-btn">Submit Contribution</button>
                         </form>
@@ -208,7 +208,7 @@
                     Memory is ours. Build it together.
                 </div>
                 <div class="footer-contact">
-                    Add to the archive → <a href="mailto:lacasaspecialprojects@gmail.com?subject=HP%26E%20Submission">lacasaspecialprojects@gmail.com</a>
+                    Add to the archive → <a href="submit.html">Submit a contribution</a>
                 </div>
             </div>
         </div>
