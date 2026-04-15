@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">    <style>
         :root {
             --bg: #1a2e1f;
             --bg-soft: #223327;
@@ -23,10 +23,10 @@
             --space-4: 1rem;
             --space-6: 1.5rem;
             --space-8: 2rem;
-            --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
+            --font-display: 'Space Mono', 'Courier New', monospace; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
 
         /* ---- Header ---- */
@@ -56,7 +56,7 @@
             border-bottom: 1px solid var(--border-strong);
             background: transparent;
             color: var(--text-main);
-            font-family: var(--font-body), monospace;
+            font-family: var(--font-body);
             padding: 0.6rem 2.5rem 0.6rem 0;
             width: 100%;
             outline: none;
@@ -92,7 +92,7 @@
         }
         .filter-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .filter-btn {
-            font-family: var(--font-body), monospace;
+            font-family: var(--font-body);
             font-size: 0.72rem;
             color: var(--text-muted);
             padding: 0.28rem 0.65rem;
@@ -113,7 +113,7 @@
         .sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
         .sort-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
         .sort-select {
-            font-family: var(--font-body), monospace;
+            font-family: var(--font-body);
             font-size: 0.72rem;
             background: var(--bg-soft-2);
             border: 1px solid var(--border-soft);
@@ -126,7 +126,7 @@
         .sort-select:focus { border-color: var(--accent); }
         .sort-select option { background: var(--bg-soft-2); }
         .clear-all-btn {
-            font-family: var(--font-body), monospace;
+            font-family: var(--font-body);
             font-size: 0.7rem;
             background: none;
             border: none;
@@ -337,7 +337,7 @@
                 </div>
                 <div class="filter-actions">
                     <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
-                        <button class="filter-btn" data-group="featured" data-value="featured" data-testid="filter-featured">★ Featured only</button>
+                        <button class="filter-btn" data-group="featured" data-value="featured" data-testid="filter-featured">&#9733; Featured only</button>
                         <button class="filter-btn" data-group="submitter" data-value="has-file" data-testid="filter-has-file">Has file link</button>
                     </div>
                     <div class="sort-wrap">
