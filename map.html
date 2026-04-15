@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <title>Map | La Casa HP&E Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+    <style>
+        :root {
+            --bg: #1a2e1f; --bg-soft: #223327; --bg-soft-2: #2a3d2e;
+            --bg-footer: #111a13; --text-main: #f2ead8; --text-muted: #9aab97;
+            --accent: #c9a84c; --border-soft: rgba(242,234,216,0.12);
+            --border-strong: rgba(242,234,216,0.3); --divider: rgba(242,234,216,0.15);
+            --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Space Mono', 'Courier New', monospace;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: rgba(26,46,31,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; transition: box-shadow 0.3s ease, padding 0.3s ease; }
+        .site-header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); padding: 0.65rem 0; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
+        .brand-mark-text:hover { color: var(--accent); }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; padding: 0.25rem 0; position: relative; transition: color var(--transition); }
+        .nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s ease; }
+        .nav a:hover { color: var(--text-main); }
+        .nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
+        .nav a[aria-current="page"] { color: var(--text-main); }
+        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .section-head { margin-bottom: 2rem; }
+        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+        h2 { font-family: var(--font-display); font-size: 2.6rem; font-style: italic; font-weight: 400; line-height: 1.1; }
+        .section-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 700px; }
+        #map { width: 100%; height: 540px; border: 1px solid var(--border-soft); margin-bottom: 3rem; background: var(--bg-soft); }
+        .leaflet-container { background: #1a2e1f !important; }
+        .leaflet-popup-content-wrapper { background: #1e3324; color: #f2ead8; border: 1px solid rgba(242,234,216,0.2); border-radius: 0; font-family: var(--font-body), monospace; font-size: 0.8rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .leaflet-popup-tip { background: #1e3324; }
+        .leaflet-popup-content h4 { font-family: var(--font-display); font-size: 1rem; color: #c9a84c; margin-bottom: 0.3rem; }
+        .leaflet-popup-content .pop-addr { font-size: 0.7rem; color: var(--accent); opacity: 0.7; margin-bottom: 0.4rem; }
+        .leaflet-popup-content p { color: #9aab97; font-size: 0.75rem; line-height: 1.5; margin: 0; }
+        .leaflet-popup-close-button { color: #9aab97 !important; }
+        .map-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+        .legend-item h4 { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .legend-item p { font-size: 0.85rem; color: var(--text-muted); }
+        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+        .admin-access-bar { text-align: center; padding: 1.5rem 0; background: var(--bg-footer); border-top: 1px solid var(--border-soft); }
+        .admin-btn { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); text-decoration: none; padding: 0.4rem 1rem; border: 1px solid var(--border-soft); transition: var(--transition); }
+        .admin-btn:hover { color: var(--accent); border-color: var(--accent); }
+        @media (max-width: 768px) { h2 { font-size: 2rem; } #map { height: 360px; } }
+    </style>
+</head>
+<body>
+    <header class="site-header" id="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
+                <nav class="nav">
+                    <a href="mission.html">Mission</a>
+                    <a href="collections.html">Collections</a>
+                    <a href="map.html" aria-current="page">Map</a>
+                    <a href="timeline.html">Timeline</a>
+                    <a href="groups.html">Groups</a>
+                    <a href="submit.html">Contribute</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">Campus Geography</span>
+                    <h2>Memory has a coordinate.</h2>
+                </div>
+                <p class="section-intro">Mapping the physical presence of the Latine community across the Yale landscape. Click any marker for details.</p>
+                <div id="map" data-testid="campus-map"></div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <h4>Cultural Corridor</h4>
+                        <p>The concentration of cultural centers along Crown and Park streets represents the heart of student advocacy since the 1970s.</p>
+                    </div>
+                    <div class="legend-item">
+                        <h4>Institutional Center</h4>
+                        <p>Old Campus and Sterling Library served as primary sites for organizational meetings and historic protests.</p>
+                    </div>
+                    <div class="legend-item">
+                        <h4>Solidarity Sites</h4>
+                        <p>Proximity to the Afro-American Cultural Center and other houses fostered the cross-cultural coalitions that built La Casa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div><strong>La Casa Cultural &middot; HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive &rarr; <a href="submit.html">Submit a contribution</a></div>
+            </div>
+        </div>
+    </footer>
+    <div class="admin-access-bar">
+        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+    <script>
+        // Sticky header
+        var header = document.getElementById('site-header');
+        window.addEventListener('scroll', function() {
+            header.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Init map
+        var map = L.map('map', {
+            center: [41.3090, -72.9310],
+            zoom: 16,
+            zoomControl: true,
+            scrollWheelZoom: false
+        });
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/" target="_blank" rel="noopener">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Force tile repaint after layout settles
+        setTimeout(function() { map.invalidateSize(); }, 200);
+
+        var goldIcon = L.divIcon({
+            className: '',
+            html: '<div style="width:13px;height:13px;background:#c9a84c;border-radius:50%;border:2px solid #f2ead8;box-shadow:0 0 10px rgba(201,168,76,0.7);"></div>',
+            iconSize: [13, 13], iconAnchor: [6, 6], popupAnchor: [0, -10]
+        });
+
+        var primaryIcon = L.divIcon({
+            className: '',
+            html: '<div style="width:17px;height:17px;background:#c9a84c;border-radius:50%;border:2px solid #f2ead8;box-shadow:0 0 14px rgba(201,168,76,0.9);"></div>',
+            iconSize: [17, 17], iconAnchor: [8, 8], popupAnchor: [0, -12]
+        });
+
+        var locations = [
+            { lat: 41.30510, lng: -72.93384, name: 'La Casa Cultural de Julia de Burgos', addr: '301 Crown St', desc: 'Yale\'s Latine cultural center, established 1969. A three-story red brick house that has been the hub of community organizing, programming, and the HP&E archive for over 50 years.', primary: true },
+            { lat: 41.30524, lng: -72.93357, name: 'Asian American Cultural Center', addr: '295 Crown St', desc: 'Part of Yale\'s network of cultural houses on Crown Street, fostering inter-community solidarity and co-programming with La Casa.', primary: false },
+            { lat: 41.30564, lng: -72.93481, name: 'Afro-American Cultural Center (AACC)', addr: '211 Park St', desc: 'A sister institution whose proximity fostered the cross-cultural coalitions that shaped La Casa\'s founding. Opened 1969 on Chapel Street, moved to Park Street in 1970.', primary: false },
+            { lat: 41.30966, lng: -72.92812, name: 'Native American Cultural Center (NACC)', addr: '26 High St', desc: 'Part of the network of cultural houses at Yale. The NACC has long been an ally in coalition-building with La Casa students.', primary: false },
+            { lat: 41.30812, lng: -72.92993, name: 'Old Campus', addr: 'Phelps Gate, College St', desc: 'Central site for early organizational meetings, rallies, and historic protests during the founding era of La Casa and allied student groups.', primary: false },
+            { lat: 41.31128, lng: -72.92903, name: 'Sterling Memorial Library', addr: '120 High St', desc: 'Yale\'s main library and one of its most iconic buildings. Site of early archive deposits and scholarly research into the history of the Latine community at Yale.', primary: false },
+            { lat: 41.31157, lng: -72.92730, name: 'Beinecke Rare Book Library', addr: '121 Wall St', desc: 'Home to rare manuscripts and special collections. A key resource for historical research on Yale\'s cultural communities and Latinx history.', primary: false },
+            { lat: 41.30852, lng: -72.92840, name: 'Linsly-Chittenden Hall', addr: '63 High St', desc: 'Classroom building where early Chicano and Latino Studies courses were proposed, debated, and eventually taught — a key site of academic advocacy.', primary: false },
+            { lat: 41.31002, lng: -72.92944, name: 'Cross Campus', addr: 'Cross Campus Green', desc: 'Central green space and gathering site for student demonstrations, cultural festivals, and community events organized by La Casa and allied groups.', primary: false },
+            { lat: 41.30921, lng: -72.93018, name: 'Battell Chapel', addr: '400 College St', desc: 'Historic chapel used for vigils, memorial services, and solemn community gatherings since the founding era. A site of mourning and celebration alike.', primary: false },
+            { lat: 41.31196, lng: -72.93034, name: 'Schwarzman Center', addr: '168 Grove St', desc: 'Yale\'s university commons and premier gathering space, site of many cultural events, commemorations, and the 50th anniversary celebrations in 2019.', primary: false },
+            { lat: 41.31162, lng: -72.93022, name: 'Woolsey Hall', addr: '500 College St', desc: 'Yale\'s grand ceremonial hall. Hosted landmark assemblies and the 50th anniversary celebration in 2019 marking La Casa\'s half-century of resistance.', primary: false },
+            { lat: 41.30730, lng: -72.93106, name: 'Dwight Hall', addr: '67 High St', desc: 'Center for public service and social justice organizing. Many La Casa-affiliated students led community service and advocacy work through Dwight Hall.', primary: false },
+            { lat: 41.30614, lng: -72.93168, name: 'Yale University Art Gallery', addr: '1111 Chapel St', desc: 'Hosted exhibitions featuring Latinx and Latin American artists connected to La Casa programming. A longtime partner for cultural visibility on campus.', primary: false },
+            { lat: 41.30583, lng: -72.92969, name: 'Yale Repertory Theatre', addr: '1120 Chapel St', desc: 'Site of cultural performances and theatrical events tied to La Casa programming, including works by Latinx playwrights and directors.', primary: false },
+            { lat: 41.30510, lng: -72.92955, name: 'Grace Hopper College', addr: '194 Elm St', desc: 'Residential college home to many Latine students and site of cultural programming partnerships over the decades.', primary: false },
+            { lat: 41.31386, lng: -72.92576, name: 'Silliman College', addr: 'Hillhouse Ave', desc: 'Residential college with significant ties to student organizing in the 1970s and 80s. Several La Casa founders were Silliman residents.', primary: false },
+            { lat: 41.31472, lng: -72.92634, name: 'Payne Whitney Gymnasium', addr: '70 Tower Pkwy', desc: 'Site of intramural and cultural sporting events that brought diverse student communities together under shared La Casa-organized programming.', primary: false }
+        ];
+
+        locations.forEach(function(loc) {
+            L.marker([loc.lat, loc.lng], { icon: loc.primary ? primaryIcon : goldIcon })
+                .addTo(map)
+                .bindPopup('<h4>' + loc.name + '</h4><div class="pop-addr">' + loc.addr + '</div><p>' + loc.desc + '</p>');
+        });
+    </script>
+</body>
+</html>
