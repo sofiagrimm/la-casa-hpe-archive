@@ -6,80 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">    <style>
-        :root {
-            --bg: #1a2e1f;
-            --bg-soft: #223327;
-            --bg-soft-2: #2a3d2e;
-            --bg-footer: #111a13;
-            --text-main: #f2ead8;
-            --text-muted: #9aab97;
-            --accent: #c9a84c;
-            --border-soft: rgba(242, 234, 216, 0.12);
-            --border-strong: rgba(242, 234, 216, 0.3);
-            --divider: rgba(242, 234, 216, 0.15);
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-4: 1rem;
-            --space-6: 1.5rem;
-            --space-8: 2rem;
-            --font-display: 'Space Mono', 'Courier New', monospace;
-            --font-body: 'Space Mono', 'Courier New', monospace;
-            --transition: 0.2s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
-        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
-        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
-        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
-        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-        .nav a:hover { color: var(--text-main); text-decoration: underline; }
-
-        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
-        .section-head { margin-bottom: 3rem; }
-        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-
-        h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; }
-        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
-
-        .opening-quote { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
-        .opening-quote .quote-text { font-family: var(--font-display); font-size: 2rem; font-style: italic; line-height: 1.35; margin-bottom: 1.5rem; max-width: 860px; color: var(--text-main); }
-        .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
-        .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
-
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
         .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
         .group-card { background: var(--bg-soft); padding: 2rem; border: 1px solid var(--border-soft); transition: var(--transition); text-decoration: none; color: inherit; display: block; }
         .group-card:hover { background: var(--bg-soft-2); border-color: var(--accent); }
         .group-card h3 { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--text-main); }
         .group-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
-
-        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
-        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
-        .footer-contact a { color: var(--accent); text-decoration: underline; }
-
-        .admin-access-bar { text-align: center; padding: 1.5rem 0; background: var(--bg-footer); border-top: 1px solid var(--border-soft); }
-        .admin-btn { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); text-decoration: none; padding: 0.4rem 1rem; border: 1px solid var(--border-soft); transition: var(--transition); }
-        .admin-btn:hover { color: var(--accent); border-color: var(--accent); }
-
-        @media (max-width: 768px) {
-            h2 { font-size: 2rem; }
-            .opening-quote .quote-text { font-size: 1.5rem; }
-        }
+        @media (max-width: 768px) { h2 { font-size: 2rem; } }
     </style>
 </head>
 <body>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
-                <nav class="nav">
+                <a href="index.html" aria-label="La Casa HP&amp;E Archive home">
+                    <img src="logo.png" alt="La Casa HP&amp;E Archive" class="brand-logo">
+                </a>
+                <nav class="nav" aria-label="Primary navigation">
                     <a href="mission.html">Mission</a>
                     <a href="collections.html">Collections</a>
                     <a href="map.html">Map</a>
                     <a href="timeline.html">Timeline</a>
-                    <a href="groups.html">Groups</a>
+                    <a href="groups.html" aria-current="page">Groups</a>
                     <a href="submit.html">Contribute</a>
                 </nav>
             </div>
@@ -102,54 +52,18 @@
                     <h2>The collective memory.</h2>
                 </div>
                 <div class="groups-grid" data-testid="groups-grid">
-                    <a href="https://campuspress.yale.edu/mecha/about/" target="_blank" rel="noopener" class="group-card">
-                        <h3>MEChA de Yale</h3>
-                        <p>A student organization dedicated to Chicanx culture, history, and activism on campus since the late 60s.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>La Casa Cultural</h3>
-                        <p>The Latinx Cultural Center at Yale, serving as a hub for community building and historical preservation.</p>
-                    </a>
-                    <a href="https://collegearts.yale.edu/organizations/alliance-dance-yale/dance-groups/ballet-folklorico-mexicano-de-yale-bfmdy" target="_blank" rel="noopener" class="group-card">
-                        <h3>Ballet Folkl&oacute;rico de Yale</h3>
-                        <p>Preserving and sharing traditional Mexican dance through performance and community engagement.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>GRADLAS</h3>
-                        <p>Yale Graduate Students of Latin American and Caribbean Origin, bridging the gap between undergraduate and graduate communities.</p>
-                    </a>
-                    <a href="https://collegearts.yale.edu/organizations/alliance-dance-yale/dance-groups/sabrosura" target="_blank" rel="noopener" class="group-card">
-                        <h3>Sabrosura</h3>
-                        <p>Yale&rsquo;s premier Latin dance team, contributing to the vibrant cultural landscape of the university.</p>
-                    </a>
-                    <a href="https://despiertaboricua-yale.org/about.html" target="_blank" rel="noopener" class="group-card">
-                        <h3>Despierta Boricua</h3>
-                        <p>Yale&rsquo;s Puerto Rican student organization, founded in 1971 and dedicated to promoting Puerto Rican culture and advocacy.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>UndocuAllied at Yale</h3>
-                        <p>Supporting undocumented students and allies through advocacy, resources, and community building at Yale.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>La Unidad de Yale</h3>
-                        <p>A Latinx political and cultural organization advocating for the rights and visibility of the Latine community.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>Yale Maracatu</h3>
-                        <p>An Afro-Brazilian percussion and dance ensemble celebrating the cultural traditions of the African diaspora in Latin America.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>Alianza for Latin America at Yale</h3>
-                        <p>Promoting awareness of political, social, and economic issues in Latin America through events and advocacy.</p>
-                    </a>
-                    <a href="https://yaleconnect.yale.edu/sube/contact-us/" target="_blank" rel="noopener" class="group-card">
-                        <h3>Latinx Pre-Professional Society</h3>
-                        <p>Supporting Latine students in pre-medical, pre-law, and other professional tracks through mentorship and networking.</p>
-                    </a>
-                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card">
-                        <h3>HP&amp;E Committee</h3>
-                        <p>La Casa&rsquo;s Historical Preservation &amp; Education committee, dedicated to archiving and sharing the community&rsquo;s history.</p>
-                    </a>
+                    <a href="https://campuspress.yale.edu/mecha/about/" target="_blank" rel="noopener" class="group-card"><h3>MEChA de Yale</h3><p>A student organization dedicated to Chicanx culture, history, and activism on campus since the late 60s.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>La Casa Cultural</h3><p>The Latinx Cultural Center at Yale, serving as a hub for community building and historical preservation.</p></a>
+                    <a href="https://collegearts.yale.edu/organizations/alliance-dance-yale/dance-groups/ballet-folklorico-mexicano-de-yale-bfmdy" target="_blank" rel="noopener" class="group-card"><h3>Ballet Folkl&oacute;rico de Yale</h3><p>Preserving and sharing traditional Mexican dance through performance and community engagement.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>GRADLAS</h3><p>Yale Graduate Students of Latin American and Caribbean Origin, bridging the gap between undergraduate and graduate communities.</p></a>
+                    <a href="https://collegearts.yale.edu/organizations/alliance-dance-yale/dance-groups/sabrosura" target="_blank" rel="noopener" class="group-card"><h3>Sabrosura</h3><p>Yale&rsquo;s premier Latin dance team, contributing to the vibrant cultural landscape of the university.</p></a>
+                    <a href="https://despiertaboricua-yale.org/about.html" target="_blank" rel="noopener" class="group-card"><h3>Despierta Boricua</h3><p>Yale&rsquo;s Puerto Rican student organization, founded in 1971 and dedicated to promoting Puerto Rican culture and advocacy.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>UndocuAllied at Yale</h3><p>Supporting undocumented students and allies through advocacy, resources, and community building at Yale.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>La Unidad de Yale</h3><p>A Latinx political and cultural organization advocating for the rights and visibility of the Latine community.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>Yale Maracatu</h3><p>An Afro-Brazilian percussion and dance ensemble celebrating the cultural traditions of the African diaspora in Latin America.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>Alianza for Latin America at Yale</h3><p>Promoting awareness of political, social, and economic issues in Latin America through events and advocacy.</p></a>
+                    <a href="https://yaleconnect.yale.edu/sube/contact-us/" target="_blank" rel="noopener" class="group-card"><h3>Latinx Pre-Professional Society</h3><p>Supporting Latine students in pre-medical, pre-law, and other professional tracks through mentorship and networking.</p></a>
+                    <a href="https://lacasa.yalecollege.yale.edu/" target="_blank" rel="noopener" class="group-card"><h3>HP&amp;E Committee</h3><p>La Casa&rsquo;s Historical Preservation &amp; Education committee, dedicated to archiving and sharing the community&rsquo;s history.</p></a>
                 </div>
             </div>
         </section>
@@ -163,9 +77,15 @@
             </div>
         </div>
     </footer>
-
     <div class="admin-access-bar">
         <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
     </div>
+
+    <script>
+        (function(){
+            var h = document.getElementById('site-header');
+            window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+        })();
+    </script>
 </body>
 </html>
