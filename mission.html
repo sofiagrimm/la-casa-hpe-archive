@@ -24,17 +24,17 @@
             --space-4: 1rem;
             --space-6: 1.5rem;
             --space-8: 2rem;
-            --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
+            --transition: 0.2s ease;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
 
         /* ---- Header ---- */
         .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: rgba(26,46,31,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; transition: box-shadow 0.3s, padding 0.3s; }
         .site-header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); padding: 0.75rem 0; }
         .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
+        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
         .brand-mark-text:hover { color: var(--accent); }
         .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
         .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; position: relative; padding: 0.25rem 0; transition: color var(--transition); }
@@ -54,7 +54,7 @@
         .quote-hero { padding: 4rem 0 2rem; position: relative; overflow: hidden; }
         .quote-glow { position: absolute; top: -80px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%); pointer-events: none; animation: glow-pulse 6s ease-in-out infinite; }
         @keyframes glow-pulse { 0%, 100% { opacity: 0.18; transform: scale(1); } 50% { opacity: 0.28; transform: scale(1.04); } }
-        .quote-text { font-family: var(--font-display); font-size: clamp(1.35rem, 0.9rem + 1.8vw, 2rem); font-style: italic; line-height: 1.35; margin-bottom: 1.25rem; max-width: 860px; color: var(--text-main); position: relative; z-index: 1; min-height: 2em; }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(1.35rem, 0.9rem + 1.8vw, 2rem); font-style: italic; line-height: 1.35; margin-bottom: 1.25rem; max-width: 860px; color: var(--text-main); position: relative; z-index: 1; min-height: 2em; }
         .quote-text.done::after { content: '|'; color: var(--accent); animation: blink 0.9s step-end infinite; margin-left: 2px; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.25rem; }
@@ -70,7 +70,7 @@
         /* ---- Sections ---- */
         section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-        h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
         h2 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); font-style: italic; font-weight: 400; }
         .section-head { margin-bottom: 2rem; }
 
@@ -86,12 +86,9 @@
 
         .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
         .principle { text-align: center; padding: 1.5rem 1.25rem; border: 1px solid var(--border-soft); position: relative; }
-        .principle-num { font-family: var(--font-display); font-size: 3rem; font-style: italic; color: rgba(201,168,76,0.15); position: absolute; top: 0.5rem; left: 0.75rem; line-height: 1; }
+        .principle-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-style: italic; color: rgba(201,168,76,0.15); position: absolute; top: 0.5rem; left: 0.75rem; line-height: 1; }
         .principle h3 { font-size: 0.95rem; margin-bottom: 0.4rem; position: relative; z-index: 1; }
         .principle p { font-size: 0.78rem; color: var(--text-muted); position: relative; z-index: 1; }
-
-        /* ---- Land acknowledgement ---- */
-        .land-acknowledgement { padding: 4rem 0; color: var(--text-muted); font-size: 0.85rem; max-width: 800px; line-height: 1.75; }
 
         /* ---- Footer ---- */
         .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
@@ -153,7 +150,7 @@
             <div class="quote-hero">
                 <div class="quote-glow" aria-hidden="true"></div>
                 <p class="quote-text reveal" id="typed-quote"></p>
-                <p class="quote-attribution reveal reveal-delay-1">— La Casa Cultural</p>
+                <p class="quote-attribution reveal reveal-delay-1">&mdash; La Casa Cultural</p>
                 <p class="quote-source reveal reveal-delay-2">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
             </div>
         </div>
@@ -170,7 +167,7 @@
                         <p>Our archive is built for students, alumni, and community members to explore their heritage and ensure that future generations can learn from the labor and triumphs of those who came before.</p>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item reveal reveal-delay-1"><h3>Multimedia Focus</h3><p>We collect photographs, oral histories, audio clips, flyers, and documents to provide a rich, multi-layered view of our community's past.</p></div>
+                        <div class="feature-item reveal reveal-delay-1"><h3>Multimedia Focus</h3><p>We collect photographs, oral histories, audio clips, flyers, and documents to provide a rich, multi-layered view of our community&rsquo;s past.</p></div>
                         <div class="feature-item reveal reveal-delay-2"><h3>Radical Accessibility</h3><p>Every label and prompt is designed for clarity, ensuring that even a first-year student can navigate the archive with ease.</p></div>
                         <div class="feature-item reveal reveal-delay-3"><h3>Living Archive</h3><p>The archive grows as the community contributes. Submit photographs, oral histories, or documents and become part of the permanent record.</p></div>
                     </div>
@@ -182,12 +179,6 @@
                 </div>
             </div>
         </section>
-
-        <div class="container">
-            <div class="land-acknowledgement reveal">
-                <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
-            </div>
-        </div>
     </main>
 
     <footer class="footer">
