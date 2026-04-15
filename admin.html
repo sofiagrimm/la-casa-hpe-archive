@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #1a2e1f;
@@ -23,10 +23,12 @@
             --error: #dc3545;
             --success: #28a745;
             --space-8: 2rem;
-            --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
+            --font-display: 'Halant', Georgia, serif;
+            --font-body: 'Halant', Georgia, serif;
+            --transition: 0.2s ease;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-8); }
         .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; }
         .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
@@ -241,7 +243,7 @@
                             <select id="edit-type"><option value="photograph">Photograph</option><option value="document">Document</option><option value="flyer">Flyer</option><option value="oral-history">Oral History</option><option value="video">Video</option><option value="audio">Audio</option><option value="other">Other</option></select>
                         </div>
                     </div>
-                    <div class="form-group"><label for="edit-org">Organization</label><input type="text" id="edit-org" /></div>
+                    <div class="form-group"><label for="edit-org">Organization</label><input type="edit-org" /></div>
                     <div class="form-group"><label for="edit-desc">Description *</label><textarea id="edit-desc" rows="4" required></textarea></div>
                     <div class="form-group"><label for="edit-thumbnail">Thumbnail URL</label><input type="url" id="edit-thumbnail" /></div>
                     <div class="form-row">
@@ -271,13 +273,11 @@
         const logoutBtn    = document.getElementById('logout-btn');
         const editModal    = document.getElementById('edit-modal');
 
-        // Check existing session on load
         (async () => {
             const { data: { session } } = await sb.auth.getSession();
             if (session) { showAdmin(); loadDashboard(); }
         })();
 
-        // Sign in with email + password via Supabase Auth
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             loginError.style.display = 'none';
@@ -297,7 +297,6 @@
             }
         });
 
-        // Sign out
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             await sb.auth.signOut();
@@ -312,7 +311,6 @@
             adminContent.style.display = 'block';
         }
 
-        // Tabs
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
