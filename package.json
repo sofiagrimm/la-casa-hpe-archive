@@ -1,0 +1,11 @@
+{
+  "name": "la-casa-hpe-archive",
+  "version": "1.0.0",
+  "description": "La Casa HP&E Archive — digital community archive concept for Yale",
+  "scripts": {
+    "start": "npx serve . -l ${PORT:-3000} -s"
+  },
+  "dependencies": {
+    "serve": "^14.2.6"
+  }
+}

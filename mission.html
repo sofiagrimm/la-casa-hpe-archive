@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mission | La Casa HP&E Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2e1f;
+            --bg-soft: #223327;
+            --bg-soft-2: #2a3d2e;
+            --bg-footer: #111a13;
+            --text-main: #f2ead8;
+            --text-muted: #9aab97;
+            --accent: #c9a84c;
+            --border-soft: rgba(242, 234, 216, 0.12);
+            --border-strong: rgba(242, 234, 216, 0.3);
+            --divider: rgba(242, 234, 216, 0.15);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .nav a:hover { color: var(--text-main); text-decoration: underline; }
+        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .section-head { margin-bottom: 3rem; }
+        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
+        .opening-quote { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; line-height: 1.35; margin-bottom: 1.5rem; max-width: 860px; color: var(--text-main); }
+        .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+        .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
+        .mission-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .mission-text p { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-muted); }
+        .feature-list { display: grid; gap: 1.5rem; }
+        .feature-item { background: var(--bg-soft); padding: 1.75rem; border: 1px solid var(--border-soft); transition: var(--transition); }
+        .feature-item:hover { background: var(--bg-soft-2); border-color: var(--border-strong); }
+        .feature-item h3 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+        .feature-item p { color: var(--text-muted); font-size: 0.85rem; }
+        .land-acknowledgement { padding: 4rem 0; color: var(--text-muted); font-size: 0.85rem; max-width: 800px; }
+        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+        .admin-access-bar {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: var(--bg-footer);
+            border-top: 1px solid var(--border-soft);
+        }
+        .admin-btn {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+        .admin-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .mission-grid { grid-template-columns: 1fr; gap: 2rem; }
+            h2 { font-size: 2rem; }
+            .quote-text { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <nav class="nav">
+                    <a href="mission.html">Mission</a>
+                    <a href="collections.html">Collections</a>
+                    <a href="map.html">Map</a>
+                    <a href="timeline.html">Timeline</a>
+                    <a href="groups.html">Groups</a>
+                    <a href="submit.html">Contribute</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="opening-quote">
+                <p class="quote-text">"Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains."</p>
+                <p class="quote-attribution">— La Casa Cultural</p>
+                <p class="quote-source">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
+            </div>
+        </div>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">Mission</span>
+                    <h2>Keep it accessible. Keep it real.</h2>
+                </div>
+                <div class="mission-grid">
+                    <div class="mission-text">
+                        <p>The La Casa HP&E Archive is a community-centered project dedicated to preserving the history of Latine life at Yale. We believe that history is not just found in textbooks, but in the everyday experiences, activism, and joy of our community.</p>
+                        <p>Our archive is built for students, alumni, and community members to explore their heritage and ensure that future generations can learn from the labor and triumphs of those who came before.</p>
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <h3>Multimedia Focus</h3>
+                            <p>We collect photographs, oral histories, audio clips, flyers, and documents to provide a rich, multi-layered view of our community's past.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Radical Accessibility</h3>
+                            <p>Every label and prompt is designed for clarity, ensuring that even a first-year student can navigate the archive with ease.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="land-acknowledgement">
+                <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <strong>La Casa Cultural · HP&E Archive</strong><br>
+                    Memory is ours. Build it together.
+                </div>
+                <div class="footer-contact">
+                    Add to the archive → <a href="mailto:lacasaspecialprojects@gmail.com?subject=HP%26E%20Submission">lacasaspecialprojects@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="admin-access-bar">
+        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
+    </div>
+</body>
+</html>

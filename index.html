@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <title>La Casa HP&E Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2e1f;
+            --bg-soft: #223327;
+            --bg-soft-2: #2a3d2e;
+            --bg-footer: #111a13;
+            --text-main: #f2ead8;
+            --text-muted: #9aab97;
+            --accent: #c9a84c;
+            --border-soft: rgba(242, 234, 216, 0.12);
+            --border-strong: rgba(242, 234, 216, 0.3);
+            --divider: rgba(242, 234, 216, 0.15);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .nav a:hover { color: var(--text-main); text-decoration: underline; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
+        .opening-quote { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; line-height: 1.35; margin-bottom: 1.5rem; max-width: 860px; color: var(--text-main); }
+        .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+        .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
+        .hero { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .hero h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 2.5rem; }
+        .hero-links { display: flex; gap: 1.5rem; align-items: center; font-size: 1rem; flex-wrap: wrap; }
+        .hero-links a { color: var(--text-main); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .hero-links a:hover { border-bottom-color: var(--accent); }
+        .hero-links span { color: var(--text-muted); }
+        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .section-head { margin-bottom: 3rem; }
+        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--bg-soft); padding: 2.5rem; text-decoration: none; color: inherit; border: 1px solid var(--border-soft); transition: all var(--transition); }
+        .card:hover { background: var(--bg-soft-2); border-color: var(--border-strong); }
+        .card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; }
+        .cta-box { background: var(--accent); color: #111a13; padding: 4rem; text-align: center; margin: 4rem 0; }
+        .cta-box h2 { font-size: 2.8rem; margin-bottom: 1.5rem; color: #111a13; }
+        .cta-button { display: inline-block; background: #111a13; color: var(--accent); padding: 1rem 2.5rem; text-decoration: none; font-weight: 700; margin-top: 1rem; transition: opacity 0.2s; }
+        .cta-button:hover { opacity: 0.9; }
+        .land-acknowledgement { padding: 4rem 0; color: var(--text-muted); font-size: 0.85rem; max-width: 800px; }
+        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+        
+        /* Featured Carousel Styles */
+        .featured-carousel-section {
+            margin-top: 4rem;
+            display: grid;
+            gap: var(--space-6);
+        }
+        .featured-carousel-header {
+            display: grid;
+            gap: 0.75rem;
+            max-width: 68ch;
+        }
+        .eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+        }
+        .featured-carousel-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+            line-height: 1.04;
+        }
+        .featured-carousel-intro {
+            color: var(--text-muted);
+            max-width: 56ch;
+        }
+        .featured-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.25rem;
+            border: 1px solid rgba(201, 168, 76, 0.18);
+            background: linear-gradient(180deg, rgba(34, 51, 39, 0.96), rgba(26, 46, 31, 0.98));
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+        }
+        .carousel-track {
+            position: relative;
+            min-height: 440px;
+        }
+        .carousel-slide {
+            display: none;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+            gap: var(--space-6);
+            align-items: stretch;
+            padding: var(--space-8);
+        }
+        .carousel-slide.is-active {
+            display: grid;
+        }
+        .carousel-copy {
+            display: grid;
+            align-content: center;
+            gap: var(--space-4);
+        }
+        .carousel-pill {
+            width: fit-content;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(201, 168, 76, 0.12);
+            border: 1px solid rgba(201, 168, 76, 0.26);
+            color: var(--accent);
+            font-size: 0.74rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .carousel-slide h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 1.2rem + 1.6vw, 3rem);
+            line-height: 1.05;
+        }
+        .carousel-slide p {
+            color: var(--text-muted);
+            max-width: 52ch;
+        }
+        .carousel-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        .carousel-link {
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0.85rem 1.2rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #182317;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .carousel-link:hover {
+            background: #d4b55f;
+        }
+        .carousel-media {
+            position: relative;
+            min-height: 320px;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.14);
+            background: #223327;
+        }
+        .carousel-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .carousel-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            padding: var(--space-6);
+            color: var(--text-muted);
+            text-align: center;
+            background: radial-gradient(circle at top left, rgba(201, 168, 76, 0.08), transparent 30%), #223327;
+        }
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: 0 var(--space-8) var(--space-6);
+        }
+        .carousel-button {
+            min-width: 44px;
+            min-height: 44px;
+            border-radius: 999px;
+            border: 1px solid rgba(201, 168, 76, 0.22);
+            background: transparent;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .carousel-button:hover {
+            background: rgba(201, 168, 76, 0.08);
+        }
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(242, 234, 216, 0.24);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .carousel-dot.is-active {
+            background: var(--accent);
+        }
+        
+        /* Admin Access Bar */
+        .admin-access-bar {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: var(--bg-footer);
+            border-top: 1px solid var(--border-soft);
+        }
+        .admin-btn {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+        .admin-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        @media (max-width: 900px) {
+            .carousel-slide,
+            .carousel-slide.is-active {
+                grid-template-columns: 1fr;
+            }
+            .carousel-track {
+                min-height: unset;
+            }
+            .carousel-media {
+                min-height: 240px;
+            }
+            .carousel-controls {
+                padding: 0 var(--space-6) var(--space-6);
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .quote-text { font-size: 1.5rem; }
+            .nav { gap: var(--space-4); }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <nav class="nav">
+                    <a href="mission.html">Mission</a>
+                    <a href="collections.html">Collections</a>
+                    <a href="map.html">Map</a>
+                    <a href="timeline.html">Timeline</a>
+                    <a href="groups.html">Groups</a>
+                    <a href="submit.html">Contribute</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="opening-quote">
+                <p class="quote-text">"Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains."</p>
+                <p class="quote-attribution">— La Casa Cultural</p>
+                <p class="quote-source">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="hero">
+                <h1>La Casa,<br>remembered properly.</h1>
+                <div class="hero-links">
+                    <a href="collections.html">Browse the Records</a>
+                    <span>—</span>
+                    <a href="mission.html">Our Philosophy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <section class="featured-carousel-section" aria-labelledby="featured-carousel-title">
+                <div class="featured-carousel-header">
+                    <p class="eyebrow">Recent Archives</p>
+                    <h2 id="featured-carousel-title">Featured community submissions</h2>
+                    <p class="featured-carousel-intro">
+                        Newly added archival materials, oral histories, and community records from La Casa's living archive.
+                    </p>
+                </div>
+                <div class="featured-carousel" id="featured-carousel" aria-roledescription="carousel">
+                    <div class="carousel-track" id="carousel-track">
+                        <article class="carousel-slide is-active">
+                            <div class="carousel-copy">
+                                <span class="carousel-pill">Loading</span>
+                                <h3>Loading featured archives…</h3>
+                                <p>Please wait while the homepage connects to the archive database.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-button" id="carousel-prev" type="button" aria-label="Previous featured archive">←</button>
+                        <div class="carousel-dots" id="carousel-dots" aria-label="Featured archive navigation"></div>
+                        <button class="carousel-button" id="carousel-next" type="button" aria-label="Next featured archive">→</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">The Archive</span>
+                    <h2>Keep it whole. Keep it visible.</h2>
+                </div>
+                <div class="grid">
+                    <a href="collections.html" class="card" data-testid="collections-card">
+                        <h3>Collections</h3>
+                        <p>Digital surrogates of physical ephemera, meeting minutes, and oral histories spanning five decades of Latine life at Yale.</p>
+                    </a>
+                    <a href="map.html" class="card" data-testid="map-card">
+                        <h3>Spatial History</h3>
+                        <p>Mapping the movement and presence of our community across the campus, from 301 Crown Street to the halls of Old Campus.</p>
+                    </a>
+                    <a href="timeline.html" class="card" data-testid="timeline-card">
+                        <h3>Timeline</h3>
+                        <p>A chronological account of institutional struggle, cultural celebration, and the founding of La Casa in 1969.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">Voices & Context</span>
+                    <h2>Beyond the artifacts.</h2>
+                </div>
+                <div class="grid">
+                    <a href="storytelling.html" class="card" data-testid="storytelling-card">
+                        <h3>Storytelling</h3>
+                        <p>Narrative essays and student reflections on what it means to belong to the "House" across generations.</p>
+                    </a>
+                    <a href="groups.html" class="card" data-testid="groups-card">
+                        <h3>Groups</h3>
+                        <p>Profiles of the student organizations that have called La Casa home, from MEChA to Despierta Boricua.</p>
+                    </a>
+                    <a href="hub.html" class="card" data-testid="hub-card">
+                        <h3>Resources</h3>
+                        <p>Research guides, external archive links, and tools for preserving your own student organization's history.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="cta-box">
+                <h2>Add to the story.</h2>
+                <p>We are actively seeking documents, photographs, and memories from alumni and current students.</p>
+                <a href="submit.html" class="cta-button" data-testid="submit-cta">Email Submission</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="land-acknowledgement">
+                <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <strong>La Casa Cultural · HP&E Archive</strong><br>
+                    Memory is ours. Build it together.
+                </div>
+                <div class="footer-contact">
+                    Add to the archive → <a href="submit.html">lacasaspecialprojects@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="admin-access-bar">
+        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabase = window.supabase.createClient(
+            'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ'
+        );
+        
+        const carouselTrack = document.getElementById('carousel-track');
+        const carouselDots = document.getElementById('carousel-dots');
+        const prevButton = document.getElementById('carousel-prev');
+        const nextButton = document.getElementById('carousel-next');
+        const carouselRoot = document.getElementById('featured-carousel');
+        
+        let featuredArchives = [];
+        let currentSlide = 0;
+        let autoRotate = null;
+        
+        function escapeHtml(value = '') {
+            return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        }
+        
+        function renderSlides(items) {
+            carouselTrack.innerHTML = items.map((item, index) => `
+                <article class="carousel-slide ${index === 0 ? 'is-active' : ''}" data-slide-index="${index}">
+                    <div class="carousel-copy">
+                        <span class="carousel-pill">${escapeHtml(item.media_type || 'Archive')}</span>
+                        <h3>${escapeHtml(item.title || 'Untitled archive')}</h3>
+                        <p>${escapeHtml(item.description || 'No description provided.')}</p>
+                        <div class="carousel-meta">
+                            <span>${escapeHtml(item.organization || 'La Casa community')}</span>
+                            <span>${item.archive_date ? escapeHtml(item.archive_date) : 'Date not listed'}</span>
+                        </div>
+                        <a class="carousel-link" href="./collections.html">Explore collections</a>
+                    </div>
+                    <div class="carousel-media">
+                        ${item.thumbnail_url 
+                            ? `<img src="${escapeHtml(item.thumbnail_url)}" alt="${escapeHtml(item.title || 'Featured archive image')}" loading="lazy">` 
+                            : `<div class="carousel-placeholder">Featured archival material from the La Casa community archive.</div>`}
+                    </div>
+                </article>
+            `).join('');
+            
+            carouselDots.innerHTML = items.map((_, index) => `
+                <button class="carousel-dot ${index === 0 ? 'is-active' : ''}" type="button" aria-label="Go to featured archive ${index + 1}" data-dot-index="${index}"></button>
+            `).join('');
+        }
+        
+        function showSlide(index) {
+            const slides = [...document.querySelectorAll('.carousel-slide')];
+            const dots = [...document.querySelectorAll('.carousel-dot')];
+            if (!slides.length) return;
+            currentSlide = (index + slides.length) % slides.length;
+            slides.forEach((slide, i) => { slide.classList.toggle('is-active', i === currentSlide); });
+            dots.forEach((dot, i) => { dot.classList.toggle('is-active', i === currentSlide); });
+        }
+        
+        function startAutoRotate() {
+            stopAutoRotate();
+            autoRotate = setInterval(() => { showSlide(currentSlide + 1); }, 5000);
+        }
+        
+        function stopAutoRotate() {
+            if (autoRotate) { clearInterval(autoRotate); autoRotate = null; }
+        }
+        
+        async function loadFeaturedArchives() {
+            const { data, error } = await supabase
+                .from('archives')
+                .select('title, description, organization, archive_date, media_type, thumbnail_url')
+                .eq('featured', true)
+                .eq('status', 'published')
+                .order('created_at', { ascending: false })
+                .limit(5);
+            
+            if (error || !data || !data.length) {
+                carouselTrack.innerHTML = `
+                    <article class="carousel-slide is-active">
+                        <div class="carousel-copy">
+                            <span class="carousel-pill">Archive</span>
+                            <h3>No featured archives yet</h3>
+                            <p>Add published featured entries in the admin dashboard to populate this homepage carousel.</p>
+                            <a class="carousel-link" href="./submit.html">Submit an archive</a>
+                        </div>
+                        <div class="carousel-media">
+                            <div class="carousel-placeholder">Featured archives will appear here.</div>
+                        </div>
+                    </article>
+                `;
+                carouselDots.innerHTML = '';
+                return;
+            }
+            
+            featuredArchives = data;
+            renderSlides(featuredArchives);
+            showSlide(0);
+            startAutoRotate();
+        }
+        
+        prevButton.addEventListener('click', () => { showSlide(currentSlide - 1); startAutoRotate(); });
+        nextButton.addEventListener('click', () => { showSlide(currentSlide + 1); startAutoRotate(); });
+        carouselDots.addEventListener('click', (event) => {
+            const button = event.target.closest('.carousel-dot');
+            if (!button) return;
+            showSlide(Number(button.dataset.dotIndex));
+            startAutoRotate();
+        });
+        
+        carouselRoot.addEventListener('mouseenter', stopAutoRotate);
+        carouselRoot.addEventListener('mouseleave', startAutoRotate);
+        carouselRoot.addEventListener('focusin', stopAutoRotate);
+        carouselRoot.addEventListener('focusout', startAutoRotate);
+        
+        loadFeaturedArchives();
+    </script>
+</body>
+</html>

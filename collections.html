@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <title>Collections | La Casa HP&E Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2e1f;
+            --bg-soft: #223327;
+            --bg-soft-2: #2a3d2e;
+            --bg-footer: #111a13;
+            --text-main: #f2ead8;
+            --text-muted: #9aab97;
+            --accent: #c9a84c;
+            --border-soft: rgba(242, 234, 216, 0.12);
+            --border-strong: rgba(242, 234, 216, 0.3);
+            --divider: rgba(242, 234, 216, 0.15);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .nav a:hover { color: var(--text-main); text-decoration: underline; }
+        
+        .opening-quote { padding: var(--space-8) 0; border-bottom: 1px solid var(--divider); margin-bottom: 4rem; }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; line-height: 1.3; color: var(--text-main); margin-bottom: var(--space-4); max-width: 800px; }
+        .quote-attribution { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+        .quote-source { font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-1); }
+
+        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .section-head { margin-bottom: 3rem; }
+        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
+        
+        .search-input { 
+            border: none; 
+            border-bottom: 1px solid var(--border-strong); 
+            background: transparent; 
+            color: var(--text-main); 
+            font-family: 'Space Mono', monospace; 
+            padding: 0.6rem 0; 
+            width: 100%; 
+            margin-bottom: 1rem; 
+            outline: none;
+            font-size: 1rem;
+        }
+        .search-input:focus { border-bottom-color: var(--accent); }
+        .search-input::placeholder { color: var(--text-muted); }
+        
+        .filter-row { margin-bottom: var(--space-8); font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .filter-btn { 
+            text-decoration: none; 
+            color: var(--text-muted); 
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+            cursor: pointer;
+            background: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        .filter-btn:hover, .filter-btn.active { 
+            color: var(--accent); 
+            border-color: var(--accent);
+        }
+        
+        .records-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        .record { 
+            padding: 1.5rem; 
+            background: var(--bg-soft);
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+        .record:hover {
+            background: var(--bg-soft-2);
+            border-color: var(--border-strong);
+        }
+        .record-inner { display: grid; grid-template-columns: 96px 1fr; gap: var(--space-6); line-height: 1.3; align-items: center; }
+        .thumb { 
+            aspect-ratio: 1; 
+            background-image: repeating-linear-gradient(45deg, rgba(242,234,216,0.05) 0px, rgba(242,234,216,0.05) 1px, transparent 1px, transparent 8px); 
+            border: 1px solid var(--border-soft); 
+            display: flex; 
+            align-items: flex-end; 
+            padding: 0.5rem; 
+            font-size: 0.6rem; 
+            text-transform: uppercase; 
+            color: var(--text-muted);
+            overflow: hidden;
+        }
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .record-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+        .record-title { font-size: 1.1rem; color: var(--text-main); }
+        .record-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+        
+        .panel { background: var(--bg-soft); border: 1px solid var(--border-soft); padding: var(--space-6); margin-top: 3rem; }
+        .panel h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .panel p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: var(--text-muted); }
+        .spinner { width: 24px; height: 24px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 0.75rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); }
+        .empty-state h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); }
+
+        .land-acknowledgement { padding: 4rem 0; font-size: 0.85rem; line-height: 1.8; color: var(--text-muted); border-top: 1px solid var(--divider); margin-top: 4rem; }
+        .land-acknowledgement p { max-width: 800px; }
+        
+        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+        
+        .admin-access-bar {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: var(--bg-footer);
+            border-top: 1px solid var(--border-soft);
+        }
+        .admin-btn {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition);
+        }
+        .admin-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            h2 { font-size: 2rem; }
+            .quote-text { font-size: 1.4rem; }
+            .record-inner { grid-template-columns: 72px 1fr; gap: var(--space-4); }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+            <nav class="nav">
+                <a href="mission.html">Mission</a>
+                <a href="collections.html">Collections</a>
+                <a href="map.html">Map</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="groups.html">Groups</a>
+                <a href="submit.html">Contribute</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="opening-quote">
+            <p class="quote-text">"Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and religions."</p>
+            <p class="quote-attribution">— La Casa Cultural</p>
+            <p class="quote-source">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
+        </div>
+
+        <section>
+            <div class="section-head">
+                <span class="section-kicker">Collections</span>
+                <h2>Browse by memory.</h2>
+            </div>
+
+            <input class="search-input" type="search" id="search-input" placeholder="Search 'banquet,' 'activism,' 'dance showcase'..." data-testid="search-input">
+            <div class="filter-row">
+                <button class="filter-btn active" data-filter="all" data-testid="filter-all">All</button>
+                <button class="filter-btn" data-filter="photograph" data-testid="filter-photos">Photos</button>
+                <button class="filter-btn" data-filter="oral-history" data-testid="filter-oral">Oral histories</button>
+                <button class="filter-btn" data-filter="flyer" data-testid="filter-flyers">Flyers</button>
+                <button class="filter-btn" data-filter="document" data-testid="filter-docs">Documents</button>
+                <button class="filter-btn" data-filter="video" data-testid="filter-video">Video</button>
+                <button class="filter-btn" data-filter="audio" data-testid="filter-audio">Audio</button>
+            </div>
+
+            <div class="records-grid" id="records-list">
+                <div class="loading"><div class="spinner"></div> Loading collections...</div>
+            </div>
+
+            <div class="panel">
+                <h3>Tag once, show up everywhere</h3>
+                <p>Every item carries context so it can live in multiple narratives — the timeline, the map, and group collections.</p>
+            </div>
+        </section>
+
+        <div class="land-acknowledgement">
+            <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>
+                <strong>La Casa Cultural · HP&E Archive</strong><br>
+                Memory is ours. Build it together.
+            </div>
+            <div class="footer-contact">
+                Add to the archive → <a href="mailto:lacasaspecialprojects@gmail.com?subject=HP&E Submission">lacasaspecialprojects@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="admin-access-bar">
+        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabase = window.supabase.createClient(
+            'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ'
+        );
+        
+        const recordsList = document.getElementById('records-list');
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        let allArchives = [];
+        let currentFilter = 'all';
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+        
+        function renderRecords(archives) {
+            if (!archives || archives.length === 0) {
+                recordsList.innerHTML = '<div class="empty-state"><h4>No archives found</h4><p>Try a different search or filter.</p></div>';
+                return;
+            }
+            
+            recordsList.innerHTML = archives.map(archive => `
+                <div class="record" data-type="${archive.media_type || 'other'}">
+                    <div class="record-inner">
+                        <div class="thumb">
+                            ${archive.thumbnail_url 
+                                ? `<img src="${escapeHtml(archive.thumbnail_url)}" alt="${escapeHtml(archive.title)}" loading="lazy">` 
+                                : escapeHtml(archive.media_type || 'Archive')}
+                        </div>
+                        <div>
+                            <div class="record-meta">${escapeHtml(archive.archive_date) || 'Date unknown'} · ${escapeHtml(archive.organization) || 'La Casa'}</div>
+                            <strong class="record-title">${escapeHtml(archive.title) || 'Untitled'}</strong>
+                            ${archive.description ? `<p class="record-desc">${escapeHtml(archive.description.substring(0, 150))}${archive.description.length > 150 ? '...' : ''}</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterAndRender() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let filtered = allArchives;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(a => a.media_type === currentFilter);
+            }
+            
+            if (searchTerm) {
+                filtered = filtered.filter(a => 
+                    (a.title && a.title.toLowerCase().includes(searchTerm)) ||
+                    (a.description && a.description.toLowerCase().includes(searchTerm)) ||
+                    (a.organization && a.organization.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            renderRecords(filtered);
+        }
+        
+        async function loadArchives() {
+            const { data, error } = await supabase
+                .from('archives')
+                .select('*')
+                .eq('status', 'published')
+                .order('archive_date', { ascending: false });
+            
+            if (error) {
+                recordsList.innerHTML = `<div class="empty-state"><h4>Error loading collections</h4><p>${error.message}</p></div>`;
+                return;
+            }
+            
+            allArchives = data || [];
+            renderRecords(allArchives);
+        }
+        
+        // Filter buttons
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                filterAndRender();
+            });
+        });
+        
+        // Search
+        searchInput.addEventListener('input', filterAndRender);
+        
+        // Init
+        loadArchives();
+    </script>
+</body>
+</html>
