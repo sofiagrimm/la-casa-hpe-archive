@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <title>Storytelling | La Casa HP&E Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2e1f;
+            --bg-soft: #223327;
+            --bg-soft-2: #2a3d2e;
+            --bg-footer: #111a13;
+            --text-main: #f2ead8;
+            --text-muted: #9aab97;
+            --accent: #c9a84c;
+            --border-soft: rgba(242, 234, 216, 0.12);
+            --border-strong: rgba(242, 234, 216, 0.3);
+            --divider: rgba(242, 234, 216, 0.15);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Space Mono', 'Courier New', monospace;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .nav a:hover { color: var(--text-main); text-decoration: underline; }
+
+        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .section-head { margin-bottom: 3rem; }
+        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+
+        h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; }
+        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
+
+        .opening-quote { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
+        .opening-quote .quote-text { font-family: var(--font-display); font-size: 2rem; font-style: italic; line-height: 1.35; margin-bottom: 1.5rem; max-width: 860px; color: var(--text-main); }
+        .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+        .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
+
+        .stories-grid { display: grid; gap: 4rem; }
+        .story-block { max-width: 800px; }
+        .story-quote { font-family: var(--font-display); font-size: 1.8rem; line-height: 1.3; margin-bottom: 1.5rem; position: relative; padding-left: 2.5rem; }
+        .story-quote::before { content: '"'; position: absolute; left: 0; top: -0.5rem; font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; }
+        .story-meta { font-size: 0.8rem; color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: 1rem; }
+
+        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
+        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+
+        .admin-access-bar { text-align: center; padding: 1.5rem 0; background: var(--bg-footer); border-top: 1px solid var(--border-soft); }
+        .admin-btn { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); text-decoration: none; padding: 0.4rem 1rem; border: 1px solid var(--border-soft); transition: var(--transition); }
+        .admin-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+        @media (max-width: 768px) {
+            h2 { font-size: 2rem; }
+            .opening-quote .quote-text { font-size: 1.5rem; }
+            .story-quote { font-size: 1.4rem; padding-left: 2rem; }
+            .story-quote::before { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <nav class="nav">
+                    <a href="mission.html">Mission</a>
+                    <a href="collections.html">Collections</a>
+                    <a href="map.html">Map</a>
+                    <a href="timeline.html">Timeline</a>
+                    <a href="groups.html">Groups</a>
+                    <a href="submit.html">Contribute</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="opening-quote">
+                <p class="quote-text">"Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains."</p>
+                <p class="quote-attribution">— La Casa Cultural</p>
+                <p class="quote-source">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
+            </div>
+        </div>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">Voices</span>
+                    <h2>Memory is a shared act.</h2>
+                </div>
+                <div class="stories-grid" data-testid="stories-grid">
+                    <div class="story-block">
+                        <p class="story-quote">We were looking for a home, and we found it in each other. La Casa was more than a building; it was the breath of the community.</p>
+                        <p class="story-meta"><strong>Alumni Perspective, Class of 1982</strong><br>Recorded during the 50th Anniversary Oral History Project.</p>
+                    </div>
+                    <div class="story-block">
+                        <p class="story-quote">To document our presence is to ensure that the students who come after us know they are part of a long, unbroken lineage.</p>
+                        <p class="story-meta"><strong>Student Researcher, 2023</strong><br>Excerpt from the Archive Mission Statement.</p>
+                    </div>
+                    <div class="story-block">
+                        <p class="story-quote">Every flyer we saved, every photo we took — it was an act of resistance against being forgotten.</p>
+                        <p class="story-meta"><strong>Former HP&E Committee Chair, 2018</strong><br>Interview for the Digital Archive Launch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div><strong>La Casa Cultural · HP&E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive → <a href="submit.html">Submit a contribution</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="admin-access-bar">
+        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
+    </div>
+</body>
+</html>
