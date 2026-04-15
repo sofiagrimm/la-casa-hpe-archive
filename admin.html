@@ -239,8 +239,12 @@
     <div id="login-overlay">
         <div class="login-box card">
             <h3>Administrator Login</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Enter the password to access the admin dashboard.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Sign in with your Supabase admin account.</p>
             <form id="login-form">
+                <div class="form-group">
+                    <label for="admin-email">Email</label>
+                    <input type="email" id="admin-email" placeholder="admin@example.com" required data-testid="admin-email" />
+                </div>
                 <div class="form-group">
                     <label for="admin-pass">Password</label>
                     <input type="password" id="admin-pass" placeholder="Enter password..." required data-testid="admin-password" />
@@ -468,34 +472,37 @@
         const cancelEditBtn = document.getElementById('cancel-edit');
         
         // Check auth on load
-        function checkAuth() {
-            if (sessionStorage.getItem('lacasa_admin') === 'true') {
+        async function checkAuth() {
+            const { data: { session } } = await sbClient.auth.getSession();
+            if (session) {
                 showAdmin();
                 loadDashboard();
             }
         }
         
         // Login
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const email = document.getElementById('admin-email').value;
             const password = document.getElementById('admin-pass').value;
             
             loginError.style.display = 'none';
             
-            if (password === 'HayleySerpa2468') {
-                sessionStorage.setItem('lacasa_admin', 'true');
+            const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
+            
+            if (error) {
+                loginError.textContent = error.message || 'Invalid credentials. Please try again.';
+                loginError.style.display = 'block';
+            } else {
                 showAdmin();
                 loadDashboard();
-            } else {
-                loginError.textContent = 'Invalid password. Please try again.';
-                loginError.style.display = 'block';
             }
         });
         
         // Logout
-        logoutBtn.addEventListener('click', (e) => {
+        logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            sessionStorage.removeItem('lacasa_admin');
+            await sbClient.auth.signOut();
             loginOverlay.style.display = 'flex';
             adminContent.style.display = 'none';
         });
