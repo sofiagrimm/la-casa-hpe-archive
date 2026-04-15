@@ -598,9 +598,9 @@
             return `
                 <div class="archive-item" data-id="${archive.id}">
                     <div class="archive-meta">
-                        <span>${archive.media_type || 'Archive'}</span>
-                        <span>${archive.archive_date || 'Date unknown'}</span>
-                        <span>${archive.organization || 'La Casa'}</span>
+                        <span>$escapeHtml(archive.media_type || 'Archive')
+                        <span>${escapeHtml(archive.archive_date || 'Date unknown')}</span>
+                        <span>${escapeHtml(archive.organization || 'La Casa')}</span>
                         ${badges.join(' ')}
                     </div>
                     <div class="archive-title">${escapeHtml(archive.title || 'Untitled')}</div>
