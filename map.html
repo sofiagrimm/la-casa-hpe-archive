@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
     <style>
         :root {
             --bg: #1a2e1f; --bg-soft: #223327; --bg-soft-2: #2a3d2e;
@@ -20,20 +20,26 @@
             --transition: 0.2s ease;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
-        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: rgba(26,46,31,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; transition: box-shadow 0.3s ease, padding 0.3s ease; }
+        .site-header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); padding: 0.65rem 0; }
         .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
+        .brand-mark-text:hover { color: var(--accent); }
         .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
-        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-        .nav a:hover { color: var(--text-main); text-decoration: underline; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; padding: 0.25rem 0; position: relative; transition: color var(--transition); }
+        .nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s ease; }
+        .nav a:hover { color: var(--text-main); }
+        .nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
+        .nav a[aria-current="page"] { color: var(--text-main); }
         section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
         .section-head { margin-bottom: 2rem; }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
         h2 { font-family: var(--font-display); font-size: 2.6rem; font-style: italic; font-weight: 400; line-height: 1.1; }
         .section-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 700px; }
         #map { width: 100%; height: 540px; border: 1px solid var(--border-soft); margin-bottom: 3rem; background: var(--bg-soft); }
+        .leaflet-container { background: #1a2e1f !important; }
         .leaflet-popup-content-wrapper { background: #1e3324; color: #f2ead8; border: 1px solid rgba(242,234,216,0.2); border-radius: 0; font-family: var(--font-body), monospace; font-size: 0.8rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .leaflet-popup-tip { background: #1e3324; }
         .leaflet-popup-content h4 { font-family: var(--font-display); font-size: 1rem; color: #c9a84c; margin-bottom: 0.3rem; }
@@ -53,14 +59,14 @@
     </style>
 </head>
 <body>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container">
             <div class="header-inner">
                 <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
                 <nav class="nav">
                     <a href="mission.html">Mission</a>
                     <a href="collections.html">Collections</a>
-                    <a href="map.html">Map</a>
+                    <a href="map.html" aria-current="page">Map</a>
                     <a href="timeline.html">Timeline</a>
                     <a href="groups.html">Groups</a>
                     <a href="submit.html">Contribute</a>
@@ -99,8 +105,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-inner">
-                <div><strong>La Casa Cultural · HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
-                <div class="footer-contact">Add to the archive → <a href="submit.html">Submit a contribution</a></div>
+                <div><strong>La Casa Cultural &middot; HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive &rarr; <a href="submit.html">Submit a contribution</a></div>
             </div>
         </div>
     </footer>
@@ -108,19 +114,30 @@
         <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
     <script>
+        // Sticky header
+        var header = document.getElementById('site-header');
+        window.addEventListener('scroll', function() {
+            header.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Init map
         var map = L.map('map', {
-            center: [41.3116, -72.9302],
+            center: [41.3090, -72.9310],
             zoom: 16,
             zoomControl: true,
             scrollWheelZoom: false
         });
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-            subdomains: 'abcd', maxZoom: 20
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/" target="_blank" rel="noopener">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
         }).addTo(map);
+
+        // Force tile repaint after layout settles
+        setTimeout(function() { map.invalidateSize(); }, 200);
 
         var goldIcon = L.divIcon({
             className: '',
