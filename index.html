@@ -11,53 +11,50 @@
     <link rel="stylesheet" href="styles.css" />
     <style>
         /* Homepage-specific */
-        .hero { padding: 5rem 0 3rem; }
-        .hero h1 { font-size: 5.5rem; line-height: 1.02; margin-bottom: 1.5rem; max-width: 900px; }
+        .hero { padding: 3.5rem 0 2rem; }
+        .hero h1 { font-size: clamp(2.6rem, 1.5rem + 4vw, 5rem); line-height: 1.04; margin-bottom: 1.25rem; max-width: 900px; }
         .hero h1 .accent { color: var(--accent); }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 560px; line-height: 1.7; margin-bottom: 2rem; }
+        .hero-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 520px; line-height: 1.7; margin-bottom: 1.75rem; }
 
-        .featured-carousel-section { margin-top: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--divider); display: grid; gap: var(--space-6); }
-        .featured-carousel-header { display: grid; gap: 0.75rem; max-width: 68ch; }
+        .featured-carousel-section { margin-top: 1.25rem; padding-top: 1.75rem; border-top: 1px solid var(--divider); display: grid; gap: var(--space-4); }
+        .featured-carousel-header { display: grid; gap: 0.5rem; max-width: 68ch; }
         .eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); }
-        .featured-carousel-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem); line-height: 1.04; }
-        .featured-carousel-intro { color: var(--text-muted); max-width: 56ch; }
-        .featured-carousel { position: relative; overflow: hidden; border-radius: 1.25rem; border: 1px solid rgba(201,168,76,0.22); background: linear-gradient(135deg, rgba(34,51,39,0.98), rgba(20,36,24,0.99)); box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,168,76,0.06) inset; }
-        .carousel-track { position: relative; min-height: 440px; }
-        .carousel-slide { display: none; grid-template-columns: minmax(0,1.05fr) minmax(280px,0.95fr); gap: var(--space-6); align-items: stretch; padding: var(--space-8); }
+        .featured-carousel-header h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem); line-height: 1.06; }
+        .featured-carousel-intro { color: var(--text-muted); max-width: 56ch; font-size: 0.9rem; }
+        .featured-carousel { position: relative; overflow: hidden; border-radius: 1.25rem; border: 1px solid rgba(201,168,76,0.22); background: linear-gradient(135deg, rgba(34,51,39,0.98), rgba(20,36,24,0.99)); box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.06) inset; }
+        .carousel-track { position: relative; min-height: 400px; }
+        .carousel-slide { display: none; grid-template-columns: minmax(0,1.05fr) minmax(260px,0.95fr); gap: var(--space-6); align-items: stretch; padding: 1.75rem; }
         .carousel-slide.is-active { display: grid; animation: slide-in 0.4s ease; }
         @keyframes slide-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
-        .carousel-copy { display: grid; align-content: center; gap: var(--space-4); }
-        .carousel-pill { width: fit-content; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.26); color: var(--accent); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; }
-        .carousel-slide h3 { font-family: var(--font-display); font-size: clamp(1.8rem,1.2rem + 1.6vw,3rem); line-height: 1.05; }
-        .carousel-slide p { color: var(--text-muted); max-width: 52ch; }
-        .carousel-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; color: var(--text-muted); font-size: 0.82rem; }
-        .carousel-link { width: fit-content; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.85rem 1.2rem; border-radius: 999px; background: var(--accent); color: #182317; font-weight: 700; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+        .carousel-copy { display: grid; align-content: center; gap: 0.75rem; }
+        .carousel-pill { width: fit-content; padding: 0.3rem 0.65rem; border-radius: 999px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.26); color: var(--accent); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+        .carousel-slide h3 { font-family: var(--font-display); font-size: clamp(1.6rem,1rem + 1.6vw,2.6rem); line-height: 1.07; }
+        .carousel-slide p { color: var(--text-muted); max-width: 52ch; font-size: 0.9rem; }
+        .carousel-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; color: var(--text-muted); font-size: 0.8rem; }
+        .carousel-link { width: fit-content; display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0.7rem 1.1rem; border-radius: 999px; background: var(--accent); color: #182317; font-weight: 700; text-decoration: none; font-size: 0.85rem; transition: background 0.2s, transform 0.2s; }
         .carousel-link:hover { background: var(--accent-hover); transform: translateY(-1px); }
-        .carousel-media { position: relative; min-height: 320px; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(201,168,76,0.14); background: #223327; }
+        .carousel-media { position: relative; min-height: 280px; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(201,168,76,0.14); background: #223327; }
         .carousel-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
         .carousel-media:hover img { transform: scale(1.03); }
         .carousel-placeholder { width: 100%; height: 100%; display: grid; place-items: center; padding: var(--space-6); color: var(--text-muted); text-align: center; background: radial-gradient(circle at top left, rgba(201,168,76,0.08), transparent 30%), #223327; }
-        .carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: 0 var(--space-8) var(--space-6); }
-        .carousel-button { min-width: 48px; min-height: 48px; border-radius: 999px; border: 1px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.06); color: var(--accent); cursor: pointer; transition: var(--transition); font-size: 1.1rem; }
+        .carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: 0 1.75rem 1.25rem; }
+        .carousel-button { min-width: 44px; min-height: 44px; border-radius: 999px; border: 1px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.06); color: var(--accent); cursor: pointer; transition: var(--transition); font-size: 1rem; }
         .carousel-button:hover { background: rgba(201,168,76,0.15); border-color: var(--accent); transform: scale(1.08); }
         .carousel-dots { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex: 1; }
-        .carousel-dot { width: 10px; height: 10px; border-radius: 999px; border: none; background: rgba(242,234,216,0.24); cursor: pointer; transition: var(--transition); }
-        .carousel-dot.is-active { background: var(--accent); width: 24px; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 999px; border: none; background: rgba(242,234,216,0.24); cursor: pointer; transition: var(--transition); }
+        .carousel-dot.is-active { background: var(--accent); width: 20px; }
 
-        .cta-box { background: var(--accent); color: #111a13; padding: 4rem; text-align: center; margin: 4rem 0; position: relative; overflow: hidden; }
+        .cta-box { background: var(--accent); color: #111a13; padding: 3rem; text-align: center; margin: 2.5rem 0; position: relative; overflow: hidden; }
         .cta-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%); pointer-events: none; }
-        .cta-box h2 { font-size: 2.8rem; margin-bottom: 1.5rem; color: #111a13; }
-        .cta-box p { color: #1a2e1f; }
-        .cta-button { display: inline-block; background: #111a13; color: var(--accent); padding: 1rem 2.5rem; text-decoration: none; font-weight: 700; margin-top: 1rem; transition: opacity 0.2s, transform 0.2s; font-family: var(--font-body); }
+        .cta-box h2 { font-size: 2.4rem; margin-bottom: 1rem; color: #111a13; }
+        .cta-box p { color: #1a2e1f; font-size: 0.95rem; }
+        .cta-button { display: inline-block; background: #111a13; color: var(--accent); padding: 0.85rem 2rem; text-decoration: none; font-weight: 700; margin-top: 1rem; transition: opacity 0.2s, transform 0.2s; font-family: var(--font-body); font-size: 0.85rem; }
         .cta-button:hover { opacity: 0.9; transform: translateY(-1px); }
 
         @media (max-width: 900px) {
             .carousel-slide, .carousel-slide.is-active { grid-template-columns: 1fr; }
             .carousel-track { min-height: unset; }
-            .carousel-media { min-height: 240px; }
-        }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
+            .carousel-media { min-height: 200px; }
         }
     </style>
 </head>
@@ -81,7 +78,6 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero with ambient glow -->
         <div class="hero-wrap">
             <div class="hero-glow" aria-hidden="true"></div>
             <div class="container">
@@ -93,25 +89,12 @@
             </div>
         </div>
 
-        <!-- Live stats bar -->
         <div class="container">
             <div class="stats-bar reveal reveal-delay-1" id="stats-bar" aria-label="Archive statistics">
-                <div class="stat-item">
-                    <span class="stat-number" id="stat-total" data-target="0">—</span>
-                    <span class="stat-label">Archive entries</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="stat-published" data-target="0">—</span>
-                    <span class="stat-label">Published</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="stat-featured" data-target="0">—</span>
-                    <span class="stat-label">Featured</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="stat-since">1969</span>
-                    <span class="stat-label">Est. La Casa</span>
-                </div>
+                <div class="stat-item"><span class="stat-number" id="stat-total" data-target="0">—</span><span class="stat-label">Archive entries</span></div>
+                <div class="stat-item"><span class="stat-number" id="stat-published" data-target="0">—</span><span class="stat-label">Published</span></div>
+                <div class="stat-item"><span class="stat-number" id="stat-featured" data-target="0">—</span><span class="stat-label">Featured</span></div>
+                <div class="stat-item"><span class="stat-number" id="stat-since">1969</span><span class="stat-label">Est. La Casa</span></div>
             </div>
         </div>
 
@@ -148,18 +131,9 @@
                     <h2 id="archive-heading">Keep it whole. Keep it visible.</h2>
                 </div>
                 <div class="grid">
-                    <a href="collections.html" class="card reveal reveal-delay-1" data-testid="collections-card">
-                        <h3>Collections</h3>
-                        <p>Digital surrogates of physical ephemera, meeting minutes, and oral histories spanning five decades of Latine life at Yale.</p>
-                    </a>
-                    <a href="map.html" class="card reveal reveal-delay-2" data-testid="map-card">
-                        <h3>Spatial History</h3>
-                        <p>Mapping the movement and presence of our community across the campus, from 301 Crown Street to the halls of Old Campus.</p>
-                    </a>
-                    <a href="timeline.html" class="card reveal reveal-delay-3" data-testid="timeline-card">
-                        <h3>Timeline</h3>
-                        <p>A chronological account of institutional struggle, cultural celebration, and the founding of La Casa in 1969.</p>
-                    </a>
+                    <a href="collections.html" class="card reveal reveal-delay-1" data-testid="collections-card"><h3>Collections</h3><p>Digital surrogates of physical ephemera, meeting minutes, and oral histories spanning five decades of Latine life at Yale.</p></a>
+                    <a href="map.html" class="card reveal reveal-delay-2" data-testid="map-card"><h3>Spatial History</h3><p>Mapping the movement and presence of our community across the campus, from 301 Crown Street to the halls of Old Campus.</p></a>
+                    <a href="timeline.html" class="card reveal reveal-delay-3" data-testid="timeline-card"><h3>Timeline</h3><p>A chronological account of institutional struggle, cultural celebration, and the founding of La Casa in 1969.</p></a>
                 </div>
             </div>
         </section>
@@ -171,18 +145,9 @@
                     <h2 id="voices-heading">Beyond the artifacts.</h2>
                 </div>
                 <div class="grid">
-                    <a href="storytelling.html" class="card reveal reveal-delay-1" data-testid="storytelling-card">
-                        <h3>Storytelling</h3>
-                        <p>Narrative essays and student reflections on what it means to belong to the "House" across generations.</p>
-                    </a>
-                    <a href="groups.html" class="card reveal reveal-delay-2" data-testid="groups-card">
-                        <h3>Groups</h3>
-                        <p>Profiles of the student organizations that have called La Casa home, from MEChA to Despierta Boricua.</p>
-                    </a>
-                    <a href="hub.html" class="card reveal reveal-delay-3" data-testid="hub-card">
-                        <h3>Resources</h3>
-                        <p>Research guides, external archive links, and tools for preserving your own student organization's history.</p>
-                    </a>
+                    <a href="storytelling.html" class="card reveal reveal-delay-1" data-testid="storytelling-card"><h3>Storytelling</h3><p>Narrative essays and student reflections on what it means to belong to the "House" across generations.</p></a>
+                    <a href="groups.html" class="card reveal reveal-delay-2" data-testid="groups-card"><h3>Groups</h3><p>Profiles of the student organizations that have called La Casa home, from MEChA to Despierta Boricua.</p></a>
+                    <a href="hub.html" class="card reveal reveal-delay-3" data-testid="hub-card"><h3>Resources</h3><p>Research guides, external archive links, and tools for preserving your own student organization's history.</p></a>
                 </div>
             </div>
         </section>
@@ -194,20 +159,13 @@
                 <a href="submit.html" class="cta-button" data-testid="submit-cta">Make a Submission</a>
             </div>
         </div>
-
-        <div class="container">
     </main>
 
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-inner">
-                <div>
-                    <strong>La Casa Cultural · HP&E Archive</strong><br>
-                    Memory is ours. Build it together.
-                </div>
-                <div class="footer-contact">
-                    Add to the archive → <a href="submit.html">Submit a contribution</a>
-                </div>
+                <div><strong>La Casa Cultural · HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive → <a href="submit.html">Submit a contribution</a></div>
             </div>
         </div>
     </footer>
@@ -218,124 +176,62 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-init.js"></script>
     <script>
-    // ── Sticky header shrink ──────────────────────────────────────────
     (function() {
         var header = document.getElementById('site-header');
         window.addEventListener('scroll', function() {
             header.classList.toggle('scrolled', window.scrollY > 40);
         }, { passive: true });
     })();
-
-    // ── Scroll reveal via IntersectionObserver ────────────────────────
     (function() {
         var els = document.querySelectorAll('.reveal');
         var io = new IntersectionObserver(function(entries) {
             entries.forEach(function(e) {
                 if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
             });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.1 });
         els.forEach(function(el) { io.observe(el); });
     })();
-
-    // ── Animated counter ─────────────────────────────────────────────
     function animateCount(el, target) {
-        var start = 0;
-        var duration = 900;
-        var startTime = null;
+        var start = 0, duration = 900, startTime = null;
         function step(ts) {
             if (!startTime) startTime = ts;
             var progress = Math.min((ts - startTime) / duration, 1);
-            var val = Math.floor(progress * target);
-            el.textContent = val;
+            el.textContent = Math.floor(progress * target);
             if (progress < 1) requestAnimationFrame(step);
             else el.textContent = target;
         }
         requestAnimationFrame(step);
     }
-
-    // ── Live stats from Supabase ──────────────────────────────────────
     async function loadStats() {
         if (!window.sbClient) return;
-        var totalEl = document.getElementById('stat-total');
-        var pubEl   = document.getElementById('stat-published');
-        var featEl  = document.getElementById('stat-featured');
-
         var [total, published, featured] = await Promise.all([
             window.sbClient.from('archives').select('id', { count: 'exact', head: true }),
             window.sbClient.from('archives').select('id', { count: 'exact', head: true }).eq('status','published'),
             window.sbClient.from('archives').select('id', { count: 'exact', head: true }).eq('featured', true)
         ]);
-
-        var totalCount = total.count || 0;
-        var pubCount   = published.count || 0;
-        var featCount  = featured.count || 0;
-
-        // Only animate once stats bar is visible
         var io = new IntersectionObserver(function(entries) {
             if (entries[0].isIntersecting) {
-                animateCount(totalEl, totalCount);
-                animateCount(pubEl,   pubCount);
-                animateCount(featEl,  featCount);
+                animateCount(document.getElementById('stat-total'), total.count||0);
+                animateCount(document.getElementById('stat-published'), published.count||0);
+                animateCount(document.getElementById('stat-featured'), featured.count||0);
                 io.disconnect();
             }
         }, { threshold: 0.5 });
         io.observe(document.getElementById('stats-bar'));
     }
-
-    // ── Carousel ──────────────────────────────────────────────────────
-    var carouselTrack = document.getElementById('carousel-track');
-    var carouselDots  = document.getElementById('carousel-dots');
-    var prevButton    = document.getElementById('carousel-prev');
-    var nextButton    = document.getElementById('carousel-next');
-    var carouselRoot  = document.getElementById('featured-carousel');
-    var currentSlide  = 0;
-    var autoRotate    = null;
-
+    var carouselTrack=document.getElementById('carousel-track'),carouselDots=document.getElementById('carousel-dots'),prevButton=document.getElementById('carousel-prev'),nextButton=document.getElementById('carousel-next'),carouselRoot=document.getElementById('featured-carousel'),currentSlide=0,autoRotate=null;
     function escapeHtml(v){if(!v)return'';return v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-
-    function renderSlides(items) {
-        carouselTrack.innerHTML = items.map(function(item,i){
-            return '<article class="carousel-slide'+(i===0?' is-active':'')+'" data-slide-index="'+i+'" role="tabpanel" aria-label="Featured archive '+(i+1)+' of '+items.length+'"><div class="carousel-copy"><span class="carousel-pill">'+escapeHtml(item.media_type||'Archive')+'</span><h3>'+escapeHtml(item.title||'Untitled archive')+'</h3><p>'+escapeHtml(item.description||'No description provided.')+'</p><div class="carousel-meta"><span>'+escapeHtml(item.organization||'La Casa community')+'</span><span>'+(item.archive_date?escapeHtml(item.archive_date):'Date not listed')+'</span></div><a class="carousel-link" href="./collections.html">Explore collections</a></div><div class="carousel-media">'+(item.thumbnail_url?'<img src="'+escapeHtml(item.thumbnail_url)+'" alt="'+escapeHtml(item.title||'Featured archive image')+'" loading="lazy">':'<div class="carousel-placeholder">Featured archival material from the La Casa community archive.</div>')+'</div></article>';
-        }).join('');
-        carouselDots.innerHTML = items.map(function(_,i){
-            return '<button class="carousel-dot'+(i===0?' is-active':'')+'" type="button" role="tab" aria-selected="'+(i===0)+'" aria-label="Go to featured archive '+(i+1)+'" data-dot-index="'+i+'"></button>';
-        }).join('');
-    }
-
-    function showSlide(index) {
-        var slides = document.querySelectorAll('.carousel-slide');
-        var dots   = document.querySelectorAll('.carousel-dot');
-        if (!slides.length) return;
-        currentSlide = (index + slides.length) % slides.length;
-        slides.forEach(function(s,i){ s.classList.toggle('is-active', i===currentSlide); });
-        dots.forEach(function(d,j){ d.classList.toggle('is-active', j===currentSlide); d.setAttribute('aria-selected', j===currentSlide); });
-    }
-
-    function startAutoRotate(){ stopAutoRotate(); autoRotate=setInterval(function(){ showSlide(currentSlide+1); },5000); }
-    function stopAutoRotate(){ if(autoRotate){clearInterval(autoRotate);autoRotate=null;} }
-
-    async function loadFeaturedArchives() {
-        if (!window.sbClient) { renderEmpty(); return; }
-        var result = await window.sbClient.from('archives').select('title,description,organization,archive_date,media_type,thumbnail_url').eq('featured',true).eq('status','published').order('created_at',{ascending:false}).limit(5);
-        if (result.error || !result.data || !result.data.length) { renderEmpty(); return; }
-        renderSlides(result.data);
-        showSlide(0);
-        startAutoRotate();
-    }
-
-    function renderEmpty() {
-        carouselTrack.innerHTML='<article class="carousel-slide is-active"><div class="carousel-copy"><span class="carousel-pill">Archive</span><h3>No featured archives yet</h3><p>Featured entries added via the admin dashboard will appear here. In the meantime, explore the full archive or contribute your own materials.</p><a class="carousel-link" href="./submit.html">Submit an archive</a></div><div class="carousel-media"><div class="carousel-placeholder">Featured archives will appear here once published.</div></div></article>';
-        carouselDots.innerHTML='';
-    }
-
-    prevButton.addEventListener('click',function(){ showSlide(currentSlide-1); startAutoRotate(); });
-    nextButton.addEventListener('click',function(){ showSlide(currentSlide+1); startAutoRotate(); });
-    carouselDots.addEventListener('click',function(e){ var b=e.target.closest('.carousel-dot'); if(!b)return; showSlide(Number(b.dataset.dotIndex)); startAutoRotate(); });
+    function renderSlides(items){carouselTrack.innerHTML=items.map(function(item,i){return'<article class="carousel-slide'+(i===0?' is-active':'')+'" data-slide-index="'+i+'" role="tabpanel" aria-label="Featured archive '+(i+1)+' of '+items.length+'"><div class="carousel-copy"><span class="carousel-pill">'+escapeHtml(item.media_type||'Archive')+'</span><h3>'+escapeHtml(item.title||'Untitled archive')+'</h3><p>'+escapeHtml(item.description||'No description provided.')+'</p><div class="carousel-meta"><span>'+escapeHtml(item.organization||'La Casa community')+'</span><span>'+(item.archive_date?escapeHtml(item.archive_date):'Date not listed')+'</span></div><a class="carousel-link" href="./collections.html">Explore collections</a></div><div class="carousel-media">'+(item.thumbnail_url?'<img src="'+escapeHtml(item.thumbnail_url)+'" alt="'+escapeHtml(item.title||'Featured archive image')+'" loading="lazy">':'<div class="carousel-placeholder">Featured archival material from the La Casa community archive.</div>')+'</div></article>';}).join('');carouselDots.innerHTML=items.map(function(_,i){return'<button class="carousel-dot'+(i===0?' is-active':'')+'" type="button" role="tab" aria-selected="'+(i===0)+'" aria-label="Go to featured archive '+(i+1)+'" data-dot-index="'+i+'"></button>';}).join('');}
+    function showSlide(index){var slides=document.querySelectorAll('.carousel-slide'),dots=document.querySelectorAll('.carousel-dot');if(!slides.length)return;currentSlide=(index+slides.length)%slides.length;slides.forEach(function(s,i){s.classList.toggle('is-active',i===currentSlide);});dots.forEach(function(d,j){d.classList.toggle('is-active',j===currentSlide);d.setAttribute('aria-selected',j===currentSlide);});}
+    function startAutoRotate(){stopAutoRotate();autoRotate=setInterval(function(){showSlide(currentSlide+1);},5000);}
+    function stopAutoRotate(){if(autoRotate){clearInterval(autoRotate);autoRotate=null;}}
+    async function loadFeaturedArchives(){if(!window.sbClient){renderEmpty();return;}var result=await window.sbClient.from('archives').select('title,description,organization,archive_date,media_type,thumbnail_url').eq('featured',true).eq('status','published').order('created_at',{ascending:false}).limit(5);if(result.error||!result.data||!result.data.length){renderEmpty();return;}renderSlides(result.data);showSlide(0);startAutoRotate();}
+    function renderEmpty(){carouselTrack.innerHTML='<article class="carousel-slide is-active"><div class="carousel-copy"><span class="carousel-pill">Archive</span><h3>No featured archives yet</h3><p>Featured entries added via the admin dashboard will appear here.</p><a class="carousel-link" href="./submit.html">Submit an archive</a></div><div class="carousel-media"><div class="carousel-placeholder">Featured archives will appear here once published.</div></div></article>';carouselDots.innerHTML='';}
+    prevButton.addEventListener('click',function(){showSlide(currentSlide-1);startAutoRotate();});
+    nextButton.addEventListener('click',function(){showSlide(currentSlide+1);startAutoRotate();});
+    carouselDots.addEventListener('click',function(e){var b=e.target.closest('.carousel-dot');if(!b)return;showSlide(Number(b.dataset.dotIndex));startAutoRotate();});
     carouselRoot.addEventListener('mouseenter',stopAutoRotate);
     carouselRoot.addEventListener('mouseleave',startAutoRotate);
-    carouselRoot.addEventListener('focusin',stopAutoRotate);
-    carouselRoot.addEventListener('focusout',startAutoRotate);
-
     loadFeaturedArchives();
     loadStats();
     </script>
