@@ -148,6 +148,7 @@
                     <button class="tab active" data-tab="archives">All Archives</button>
                     <button class="tab" data-tab="pending">Pending Review</button>
                     <button class="tab" data-tab="add">Add New</button>
+                                        <button class="tab" data-tab="settings">Site Settings</button>
                 </div>
                 <div id="tab-archives" class="tab-content active">
                     <div class="card"><h3>Archive Entries</h3><div id="archives-list"><div class="loading"><div class="spinner"></div> Loading archives...</div></div></div>
@@ -160,6 +161,26 @@
                         <h3>Add New Archive Entry</h3>
                         <form id="add-archive-form">
                             <div class="form-group"><label for="new-title">Title *</label><input type="text" id="new-title" placeholder="Event name or item title..." required /></div>
+                                                <!-- Search and Filter Controls -->
+                    <div class="admin-controls" style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                        <input type="search" id="archive-search" placeholder="Search archives..." style="flex: 1; padding: 0.5rem; border: 1px solid var(--border-soft); border-radius: 4px; background: var(--bg-soft); color: var(--text-main);">
+                        <select id="archive-filter" style="padding: 0.5rem; border: 1px solid var(--border-soft); border-radius: 4px; background: var(--bg-soft); color: var(--text-main);">
+                            <option value="all">All Types</option>
+                            <option value="photo">Photos</option>
+                            <option value="video">Videos</option>
+                            <option value="audio">Audio</option>
+                            <option value="document">Documents</option>
+                            <option value="flyer">Flyers</option>
+                        </select>
+                        <button id="bulk-delete-btn" class="btn" style="background: var(--error); display: none;">Delete Selected</button>
+                    </div>
+                    <!-- Bulk Selection Controls -->
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                            <input type="checkbox" id="select-all-archives" style="width: 18px; height: 18px;">
+                            <span>Select All</span>
+                        </label>
+                    </div>
                             <div class="form-row">
                                 <div class="form-group"><label for="new-date">Archive Date</label><input type="text" id="new-date" placeholder="e.g. 1974 or March 1985" /></div>
                                 <div class="form-group"><label for="new-type">Media Type</label>
@@ -174,6 +195,32 @@
                                 <div class="form-group"><label>&nbsp;</label><div class="checkbox-group"><input type="checkbox" id="new-featured" /><label for="new-featured" style="margin:0;text-transform:none;">Mark as Featured</label></div></div>
                             </div>
                             <button type="submit" class="btn">Add to Archive</button>
+                        </form>
+                    </div>
+                </div>
+
+                                <!-- Site Settings Tab -->
+                <div id="tab-settings" class="tab-content">
+                    <div class="card">
+                        <h3>Site Settings</h3>
+                        <form id="settings-form">
+                            <div class="form-group">
+                                <label for="site-title">Site Title</label>
+                                <input type="text" id="site-title" value="La Casa HP&E Archive">
+                            </div>
+                            <div class="form-group">
+                                <label for="site-tagline">Tagline</label>
+                                <input type="text" id="site-tagline" value="Memory is ours. Build it together.">
+                            </div>
+                            <div class="form-group">
+                                <label for="land-acknowledgement-text">Land Acknowledgement Text</label>
+                                <textarea id="land-acknowledgement-text" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-soft); border-radius: 4px; background: var(--bg-soft); color: var(--text-main);">Yale University acknowledges that indigenous peoples and nations...</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Contact Email</label>
+                                <input type="email" id="contact-email" value="contact@lacasa.yale.edu">
+                            </div>
+                            <button type="submit" class="btn">Save Settings</button>
                         </form>
                     </div>
                 </div>
@@ -412,6 +459,120 @@
             if (!text) return '';
             return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
-    </script>
+
+
+    // ===== NEW ADMIN FEATURES =====
+    
+    // Search and Filter functionality
+    const archiveSearch = document.getElementById('archive-search');
+    const archiveFilter = document.getElementById('archive-filter');
+    const selectAllCheckbox = document.getElementById('select-all-archives');
+    const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+    
+    // Search archives
+    if (archiveSearch) {
+        archiveSearch.addEventListener('input', filterArchives);
+    }
+    
+    // Filter by type
+    if (archiveFilter) {
+        archiveFilter.addEventListener('change', filterArchives);
+    }
+    
+    function filterArchives() {
+        const searchTerm = archiveSearch?.value.toLowerCase() || '';
+        const filterType = archiveFilter?.value || 'all';
+        const archiveItems = document.querySelectorAll('#archives-list .archive-item');
+        
+        archiveItems.forEach(item => {
+            const title = item.querySelector('.archive-title')?.textContent.toLowerCase() || '';
+            const type = item.dataset.type || '';
+            const matchesSearch = title.includes(searchTerm);
+            const matchesFilter = filterType === 'all' || type === filterType;
+            
+            item.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
+        });
+    }
+    
+    // Select all functionality
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.archive-checkbox:not([style*="display: none"])');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+            updateBulkDeleteButton();
+        });
+    }
+    
+    // Update bulk delete button visibility
+    function updateBulkDeleteButton() {
+        const checkedBoxes = document.querySelectorAll('.archive-checkbox:checked');
+        if (bulkDeleteBtn) {
+            bulkDeleteBtn.style.display = checkedBoxes.length > 0 ? 'block' : 'none';
+        }
+    }
+    
+    // Bulk delete functionality
+    if (bulkDeleteBtn) {
+        bulkDeleteBtn.addEventListener('click', async function() {
+            const checkedBoxes = document.querySelectorAll('.archive-checkbox:checked');
+            const ids = Array.from(checkedBoxes).map(cb => cb.dataset.id);
+            
+            if (!confirm(`Delete ${ids.length} selected archive(s)? This cannot be undone.`)) return;
+            
+            try {
+                for (const id of ids) {
+                    await sb.from('archives').delete().eq('id', id);
+                }
+                showToast(`Deleted ${ids.length} archive(s)`, 'success');
+                loadDashboard();
+            } catch (error) {
+                console.error('Bulk delete error:', error);
+                showToast('Failed to delete archives', 'error');
+            }
+        });
+    }
+    
+    // Site Settings form
+    const settingsForm = document.getElementById('settings-form');
+    if (settingsForm) {
+        settingsForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const settings = {
+                site_title: document.getElementById('site-title').value,
+                site_tagline: document.getElementById('site-tagline').value,
+                land_acknowledgement: document.getElementById('land-acknowledgement-text').value,
+                contact_email: document.getElementById('contact-email').value
+            };
+            
+            try {
+                // Store settings in localStorage for now (could be moved to Supabase)
+                localStorage.setItem('site_settings', JSON.stringify(settings));
+                showToast('Settings saved successfully!', 'success');
+            } catch (error) {
+                console.error('Settings save error:', error);
+                showToast('Failed to save settings', 'error');
+            }
+        });
+    }
+    
+    // Load saved settings
+    function loadSiteSettings() {
+        try {
+            const settings = JSON.parse(localStorage.getItem('site_settings') || '{}');
+            if (settings.site_title) document.getElementById('site-title').value = settings.site_title;
+            if (settings.site_tagline) document.getElementById('site-tagline').value = settings.site_tagline;
+            if (settings.land_acknowledgement) document.getElementById('land-acknowledgement-text').value = settings.land_acknowledgement;
+            if (settings.contact_email) document.getElementById('contact-email').value = settings.contact_email;
+        } catch (error) {
+            console.error('Load settings error:', error);
+        }
+    }
+    
+    // Call loadSiteSettings when settings tab is shown
+    const settingsTab = document.querySelector('[data-tab="settings"]');
+    if (settingsTab) {
+        settingsTab.addEventListener('click', loadSiteSettings);
+    }</script>
 </body>
 </html>
