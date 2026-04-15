@@ -7,7 +7,7 @@
     'use strict';
 
     var SUPABASE_URL = 'https://bdvaqrzsnzjnlufvkxqa.supabase.co';
-    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w';
 
     if (!window.supabase || !window.supabase.createClient) {
         console.warn('Supabase JS library not loaded. Ensure the CDN script tag appears before supabase-init.js.');
