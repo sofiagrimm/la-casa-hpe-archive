@@ -309,6 +309,8 @@
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                            filterBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+                                        btn.setAttribute('aria-pressed', 'true');
                 currentFilter = btn.dataset.filter;
                 filterAndRender();
             });
