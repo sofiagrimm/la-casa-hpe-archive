@@ -239,12 +239,8 @@
     <div id="login-overlay">
         <div class="login-box card">
             <h3>Administrator Login</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Enter your credentials to access the admin dashboard.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Enter the password to access the admin dashboard.</p>
             <form id="login-form">
-                <div class="form-group">
-                    <label for="admin-email">Email</label>
-                    <input type="email" id="admin-email" placeholder="admin@lacasa.yale.edu" required data-testid="admin-email" />
-                </div>
                 <div class="form-group">
                     <label for="admin-pass">Password</label>
                     <input type="password" id="admin-pass" placeholder="Enter password..." required data-testid="admin-password" />
@@ -483,12 +479,11 @@
         // Login
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('admin-email').value;
             const password = document.getElementById('admin-pass').value;
             
             loginError.style.display = 'none';
             
-            const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
+            const { data, error } = await sbClient.auth.signInWithPassword({ email: 'admin@lacasa.yale.edu', password });
             
             if (error) {
                 loginError.textContent = error.message || 'Invalid credentials. Please try again.';
