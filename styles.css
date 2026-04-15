@@ -22,7 +22,7 @@
     --space-4: 1rem;
     --space-6: 1.5rem;
     --space-8: 2rem;
-    --transition: 0.2s ease;
+    --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
     --radius: 0;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Space Mono', 'Courier New', monospace;

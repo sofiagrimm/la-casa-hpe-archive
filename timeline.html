@@ -20,13 +20,11 @@
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: rgba(26,46,31,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; transition: box-shadow 0.3s, padding 0.3s; }
-        .site-header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); padding: 0.75rem 0; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
         .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
-        .brand-mark-text:hover { color: var(--accent); }
+        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; }
         .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
         .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; position: relative; padding: 0.25rem 0; transition: color var(--transition); }
         .nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
@@ -35,22 +33,22 @@
         .nav a.active, .nav a[aria-current="page"] { color: var(--text-main); }
         .page-hero { padding: 5rem 0 4rem; border-bottom: 1px solid var(--divider); }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.75rem; }
-        h1.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-style: italic; font-weight: 400; line-height: 1.05; margin-bottom: 1.5rem; }
+        h1.hero-title { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 5.5rem); font-style: italic; font-weight: 400; line-height: 1.05; margin-bottom: 1.5rem; }
         .hero-sub { font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2rem; }
         .filter-bar { padding: 2rem 0; border-bottom: 1px solid var(--divider); position: sticky; top: 72px; z-index: 90; background: var(--bg); }
         .filter-inner { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
         .filter-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-right: 0.5rem; }
-        .filter-btn { font-family: 'Space Mono', monospace; font-size: 0.72rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border-mid); background: transparent; color: var(--text-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; transition: all 0.2s var(--easing); }
+        .filter-btn { font-family: var(--font-body), monospace; font-size: 0.72rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border-mid); background: transparent; color: var(--text-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; transition: all 0.2s var(--easing); }
         .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
         .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
         .era-nav { margin-left: auto; display: flex; gap: 0.5rem; }
-        .era-chip { font-family: 'Space Mono', monospace; font-size: 0.65rem; padding: 0.25rem 0.7rem; border: 1px solid var(--border-soft); background: transparent; color: var(--text-faint); cursor: pointer; transition: all 0.2s; }
+        .era-chip { font-family: var(--font-body), monospace; font-size: 0.65rem; padding: 0.25rem 0.7rem; border: 1px solid var(--border-soft); background: transparent; color: var(--text-faint); cursor: pointer; transition: all 0.2s; }
         .era-chip:hover { color: var(--text-muted); border-color: var(--border-mid); }
         .timeline-section { padding: 4rem 0; }
         .era-group { margin-bottom: 5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--easing), transform 0.5s var(--easing); }
         .era-group.visible { opacity: 1; transform: none; }
         .era-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; }
-        .era-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--accent); white-space: nowrap; }
+        .era-label { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--accent); white-space: nowrap; }
         .era-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--line), transparent); }
         .era-count { font-size: 0.68rem; color: var(--text-faint); white-space: nowrap; }
         .track { position: relative; }
@@ -72,7 +70,7 @@
         .tag-advocacy { color: #c97bd0; border-color: rgba(201,123,208,0.4); }
         .tag-milestone { color: #f2a05c; border-color: rgba(242,160,92,0.4); }
         .tag-coalition { color: #a8c97b; border-color: rgba(168,201,123,0.4); }
-        .event-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; line-height: 1.2; color: var(--text-main); margin-bottom: 0.3rem; }
+        .event-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; line-height: 1.2; color: var(--text-main); margin-bottom: 0.3rem; }
         .event-summary { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
         .event-expand { overflow: hidden; max-height: 0; transition: max-height 0.45s var(--easing); }
         .event-row.expanded .event-expand { max-height: 400px; }
@@ -88,13 +86,13 @@
         .event-row.expanded .expand-icon { transform: rotate(45deg); }
         .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--divider); border: 1px solid var(--divider); margin: 3rem 0; }
         .stat-cell { background: var(--bg-card); padding: 1.5rem; text-align: center; }
-        .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-style: italic; color: var(--accent); line-height: 1; display: block; }
+        .stat-num { font-family: var(--font-display); font-size: 2.8rem; font-style: italic; color: var(--accent); line-height: 1; display: block; }
         .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-top: 0.4rem; }
         .contribute-band { padding: 5rem 0; border-top: 1px solid var(--divider); }
         .contribute-inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
-        .contribute-text h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; margin-bottom: 0.6rem; }
+        .contribute-text h3 { font-family: var(--font-display); font-size: 2rem; font-style: italic; margin-bottom: 0.6rem; }
         .contribute-text p { font-size: 0.85rem; color: var(--text-muted); max-width: 480px; }
-        .btn-primary { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.75rem 2rem; background: var(--accent); color: var(--bg); text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { display: inline-block; font-family: var(--font-body), monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.75rem 2rem; background: var(--accent); color: var(--bg); text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
         .btn-primary:hover { background: #e8c160; }
         .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
         .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }

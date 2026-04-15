@@ -14,26 +14,26 @@
             --bg-footer: #111a13; --text-main: #f2ead8; --text-muted: #9aab97;
             --accent: #c9a84c; --border-soft: rgba(242,234,216,0.12);
             --border-strong: rgba(242,234,216,0.3); --divider: rgba(242,234,216,0.15);
-            --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem; --transition: 0.2s ease;
+            --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem; --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-body), monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
         .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; }
         .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .brand-mark-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
         .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
         .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
         .nav a:hover { color: var(--text-main); text-decoration: underline; }
         section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
         .section-head { margin-bottom: 2rem; }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-style: italic; font-weight: 400; line-height: 1.1; }
+        h2 { font-family: var(--font-display); font-size: 2.6rem; font-style: italic; font-weight: 400; line-height: 1.1; }
         .section-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 700px; }
         #map { width: 100%; height: 540px; border: 1px solid var(--border-soft); margin-bottom: 3rem; background: var(--bg-soft); }
-        .leaflet-popup-content-wrapper { background: #1e3324; color: #f2ead8; border: 1px solid rgba(242,234,216,0.2); border-radius: 0; font-family: 'Space Mono', monospace; font-size: 0.8rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .leaflet-popup-content-wrapper { background: #1e3324; color: #f2ead8; border: 1px solid rgba(242,234,216,0.2); border-radius: 0; font-family: var(--font-body), monospace; font-size: 0.8rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .leaflet-popup-tip { background: #1e3324; }
-        .leaflet-popup-content h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: #c9a84c; margin-bottom: 0.3rem; }
+        .leaflet-popup-content h4 { font-family: var(--font-display); font-size: 1rem; color: #c9a84c; margin-bottom: 0.3rem; }
         .leaflet-popup-content .pop-addr { font-size: 0.7rem; color: var(--accent); opacity: 0.7; margin-bottom: 0.4rem; }
         .leaflet-popup-content p { color: #9aab97; font-size: 0.75rem; line-height: 1.5; margin: 0; }
         .leaflet-popup-close-button { color: #9aab97 !important; }
