@@ -34,49 +34,19 @@
         .nav { display: flex; gap: 1.5rem; }
         .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
         .nav a:hover { color: var(--text-main); }
-        
         section { padding: 2rem 0; }
         h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-style: italic; margin-bottom: 2rem; }
         h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; }
-        
-        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        @media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr; } }
-        
         .card { background: var(--bg-soft); padding: 2rem; border: 1px solid var(--border-soft); margin-bottom: 1.5rem; }
-        
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; 
-            background: var(--bg-soft-2); 
-            border: 1px solid var(--border-soft); 
-            color: var(--text-main); 
-            padding: 0.75rem; 
-            font-family: inherit;
-            font-size: 0.9rem;
-            transition: border-color var(--transition);
-        }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--bg-soft-2); border: 1px solid var(--border-soft); color: var(--text-main); padding: 0.75rem; font-family: inherit; font-size: 0.9rem; transition: border-color var(--transition); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
         .form-group select option { background: var(--bg-soft-2); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .checkbox-group { display: flex; align-items: center; gap: 0.5rem; }
         .checkbox-group input[type="checkbox"] { width: auto; accent-color: var(--accent); }
-        
-        .btn { 
-            background: var(--accent); 
-            color: #111a13; 
-            border: none; 
-            padding: 0.75rem 1.5rem; 
-            font-weight: 700; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            font-family: inherit;
-            transition: var(--transition);
-        }
+        .btn { background: var(--accent); color: #111a13; border: none; padding: 0.75rem 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-family: inherit; transition: var(--transition); }
         .btn:hover { background: var(--accent-hover); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
@@ -86,184 +56,80 @@
         .btn-danger:hover { background: #c82333; }
         .btn-success { background: var(--success); color: white; }
         .btn-success:hover { background: #218838; }
-        
-        .archive-item { 
-            border-bottom: 1px solid var(--divider); 
-            padding: 1.5rem 0; 
-            display: grid;
-            gap: 0.75rem;
-        }
+        .archive-item { border-bottom: 1px solid var(--divider); padding: 1.5rem 0; display: grid; gap: 0.75rem; }
         .archive-item:last-child { border-bottom: none; }
         .archive-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 1rem; flex-wrap: wrap; }
         .archive-title { font-size: 1.1rem; font-weight: 600; }
         .archive-desc { font-size: 0.85rem; color: var(--text-muted); }
         .archive-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
-        
-        .badge { 
-            display: inline-block; 
-            padding: 0.2rem 0.5rem; 
-            font-size: 0.65rem; 
-            text-transform: uppercase; 
-            letter-spacing: 0.05em;
-            border-radius: 3px;
-        }
+        .badge { display: inline-block; padding: 0.2rem 0.5rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 3px; }
         .badge-pending { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
         .badge-published { background: rgba(40, 167, 69, 0.2); color: var(--success); }
         .badge-featured { background: rgba(201, 168, 76, 0.2); color: var(--accent); }
-        
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
         .stat-card { background: var(--bg-soft); padding: 1.5rem; border: 1px solid var(--border-soft); text-align: center; }
         .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); }
         .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
-        
         .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--divider); margin-bottom: 2rem; }
-        .tab { 
-            padding: 1rem 1.5rem; 
-            background: transparent; 
-            border: none; 
-            color: var(--text-muted); 
-            cursor: pointer; 
-            font-family: inherit;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-        }
+        .tab { padding: 1rem 1.5rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-family: inherit; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid transparent; transition: var(--transition); }
         .tab:hover { color: var(--text-main); }
         .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-        
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            padding: 1rem 1.5rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
+        .toast { position: fixed; bottom: 2rem; right: 2rem; padding: 1rem 1.5rem; border-radius: 4px; font-size: 0.85rem; z-index: 1000; animation: slideIn 0.3s ease; }
         .toast-success { background: var(--success); color: white; }
         .toast-error { background: var(--error); color: white; }
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .loading { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 3rem; 
-            color: var(--text-muted);
-        }
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--border-soft);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 0.75rem;
-        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: var(--text-muted); }
+        .spinner { width: 24px; height: 24px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 0.75rem; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .empty-state { 
-            text-align: center; 
-            padding: 3rem; 
-            color: var(--text-muted);
-        }
+        .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); }
         .empty-state h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); }
-        
-        #login-overlay { 
-            position: fixed; 
-            inset: 0; 
-            background: var(--bg); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            z-index: 1000; 
-        }
+        #login-overlay { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 1000; }
         .login-box { width: 100%; max-width: 400px; }
-        .login-error { color: var(--error); font-size: 0.8rem; margin-top: 0.5rem; display: none; }
-        
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
-        }
+        .login-error { color: var(--error); font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 2rem; }
         .modal-overlay.active { display: flex; }
-        .modal {
-            background: var(--bg-soft);
-            border: 1px solid var(--border-soft);
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--divider);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .modal { background: var(--bg-soft); border: 1px solid var(--border-soft); max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--divider); display: flex; justify-content: space-between; align-items: center; }
         .modal-header h3 { margin: 0; }
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1.5rem;
-            line-height: 1;
-        }
+        .modal-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; line-height: 1; }
         .modal-body { padding: 1.5rem; }
-        .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--divider);
-            display: flex;
-            gap: 0.75rem;
-            justify-content: flex-end;
-        }
+        .modal-footer { padding: 1.5rem; border-top: 1px solid var(--divider); display: flex; gap: 0.75rem; justify-content: flex-end; }
     </style>
 </head>
 <body>
+
+    <!-- LOGIN OVERLAY -->
     <div id="login-overlay">
         <div class="login-box card">
             <h3>Administrator Login</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Sign in with your Supabase admin account.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Sign in with your La Casa admin account.</p>
             <form id="login-form">
                 <div class="form-group">
                     <label for="admin-email">Email</label>
-                    <input type="email" id="admin-email" placeholder="admin@example.com" required data-testid="admin-email" />
+                    <input type="email" id="admin-email" placeholder="admin@example.com" required autocomplete="email" />
                 </div>
                 <div class="form-group">
                     <label for="admin-pass">Password</label>
-                    <input type="password" id="admin-pass" placeholder="Enter password..." required data-testid="admin-password" />
+                    <input type="password" id="admin-pass" placeholder="Password" required autocomplete="current-password" />
                 </div>
-                <p class="login-error" id="login-error">Invalid credentials. Please try again.</p>
-                <button type="submit" class="btn" data-testid="admin-login-btn">Login</button>
+                <p class="login-error" id="login-error"></p>
+                <button type="submit" class="btn" id="login-btn" style="width:100%; margin-top:0.5rem;">Sign In</button>
             </form>
         </div>
     </div>
 
-    <div id="admin-content" style="display: none;">
+    <!-- ADMIN CONTENT -->
+    <div id="admin-content" style="display:none;">
         <header class="site-header">
             <div class="container">
                 <div class="header-inner">
-                    <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                    <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
                     <nav class="nav">
                         <a href="admin.html">Dashboard</a>
                         <a href="index.html">View Site</a>
-                        <a href="#" id="logout-btn" data-testid="logout-btn">Logout</a>
+                        <a href="#" id="logout-btn">Logout</a>
                     </nav>
                 </div>
             </div>
@@ -272,105 +138,42 @@
         <main class="container">
             <section>
                 <h2>Admin Dashboard</h2>
-                
-                <div class="stats-grid" id="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number" id="stat-total">-</div>
-                        <div class="stat-label">Total Archives</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="stat-published">-</div>
-                        <div class="stat-label">Published</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="stat-pending">-</div>
-                        <div class="stat-label">Pending</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="stat-featured">-</div>
-                        <div class="stat-label">Featured</div>
-                    </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number" id="stat-total">-</div><div class="stat-label">Total Archives</div></div>
+                    <div class="stat-card"><div class="stat-number" id="stat-published">-</div><div class="stat-label">Published</div></div>
+                    <div class="stat-card"><div class="stat-number" id="stat-pending">-</div><div class="stat-label">Pending</div></div>
+                    <div class="stat-card"><div class="stat-number" id="stat-featured">-</div><div class="stat-label">Featured</div></div>
                 </div>
-                
                 <div class="tabs">
-                    <button class="tab active" data-tab="archives" data-testid="tab-archives">All Archives</button>
-                    <button class="tab" data-tab="pending" data-testid="tab-pending">Pending Review</button>
-                    <button class="tab" data-tab="add" data-testid="tab-add">Add New</button>
+                    <button class="tab active" data-tab="archives">All Archives</button>
+                    <button class="tab" data-tab="pending">Pending Review</button>
+                    <button class="tab" data-tab="add">Add New</button>
                 </div>
-                
                 <div id="tab-archives" class="tab-content active">
-                    <div class="card">
-                        <h3>Archive Entries</h3>
-                        <div id="archives-list">
-                            <div class="loading"><div class="spinner"></div> Loading archives...</div>
-                        </div>
-                    </div>
+                    <div class="card"><h3>Archive Entries</h3><div id="archives-list"><div class="loading"><div class="spinner"></div> Loading archives...</div></div></div>
                 </div>
-                
                 <div id="tab-pending" class="tab-content">
-                    <div class="card">
-                        <h3>Pending Submissions</h3>
-                        <div id="pending-list">
-                            <div class="loading"><div class="spinner"></div> Loading submissions...</div>
-                        </div>
-                    </div>
+                    <div class="card"><h3>Pending Submissions</h3><div id="pending-list"><div class="loading"><div class="spinner"></div> Loading submissions...</div></div></div>
                 </div>
-                
                 <div id="tab-add" class="tab-content">
                     <div class="card">
                         <h3>Add New Archive Entry</h3>
                         <form id="add-archive-form">
-                            <div class="form-group">
-                                <label for="new-title">Title *</label>
-                                <input type="text" id="new-title" placeholder="Event name or item title..." required data-testid="new-title" />
-                            </div>
+                            <div class="form-group"><label for="new-title">Title *</label><input type="text" id="new-title" placeholder="Event name or item title..." required /></div>
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="new-date">Archive Date</label>
-                                    <input type="text" id="new-date" placeholder="e.g. 1974 or March 1985" data-testid="new-date" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="new-type">Media Type</label>
-                                    <select id="new-type" data-testid="new-type">
-                                        <option value="photograph">Photograph</option>
-                                        <option value="document">Document</option>
-                                        <option value="flyer">Flyer</option>
-                                        <option value="oral-history">Oral History</option>
-                                        <option value="video">Video</option>
-                                        <option value="audio">Audio</option>
-                                        <option value="other">Other</option>
-                                    </select>
+                                <div class="form-group"><label for="new-date">Archive Date</label><input type="text" id="new-date" placeholder="e.g. 1974 or March 1985" /></div>
+                                <div class="form-group"><label for="new-type">Media Type</label>
+                                    <select id="new-type"><option value="photograph">Photograph</option><option value="document">Document</option><option value="flyer">Flyer</option><option value="oral-history">Oral History</option><option value="video">Video</option><option value="audio">Audio</option><option value="other">Other</option></select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="new-org">Organization</label>
-                                <input type="text" id="new-org" placeholder="e.g. MEChA de Yale, La Casa Cultural" data-testid="new-org" />
-                            </div>
-                            <div class="form-group">
-                                <label for="new-desc">Description *</label>
-                                <textarea id="new-desc" rows="4" placeholder="Detailed description of the historical context..." required data-testid="new-desc"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-thumbnail">Thumbnail URL</label>
-                                <input type="url" id="new-thumbnail" placeholder="https://..." data-testid="new-thumbnail" />
-                            </div>
+                            <div class="form-group"><label for="new-org">Organization</label><input type="text" id="new-org" placeholder="e.g. MEChA de Yale, La Casa Cultural" /></div>
+                            <div class="form-group"><label for="new-desc">Description *</label><textarea id="new-desc" rows="4" placeholder="Detailed description of the historical context..." required></textarea></div>
+                            <div class="form-group"><label for="new-thumbnail">Thumbnail URL</label><input type="url" id="new-thumbnail" placeholder="https://..." /></div>
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="new-status">Status</label>
-                                    <select id="new-status" data-testid="new-status">
-                                        <option value="pending">Pending Review</option>
-                                        <option value="published">Published</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;</label>
-                                    <div class="checkbox-group">
-                                        <input type="checkbox" id="new-featured" data-testid="new-featured" />
-                                        <label for="new-featured" style="margin: 0; text-transform: none;">Mark as Featured</label>
-                                    </div>
-                                </div>
+                                <div class="form-group"><label for="new-status">Status</label><select id="new-status"><option value="pending">Pending Review</option><option value="published">Published</option></select></div>
+                                <div class="form-group"><label>&nbsp;</label><div class="checkbox-group"><input type="checkbox" id="new-featured" /><label for="new-featured" style="margin:0;text-transform:none;">Mark as Featured</label></div></div>
                             </div>
-                            <button type="submit" class="btn" data-testid="add-archive-btn">Add to Archive</button>
+                            <button type="submit" class="btn">Add to Archive</button>
                         </form>
                     </div>
                 </div>
@@ -378,70 +181,31 @@
         </main>
     </div>
 
-    <!-- Edit Modal -->
+    <!-- EDIT MODAL -->
     <div class="modal-overlay" id="edit-modal">
         <div class="modal">
-            <div class="modal-header">
-                <h3>Edit Archive</h3>
-                <button class="modal-close" id="close-modal">&times;</button>
-            </div>
+            <div class="modal-header"><h3>Edit Archive</h3><button class="modal-close" id="close-modal">&times;</button></div>
             <form id="edit-form">
                 <div class="modal-body">
                     <input type="hidden" id="edit-id" />
-                    <div class="form-group">
-                        <label for="edit-title">Title *</label>
-                        <input type="text" id="edit-title" required data-testid="edit-title" />
-                    </div>
+                    <div class="form-group"><label for="edit-title">Title *</label><input type="text" id="edit-title" required /></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="edit-date">Archive Date</label>
-                            <input type="text" id="edit-date" data-testid="edit-date" />
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-type">Media Type</label>
-                            <select id="edit-type" data-testid="edit-type">
-                                <option value="photograph">Photograph</option>
-                                <option value="document">Document</option>
-                                <option value="flyer">Flyer</option>
-                                <option value="oral-history">Oral History</option>
-                                <option value="video">Video</option>
-                                <option value="audio">Audio</option>
-                                <option value="other">Other</option>
-                            </select>
+                        <div class="form-group"><label for="edit-date">Archive Date</label><input type="text" id="edit-date" /></div>
+                        <div class="form-group"><label for="edit-type">Media Type</label>
+                            <select id="edit-type"><option value="photograph">Photograph</option><option value="document">Document</option><option value="flyer">Flyer</option><option value="oral-history">Oral History</option><option value="video">Video</option><option value="audio">Audio</option><option value="other">Other</option></select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="edit-org">Organization</label>
-                        <input type="text" id="edit-org" data-testid="edit-org" />
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-desc">Description *</label>
-                        <textarea id="edit-desc" rows="4" required data-testid="edit-desc"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-thumbnail">Thumbnail URL</label>
-                        <input type="url" id="edit-thumbnail" data-testid="edit-thumbnail" />
-                    </div>
+                    <div class="form-group"><label for="edit-org">Organization</label><input type="text" id="edit-org" /></div>
+                    <div class="form-group"><label for="edit-desc">Description *</label><textarea id="edit-desc" rows="4" required></textarea></div>
+                    <div class="form-group"><label for="edit-thumbnail">Thumbnail URL</label><input type="url" id="edit-thumbnail" /></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="edit-status">Status</label>
-                            <select id="edit-status" data-testid="edit-status">
-                                <option value="pending">Pending Review</option>
-                                <option value="published">Published</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="edit-featured" data-testid="edit-featured" />
-                                <label for="edit-featured" style="margin: 0; text-transform: none;">Mark as Featured</label>
-                            </div>
-                        </div>
+                        <div class="form-group"><label for="edit-status">Status</label><select id="edit-status"><option value="pending">Pending Review</option><option value="published">Published</option></select></div>
+                        <div class="form-group"><label>&nbsp;</label><div class="checkbox-group"><input type="checkbox" id="edit-featured" /><label for="edit-featured" style="margin:0;text-transform:none;">Mark as Featured</label></div></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="cancel-edit">Cancel</button>
-                    <button type="submit" class="btn" data-testid="save-edit-btn">Save Changes</button>
+                    <button type="submit" class="btn">Save Changes</button>
                 </div>
             </form>
         </div>
@@ -449,317 +213,205 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Supabase client
-        var sbClient = window.supabase.createClient(
-            'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w'
-        );
-        
-        // DOM Elements
+        const SUPABASE_URL  = 'https://bdvaqrzsnzjnlufvkxqa.supabase.co';
+        const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
         const loginOverlay = document.getElementById('login-overlay');
         const adminContent = document.getElementById('admin-content');
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
-        const logoutBtn = document.getElementById('logout-btn');
-        
-        // Tab handling
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        // Modal
-        const editModal = document.getElementById('edit-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const cancelEditBtn = document.getElementById('cancel-edit');
-        
-        // Check auth on load
-        async function checkAuth() {
-            const { data: { session } } = await sbClient.auth.getSession();
-            if (session) {
-                showAdmin();
-                loadDashboard();
-            }
-        }
-        
-        // Login
+        const loginForm    = document.getElementById('login-form');
+        const loginError   = document.getElementById('login-error');
+        const loginBtn     = document.getElementById('login-btn');
+        const logoutBtn    = document.getElementById('logout-btn');
+        const editModal    = document.getElementById('edit-modal');
+
+        // Check existing session on load
+        (async () => {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) { showAdmin(); loadDashboard(); }
+        })();
+
+        // Sign in with email + password via Supabase Auth
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('admin-email').value;
-            const password = document.getElementById('admin-pass').value;
-            
             loginError.style.display = 'none';
-            
-            const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
-            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in…';
+            const email    = document.getElementById('admin-email').value.trim();
+            const password = document.getElementById('admin-pass').value;
+            const { error } = await sb.auth.signInWithPassword({ email, password });
             if (error) {
-                loginError.textContent = error.message || 'Invalid credentials. Please try again.';
+                loginError.textContent = 'Invalid email or password. Please try again.';
                 loginError.style.display = 'block';
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
             } else {
                 showAdmin();
                 loadDashboard();
             }
         });
-        
-        // Logout
+
+        // Sign out
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            await sbClient.auth.signOut();
-            loginOverlay.style.display = 'flex';
+            await sb.auth.signOut();
             adminContent.style.display = 'none';
+            loginOverlay.style.display = 'flex';
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Sign In';
         });
-        
+
         function showAdmin() {
             loginOverlay.style.display = 'none';
             adminContent.style.display = 'block';
         }
-        
-        // Tab switching
-        tabs.forEach(tab => {
+
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 tab.classList.add('active');
-                
-                const tabId = tab.dataset.tab;
-                tabContents.forEach(content => {
-                    content.classList.toggle('active', content.id === `tab-${tabId}`);
-                });
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
             });
         });
-        
-        // Load dashboard data
+
         async function loadDashboard() {
             await Promise.all([loadStats(), loadArchives(), loadPending()]);
         }
-        
-        // Load stats
+
         async function loadStats() {
-            const { data: all } = await sbClient.from('archives').select('id, status, featured');
-            if (!all) return;
-            
-            document.getElementById('stat-total').textContent = all.length;
-            document.getElementById('stat-published').textContent = all.filter(a => a.status === 'published').length;
-            document.getElementById('stat-pending').textContent = all.filter(a => a.status === 'pending').length;
-            document.getElementById('stat-featured').textContent = all.filter(a => a.featured).length;
+            const { data } = await sb.from('archives').select('id, status, featured');
+            if (!data) return;
+            document.getElementById('stat-total').textContent     = data.length;
+            document.getElementById('stat-published').textContent = data.filter(a => a.status === 'published').length;
+            document.getElementById('stat-pending').textContent   = data.filter(a => a.status === 'pending').length;
+            document.getElementById('stat-featured').textContent  = data.filter(a => a.featured).length;
         }
-        
-        // Load all archives
+
         async function loadArchives() {
-            const container = document.getElementById('archives-list');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div> Loading archives...</div>';
-            
-            const { data, error } = await sbClient
-                .from('archives')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) {
-                container.innerHTML = `<div class="empty-state"><h4>Error loading archives</h4><p>${error.message}</p></div>`;
-                return;
-            }
-            
-            if (!data || data.length === 0) {
-                container.innerHTML = '<div class="empty-state"><h4>No archives yet</h4><p>Add your first archive entry using the "Add New" tab.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = data.map(archive => renderArchiveItem(archive)).join('');
+            const el = document.getElementById('archives-list');
+            el.innerHTML = '<div class="loading"><div class="spinner"></div> Loading archives...</div>';
+            const { data, error } = await sb.from('archives').select('*').order('created_at', { ascending: false });
+            if (error) { el.innerHTML = `<div class="empty-state"><h4>Error</h4><p>${escapeHtml(error.message)}</p></div>`; return; }
+            if (!data?.length) { el.innerHTML = '<div class="empty-state"><h4>No archives yet</h4><p>Add your first entry using the "Add New" tab.</p></div>'; return; }
+            el.innerHTML = data.map(a => renderItem(a)).join('');
         }
-        
-        // Load pending
+
         async function loadPending() {
-            const container = document.getElementById('pending-list');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div> Loading submissions...</div>';
-            
-            const { data, error } = await sbClient
-                .from('archives')
-                .select('*')
-                .eq('status', 'pending')
-                .order('created_at', { ascending: false });
-            
-            if (error) {
-                container.innerHTML = `<div class="empty-state"><h4>Error loading submissions</h4><p>${error.message}</p></div>`;
-                return;
-            }
-            
-            if (!data || data.length === 0) {
-                container.innerHTML = '<div class="empty-state"><h4>No pending submissions</h4><p>All submissions have been reviewed.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = data.map(archive => renderArchiveItem(archive, true)).join('');
+            const el = document.getElementById('pending-list');
+            el.innerHTML = '<div class="loading"><div class="spinner"></div> Loading submissions...</div>';
+            const { data, error } = await sb.from('archives').select('*').eq('status', 'pending').order('created_at', { ascending: false });
+            if (error) { el.innerHTML = `<div class="empty-state"><h4>Error</h4><p>${escapeHtml(error.message)}</p></div>`; return; }
+            if (!data?.length) { el.innerHTML = '<div class="empty-state"><h4>No pending submissions</h4><p>All caught up.</p></div>'; return; }
+            el.innerHTML = data.map(a => renderItem(a, true)).join('');
         }
-        
-        // Render archive item
-        function renderArchiveItem(archive, showApprove = false) {
-            const badges = [];
-            if (archive.status === 'pending') badges.push('<span class="badge badge-pending">Pending</span>');
-            if (archive.status === 'published') badges.push('<span class="badge badge-published">Published</span>');
-            if (archive.featured) badges.push('<span class="badge badge-featured">Featured</span>');
-            
+
+        function renderItem(a, showApprove = false) {
+            const badges = [
+                a.status === 'pending'   ? '<span class="badge badge-pending">Pending</span>'    : '',
+                a.status === 'published' ? '<span class="badge badge-published">Published</span>' : '',
+                a.featured               ? '<span class="badge badge-featured">Featured</span>'   : '',
+            ].join(' ');
             return `
-                <div class="archive-item" data-id="${archive.id}">
+                <div class="archive-item" data-id="${escapeHtml(String(a.id))}">
                     <div class="archive-meta">
-                        <span>$escapeHtml(archive.media_type || 'Archive')
-                        <span>${escapeHtml(archive.archive_date || 'Date unknown')}</span>
-                        <span>${escapeHtml(archive.organization || 'La Casa')}</span>
-                        ${badges.join(' ')}
+                        <span>${escapeHtml(a.media_type || 'Archive')}</span>
+                        <span>${escapeHtml(a.archive_date || 'Date unknown')}</span>
+                        <span>${escapeHtml(a.organization || 'La Casa')}</span>
+                        ${badges}
                     </div>
-                    <div class="archive-title">${escapeHtml(archive.title || 'Untitled')}</div>
-                    <div class="archive-desc">${escapeHtml(archive.description || 'No description')}</div>
+                    <div class="archive-title">${escapeHtml(a.title || 'Untitled')}</div>
+                    <div class="archive-desc">${escapeHtml(a.description || '')}</div>
                     <div class="archive-actions">
-                        ${showApprove ? `<button class="btn btn-sm btn-success" onclick="approveArchive('${archive.id}')" data-testid="approve-${archive.id}">Approve</button>` : ''}
-                        <button class="btn btn-sm btn-secondary" onclick="editArchive('${archive.id}')" data-testid="edit-${archive.id}">Edit</button>
-                        <button class="btn btn-sm ${archive.featured ? 'btn-secondary' : ''}" onclick="toggleFeatured('${archive.id}', ${!archive.featured})" data-testid="feature-${archive.id}">${archive.featured ? 'Unfeature' : 'Feature'}</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteArchive('${archive.id}')" data-testid="delete-${archive.id}">Delete</button>
+                        ${showApprove ? `<button class="btn btn-sm btn-success" onclick="approveArchive('${a.id}')">Approve</button>` : ''}
+                        <button class="btn btn-sm btn-secondary" onclick="editArchive('${a.id}')">Edit</button>
+                        <button class="btn btn-sm ${a.featured ? 'btn-secondary' : ''}" onclick="toggleFeatured('${a.id}', ${!a.featured})">${a.featured ? 'Unfeature' : 'Feature'}</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteArchive('${a.id}')">Delete</button>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
-        
-        // Add new archive
+
         document.getElementById('add-archive-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const newArchive = {
-                title: document.getElementById('new-title').value,
-                description: document.getElementById('new-desc').value,
-                archive_date: document.getElementById('new-date').value || null,
-                media_type: document.getElementById('new-type').value,
-                organization: document.getElementById('new-org').value || null,
+            const { error } = await sb.from('archives').insert([{
+                title:         document.getElementById('new-title').value,
+                description:   document.getElementById('new-desc').value,
+                archive_date:  document.getElementById('new-date').value  || null,
+                media_type:    document.getElementById('new-type').value,
+                organization:  document.getElementById('new-org').value   || null,
                 thumbnail_url: document.getElementById('new-thumbnail').value || null,
-                status: document.getElementById('new-status').value,
-                featured: document.getElementById('new-featured').checked
-            };
-            
-            const { error } = await sbClient.from('archives').insert([newArchive]);
-            
-            if (error) {
-                showToast('Error adding archive: ' + error.message, 'error');
-            } else {
-                showToast('Archive added successfully!', 'success');
-                e.target.reset();
-                loadDashboard();
-            }
+                status:        document.getElementById('new-status').value,
+                featured:      document.getElementById('new-featured').checked,
+            }]);
+            if (error) { showToast('Error: ' + error.message, 'error'); }
+            else { showToast('Archive added!', 'success'); e.target.reset(); loadDashboard(); }
         });
-        
-        // Approve archive
+
         async function approveArchive(id) {
-            const { error } = await sbClient
-                .from('archives')
-                .update({ status: 'published' })
-                .eq('id', id);
-            
-            if (error) {
-                showToast('Error approving: ' + error.message, 'error');
-            } else {
-                showToast('Archive approved and published!', 'success');
-                loadDashboard();
-            }
+            const { error } = await sb.from('archives').update({ status: 'published' }).eq('id', id);
+            error ? showToast('Error: ' + error.message, 'error') : (showToast('Approved!', 'success'), loadDashboard());
         }
-        
-        // Toggle featured
+
         async function toggleFeatured(id, featured) {
-            const { error } = await sbClient
-                .from('archives')
-                .update({ featured })
-                .eq('id', id);
-            
-            if (error) {
-                showToast('Error updating: ' + error.message, 'error');
-            } else {
-                showToast(featured ? 'Archive featured!' : 'Archive unfeatured', 'success');
-                loadDashboard();
-            }
+            const { error } = await sb.from('archives').update({ featured }).eq('id', id);
+            error ? showToast(error.message, 'error') : (showToast(featured ? 'Featured!' : 'Unfeatured', 'success'), loadDashboard());
         }
-        
-        // Delete archive
+
         async function deleteArchive(id) {
-            if (!confirm('Are you sure you want to delete this archive? This action cannot be undone.')) return;
-            
-            const { error } = await sbClient.from('archives').delete().eq('id', id);
-            
-            if (error) {
-                showToast('Error deleting: ' + error.message, 'error');
-            } else {
-                showToast('Archive deleted', 'success');
-                loadDashboard();
-            }
+            if (!confirm('Delete this archive? This cannot be undone.')) return;
+            const { error } = await sb.from('archives').delete().eq('id', id);
+            error ? showToast('Error: ' + error.message, 'error') : (showToast('Deleted', 'success'), loadDashboard());
         }
-        
-        // Edit archive
+
         async function editArchive(id) {
-            const { data, error } = await sbClient.from('archives').select('*').eq('id', id).single();
-            
-            if (error || !data) {
-                showToast('Error loading archive', 'error');
-                return;
-            }
-            
-            document.getElementById('edit-id').value = data.id;
-            document.getElementById('edit-title').value = data.title || '';
-            document.getElementById('edit-date').value = data.archive_date || '';
-            document.getElementById('edit-type').value = data.media_type || 'photograph';
-            document.getElementById('edit-org').value = data.organization || '';
-            document.getElementById('edit-desc').value = data.description || '';
-            document.getElementById('edit-thumbnail').value = data.thumbnail_url || '';
-            document.getElementById('edit-status').value = data.status || 'pending';
+            const { data, error } = await sb.from('archives').select('*').eq('id', id).single();
+            if (error || !data) { showToast('Error loading archive', 'error'); return; }
+            document.getElementById('edit-id').value         = data.id;
+            document.getElementById('edit-title').value      = data.title || '';
+            document.getElementById('edit-date').value       = data.archive_date || '';
+            document.getElementById('edit-type').value       = data.media_type || 'photograph';
+            document.getElementById('edit-org').value        = data.organization || '';
+            document.getElementById('edit-desc').value       = data.description || '';
+            document.getElementById('edit-thumbnail').value  = data.thumbnail_url || '';
+            document.getElementById('edit-status').value     = data.status || 'pending';
             document.getElementById('edit-featured').checked = data.featured || false;
-            
             editModal.classList.add('active');
         }
-        
-        // Save edit
+
         document.getElementById('edit-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const id = document.getElementById('edit-id').value;
-            const updates = {
-                title: document.getElementById('edit-title').value,
-                description: document.getElementById('edit-desc').value,
-                archive_date: document.getElementById('edit-date').value || null,
-                media_type: document.getElementById('edit-type').value,
-                organization: document.getElementById('edit-org').value || null,
+            const { error } = await sb.from('archives').update({
+                title:         document.getElementById('edit-title').value,
+                description:   document.getElementById('edit-desc').value,
+                archive_date:  document.getElementById('edit-date').value  || null,
+                media_type:    document.getElementById('edit-type').value,
+                organization:  document.getElementById('edit-org').value   || null,
                 thumbnail_url: document.getElementById('edit-thumbnail').value || null,
-                status: document.getElementById('edit-status').value,
-                featured: document.getElementById('edit-featured').checked
-            };
-            
-            const { error } = await sbClient.from('archives').update(updates).eq('id', id);
-            
-            if (error) {
-                showToast('Error saving: ' + error.message, 'error');
-            } else {
-                showToast('Archive updated!', 'success');
-                editModal.classList.remove('active');
-                loadDashboard();
-            }
+                status:        document.getElementById('edit-status').value,
+                featured:      document.getElementById('edit-featured').checked,
+            }).eq('id', id);
+            if (error) { showToast('Error: ' + error.message, 'error'); }
+            else { showToast('Saved!', 'success'); editModal.classList.remove('active'); loadDashboard(); }
         });
-        
-        // Close modal
-        closeModalBtn.addEventListener('click', () => editModal.classList.remove('active'));
-        cancelEditBtn.addEventListener('click', () => editModal.classList.remove('active'));
-        editModal.addEventListener('click', (e) => {
-            if (e.target === editModal) editModal.classList.remove('active');
-        });
-        
-        // Toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.textContent = message;
-                    toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'assertive');
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+
+        document.getElementById('close-modal').addEventListener('click',  () => editModal.classList.remove('active'));
+        document.getElementById('cancel-edit').addEventListener('click',  () => editModal.classList.remove('active'));
+        editModal.addEventListener('click', e => { if (e.target === editModal) editModal.classList.remove('active'); });
+
+        function showToast(msg, type = 'success') {
+            const t = document.createElement('div');
+            t.className = `toast toast-${type}`;
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
         }
-        
-        // Escape HTML
+
         function escapeHtml(text) {
             if (!text) return '';
-            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
-        
-        // Init
-        checkAuth();
     </script>
 </body>
 </html>
