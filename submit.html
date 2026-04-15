@@ -182,7 +182,11 @@
                                     <option value="audio">Audio</option>
                                     <option value="other">Other</option>
                                 </select>
-                            </div>
+                            </d
+                                            <div class="form-group">
+                    <label for="organization">Organization / Group (Optional)</label>
+                    <input type="text" name="organization" id="organization" placeholder="e.g., MEChA de Yale, La Casa Cultural" data-testid="submit-org">
+                </div>iv>
                             <div class="form-group">
                                 <label for="title">Title / Caption</label>
                                 <input type="text" name="title" id="title" placeholder="Brief title for your submission" required data-testid="submit-title">
@@ -249,6 +253,7 @@
                     description: document.getElementById('description').value,
                     media_type: document.getElementById('contribution-type').value,
                     submitter_name: document.getElementById('name').value,
+                                organization: document.getElementById('organization').value || null,
                     submitter_email: document.getElementById('email').value,
                     file_link: document.getElementById('submission-link').value || null,
                     status: 'pending',
