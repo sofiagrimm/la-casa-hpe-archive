@@ -41,18 +41,19 @@
         .quote-text { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; line-height: 1.35; margin-bottom: 1.5rem; max-width: 860px; color: var(--text-main); }
         .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
         .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
-        .hero { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
-        .hero h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 2.5rem; }
-        .hero-links { display: flex; gap: 1.5rem; align-items: center; font-size: 1rem; flex-wrap: wrap; }
-        .hero-links a { color: var(--text-main); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-        .hero-links a:hover { border-bottom-color: var(--accent); }
-        .hero-links span { color: var(--text-muted); }
+        .hero { padding: 5rem 0 3rem; }
+        .hero h1 { font-size: 5.5rem; line-height: 1.02; margin-bottom: 1.5rem; max-width: 900px; }
+        .hero h1 .accent { color: var(--accent); }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 560px; line-height: 1.7; margin-bottom: 2rem; }
+        .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: #111a13; padding: 1rem 2rem; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: background 0.2s; }
+        .hero-cta:hover { background: #d4b55f; }
+        .hero-cta svg { width: 18px; height: 18px; }
         section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
         .section-head { margin-bottom: 3rem; }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: var(--bg-soft); padding: 2.5rem; text-decoration: none; color: inherit; border: 1px solid var(--border-soft); transition: all var(--transition); }
-        .card:hover { background: var(--bg-soft-2); border-color: var(--border-strong); }
+        .card { background: var(--bg-soft); padding: 2.5rem; text-decoration: none; color: inherit; border: 1px solid var(--border-soft); transition: all 0.3s ease; }
+        .card:hover { background: var(--bg-soft-2); border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); }
         .card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
         .card p { color: var(--text-muted); font-size: 0.9rem; }
         .cta-box { background: var(--accent); color: #111a13; padding: 4rem; text-align: center; margin: 4rem 0; }
@@ -66,7 +67,9 @@
         
         /* Featured Carousel Styles */
         .featured-carousel-section {
-            margin-top: 4rem;
+            margin-top: 1.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider);
             display: grid;
             gap: var(--space-6);
         }
@@ -94,9 +97,9 @@
             position: relative;
             overflow: hidden;
             border-radius: 1.25rem;
-            border: 1px solid rgba(201, 168, 76, 0.18);
-            background: linear-gradient(180deg, rgba(34, 51, 39, 0.96), rgba(26, 46, 31, 0.98));
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+            border: 1px solid rgba(201, 168, 76, 0.22);
+            background: linear-gradient(135deg, rgba(34, 51, 39, 0.98), rgba(20, 36, 24, 0.99));
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(201, 168, 76, 0.06) inset;
         }
         .carousel-track {
             position: relative;
@@ -192,17 +195,20 @@
             padding: 0 var(--space-8) var(--space-6);
         }
         .carousel-button {
-            min-width: 44px;
-            min-height: 44px;
+            min-width: 48px;
+            min-height: 48px;
             border-radius: 999px;
-            border: 1px solid rgba(201, 168, 76, 0.22);
-            background: transparent;
-            color: var(--text-main);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            background: rgba(201, 168, 76, 0.06);
+            color: var(--accent);
             cursor: pointer;
             transition: var(--transition);
+            font-size: 1.1rem;
         }
         .carousel-button:hover {
-            background: rgba(201, 168, 76, 0.08);
+            background: rgba(201, 168, 76, 0.15);
+            border-color: var(--accent);
+            transform: scale(1.05);
         }
         .carousel-dots {
             display: flex;
@@ -263,8 +269,7 @@
             }
         }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .quote-text { font-size: 1.5rem; }
+            .hero h1 { font-size: 2.8rem; }
             .nav { gap: var(--space-4); }
         }
     </style>
@@ -289,12 +294,9 @@
     <main>
         <div class="container">
             <div class="hero">
-                <h1>La Casa, remembered properly.</h1>
-                <div class="hero-links">
-                    <a href="collections.html">Browse the Records</a>
-                    <span>—</span>
-                    <a href="mission.html">Our Philosophy</a>
-                </div>
+                <h1>Five decades of <span class="accent">Latine life</span> at Yale, preserved.</h1>
+                <p class="hero-subtitle">A living digital archive built by the community, for the community. Explore oral histories, photographs, flyers, and the stories that shaped La Casa Cultural since 1969.</p>
+                <a href="collections.html" class="hero-cta" data-testid="hero-cta">Explore the Archive <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
             </div>
         </div>
 
@@ -376,7 +378,7 @@
             <div class="cta-box">
                 <h2>Add to the story.</h2>
                 <p>We are actively seeking documents, photographs, and memories from alumni and current students.</p>
-                <a href="submit.html" class="cta-button" data-testid="submit-cta">Email Submission</a>
+                <a href="submit.html" class="cta-button" data-testid="submit-cta">Make a Submission</a>
             </div>
         </div>
 
