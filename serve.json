@@ -1,6 +1,4 @@
 {
-  "cleanUrls": false,
-  "rewrites": [],
-  "redirects": [],
-  "trailingSlash": false
+  "cleanUrls": true,
+  "directoryListing": false
 }
