@@ -9,25 +9,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* ---- Stories layout ---- */
         .stories-grid { display: grid; gap: 4rem; }
         .story-block { max-width: 800px; }
-        .story-quote { font-family: var(--font-display); font-size: 1.8rem; line-height: 1.3; margin-bottom: 1.5rem; position: relative; padding-left: 2.5rem; }
-        .story-quote::before { content: '"'; position: absolute; left: 0; top: -0.5rem; font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; }
-        .story-meta { font-size: 0.8rem; color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: 1rem; }
+        .story-quote {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .story-quote::before {
+            content: '\201C';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.4;
+            line-height: 1;
+        }
+        .story-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+        }
+
         @media (max-width: 768px) {
-            h2 { font-size: 2rem; }
             .story-quote { font-size: 1.4rem; padding-left: 2rem; }
             .story-quote::before { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
-    <header class="site-header" id="site-header">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" role="banner" id="site-header">
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" aria-label="La Casa HP&amp;E Archive home">
-                    <img src="logo.png" alt="La Casa HP&amp;E Archive" class="brand-logo">
-                </a>
+                <a href="index.html" class="brand-mark-text" aria-label="La Casa HP&E Archive home">LA CASA HP&amp;E</a>
                 <nav class="nav" aria-label="Primary navigation">
                     <a href="mission.html">Mission</a>
                     <a href="collections.html">Collections</a>
@@ -40,11 +62,11 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <div class="container">
             <div class="opening-quote">
-                <p class="quote-text">&#8220;Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains.&#8221;</p>
-                <p class="quote-attribution">&#8212; La Casa Cultural</p>
+                <p class="quote-text">&ldquo;Our community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains.&rdquo;</p>
+                <p class="quote-attribution">&mdash; La Casa Cultural</p>
                 <p class="quote-source">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
             </div>
         </div>
@@ -65,7 +87,7 @@
                         <p class="story-meta"><strong>Student Researcher, 2023</strong><br>Excerpt from the Archive Mission Statement.</p>
                     </div>
                     <div class="story-block">
-                        <p class="story-quote">Every flyer we saved, every photo we took &#8212; it was an act of resistance against being forgotten.</p>
+                        <p class="story-quote">Every flyer we saved, every photo we took &mdash; it was an act of resistance against being forgotten.</p>
                         <p class="story-meta"><strong>Former HP&amp;E Committee Chair, 2018</strong><br>Interview for the Digital Archive Launch.</p>
                     </div>
                 </div>
@@ -73,7 +95,7 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-inner">
                 <div><strong>La Casa Cultural &middot; HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
@@ -86,10 +108,7 @@
     </div>
 
     <script>
-        (function(){
-            var h = document.getElementById('site-header');
-            window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-        })();
+    (function(){ var h = document.getElementById('site-header'); window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true }); })();
     </script>
 </body>
 </html>
