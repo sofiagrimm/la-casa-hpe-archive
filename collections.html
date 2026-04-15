@@ -26,193 +26,372 @@
             --space-8: 2rem;
             --transition: 0.2s ease;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
-        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
-        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
-        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
-        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-        .nav a:hover { color: var(--text-main); text-decoration: underline; }
-        
-        .opening-quote { padding: var(--space-8) 0; border-bottom: 1px solid var(--divider); margin-bottom: 4rem; }
-        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; line-height: 1.3; color: var(--text-main); margin-bottom: var(--space-4); max-width: 800px; }
-        .quote-attribution { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
-        .quote-source { font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-1); }
 
-        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
-        .section-head { margin-bottom: 3rem; }
+        /* ---- Header ---- */
+        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: rgba(26,46,31,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; transition: box-shadow 0.3s, padding 0.3s; }
+        .site-header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); padding: 0.75rem 0; }
+        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
+        .brand-mark-text:hover { color: var(--accent); }
+        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; position: relative; padding: 0.25rem 0; transition: color var(--transition); }
+        .nav a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--accent); transition: width 0.25s; }
+        .nav a:hover { color: var(--text-main); }
+        .nav a:hover::after, .nav a[aria-current="page"]::after { width:100%; }
+        .nav a[aria-current="page"] { color: var(--text-main); }
+
+        /* ---- Page header ---- */
+        .page-hero { padding: 4rem 0 2rem; }
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.1; }
         h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
-        
-        .search-input { 
-            border: none; 
-            border-bottom: 1px solid var(--border-strong); 
-            background: transparent; 
-            color: var(--text-main); 
-            font-family: 'Space Mono', monospace; 
-            padding: 0.6rem 0; 
-            width: 100%; 
-            margin-bottom: 1rem; 
+        .page-intro { color: var(--text-muted); font-size: 0.95rem; max-width: 56ch; margin-top: 0.75rem; line-height: 1.7; }
+
+        /* ---- Search ---- */
+        .search-wrap { position: relative; margin: 2.5rem 0 0; }
+        .search-input {
+            border: none;
+            border-bottom: 1px solid var(--border-strong);
+            background: transparent;
+            color: var(--text-main);
+            font-family: 'Space Mono', monospace;
+            padding: 0.6rem 2.5rem 0.6rem 0;
+            width: 100%;
             outline: none;
             font-size: 1rem;
+            transition: border-color 0.2s;
         }
         .search-input:focus { border-bottom-color: var(--accent); }
         .search-input::placeholder { color: var(--text-muted); }
-        
-        .filter-row { margin-bottom: var(--space-8); font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .filter-btn { 
-            text-decoration: none; 
-            color: var(--text-muted); 
-            padding: 0.3rem 0.6rem;
-            border: 1px solid var(--border-soft);
-            transition: var(--transition);
-            cursor: pointer;
-            background: none;
-            font-family: inherit;
-            font-size: inherit;
+        .search-clear {
+            position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--text-muted); cursor: pointer;
+            font-size: 1.1rem; padding: 0.25rem; display: none; transition: color 0.2s;
         }
-        .filter-btn:hover, .filter-btn.active { 
-            color: var(--accent); 
-            border-color: var(--accent);
-        }
-        
-        .records-grid {
-            display: grid;
-            gap: 1rem;
-        }
-        .record { 
-            padding: 1.5rem; 
+        .search-clear:hover { color: var(--accent); }
+        .search-clear.visible { display: block; }
+
+        /* ---- Filter panel ---- */
+        .filter-panel {
+            margin: 2rem 0;
+            padding: 1.5rem;
             background: var(--bg-soft);
             border: 1px solid var(--border-soft);
-            transition: var(--transition);
         }
-        .record:hover {
+        .filter-group { margin-bottom: 1.25rem; }
+        .filter-group:last-child { margin-bottom: 0; }
+        .filter-group-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+        .filter-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .filter-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0.28rem 0.65rem;
+            border: 1px solid var(--border-soft);
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s, background 0.15s;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        .filter-btn:hover { color: var(--text-main); border-color: var(--border-strong); }
+        .filter-btn.active {
+            color: #111a13;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        /* Filter panel footer row */
+        .filter-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--divider); flex-wrap: wrap; gap: 0.75rem; }
+        .sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
+        .sort-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
+        .sort-select {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
             background: var(--bg-soft-2);
-            border-color: var(--border-strong);
+            border: 1px solid var(--border-soft);
+            color: var(--text-main);
+            padding: 0.28rem 0.6rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
         }
-        .record-inner { display: grid; grid-template-columns: 96px 1fr; gap: var(--space-6); line-height: 1.3; align-items: center; }
-        .thumb { 
-            aspect-ratio: 1; 
-            background-image: repeating-linear-gradient(45deg, rgba(242,234,216,0.05) 0px, rgba(242,234,216,0.05) 1px, transparent 1px, transparent 8px); 
-            border: 1px solid var(--border-soft); 
-            display: flex; 
-            align-items: flex-end; 
-            padding: 0.5rem; 
-            font-size: 0.6rem; 
-            text-transform: uppercase; 
+        .sort-select:focus { border-color: var(--accent); }
+        .sort-select option { background: var(--bg-soft-2); }
+        .clear-all-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+            padding: 0;
+        }
+        .clear-all-btn:hover { color: var(--accent); }
+
+        /* ---- Active tag chips ---- */
+        .active-filters {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+            min-height: 1.8rem;
+        }
+        .active-filters-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+        .active-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.55rem;
+            border: 1px solid rgba(201,168,76,0.4);
+            background: rgba(201,168,76,0.1);
+            color: var(--accent);
+            border-radius: 999px;
+            animation: chip-in 0.2s ease;
+        }
+        @keyframes chip-in { from { opacity:0; transform: scale(0.85); } to { opacity:1; transform: scale(1); } }
+        .active-chip button {
+            background: none; border: none; color: inherit; cursor: pointer;
+            font-size: 0.75rem; line-height: 1; padding: 0; opacity: 0.7; transition: opacity 0.2s;
+        }
+        .active-chip button:hover { opacity: 1; }
+
+        /* ---- Results bar ---- */
+        .results-bar {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .results-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .results-count strong { color: var(--text-main); }
+
+        /* ---- Records ---- */
+        .records-grid { display: grid; gap: 1px; background: var(--divider); border: 1px solid var(--divider); }
+        .record {
+            padding: 1.5rem;
+            background: var(--bg);
+            transition: background 0.2s;
+            position: relative;
+        }
+        .record:hover { background: var(--bg-soft); }
+        .record-inner { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: start; }
+        .thumb {
+            aspect-ratio: 1;
+            background: var(--bg-soft);
+            background-image: repeating-linear-gradient(45deg, rgba(242,234,216,0.04) 0px, rgba(242,234,216,0.04) 1px, transparent 1px, transparent 8px);
+            border: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            text-transform: uppercase;
             color: var(--text-muted);
             overflow: hidden;
+            flex-shrink: 0;
         }
-        .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+        .record-body { display: flex; flex-direction: column; gap: 0.4rem; }
+        .record-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+        .record-tag {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            color: var(--text-muted);
         }
-        .record-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem; }
-        .record-title { font-size: 1.1rem; color: var(--text-main); }
-        .record-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
-        
-        .panel { background: var(--bg-soft); border: 1px solid var(--border-soft); padding: var(--space-6); margin-top: 3rem; }
-        .panel h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .panel p { font-size: 0.9rem; color: var(--text-muted); }
+        .record-tag.type-tag { border-color: rgba(201,168,76,0.3); color: var(--accent); }
+        .record-tag.theme-tag { border-color: rgba(154,171,151,0.35); color: #b6c9b3; }
+        .record-tag.era-tag { border-color: rgba(242,234,216,0.2); color: var(--text-muted); }
+        .record-meta { font-size: 0.73rem; color: var(--text-muted); }
+        .record-title { font-size: 1.05rem; color: var(--text-main); font-family: 'Playfair Display', serif; font-weight: 600; }
+        .record-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; }
+        .record-link {
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            text-decoration: none;
+            transition: gap 0.2s;
+        }
+        .record-link:hover { gap: 0.6rem; }
 
+        /* ---- Utility ---- */
         .loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: var(--text-muted); }
         .spinner { width: 24px; height: 24px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 0.75rem; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .empty-state { text-align: center; padding: 3rem; color: var(--text-muted); }
+        .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
         .empty-state h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .empty-state a { color: var(--accent); text-decoration: underline; }
 
-        .land-acknowledgement { padding: 4rem 0; font-size: 0.85rem; line-height: 1.8; color: var(--text-muted); margin-top: 4rem; }
+        .land-acknowledgement { padding: 4rem 0; font-size: 0.85rem; line-height: 1.8; color: var(--text-muted); margin-top: 2rem; }
         .land-acknowledgement p { max-width: 800px; }
-        
         .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
         .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
-        
-        .admin-access-bar {
-            text-align: center;
-            padding: 1.5rem 0;
-            background: var(--bg-footer);
-            border-top: 1px solid var(--border-soft);
-        }
-        .admin-btn {
-            display: inline-block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 0.4rem 1rem;
-            border: 1px solid var(--border-soft);
-            transition: var(--transition);
-        }
-        .admin-btn:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-        
+        .footer-contact a { color: var(--accent); text-decoration: underline; }
+        .admin-access-bar { text-align: center; padding: 1.5rem 0; background: var(--bg-footer); border-top: 1px solid var(--border-soft); }
+        .admin-btn { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); text-decoration: none; padding: 0.4rem 1rem; border: 1px solid var(--border-soft); transition: var(--transition); }
+        .admin-btn:hover { color: var(--accent); border-color: var(--accent); }
+
         @media (max-width: 768px) {
             h2 { font-size: 2rem; }
-            .quote-text { font-size: 1.4rem; }
-            .record-inner { grid-template-columns: 72px 1fr; gap: var(--space-4); }
+            .record-inner { grid-template-columns: 64px 1fr; gap: var(--space-4); }
+            .filter-panel { padding: 1rem; }
         }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
-            <nav class="nav">
-                <a href="mission.html">Mission</a>
-                <a href="collections.html">Collections</a>
-                <a href="map.html">Map</a>
-                <a href="timeline.html">Timeline</a>
-                <a href="groups.html">Groups</a>
-                <a href="submit.html">Contribute</a>
-            </nav>
+    <header class="site-header" id="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <nav class="nav">
+                    <a href="mission.html">Mission</a>
+                    <a href="collections.html" aria-current="page">Collections</a>
+                    <a href="map.html">Map</a>
+                    <a href="timeline.html">Timeline</a>
+                    <a href="groups.html">Groups</a>
+                    <a href="submit.html">Contribute</a>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <section>
-            <div class="section-head">
+    <main>
+        <div class="container">
+            <div class="page-hero">
                 <span class="section-kicker">Collections</span>
                 <h2>Browse by memory.</h2>
+                <p class="page-intro">Filter by media type, decade, or theme. Every item carries context so it can live in multiple narratives — the timeline, the map, and group collections.</p>
             </div>
 
-            <input class="search-input" type="search" id="search-input" placeholder="Search 'banquet,' 'activism,' 'dance showcase'..." data-testid="search-input">
-            <div class="filter-row">
-                <button class="filter-btn active" data-filter="all" data-testid="filter-all">All</button>
-                <button class="filter-btn" data-filter="photograph" data-testid="filter-photos">Photos</button>
-                <button class="filter-btn" data-filter="oral-history" data-testid="filter-oral">Oral histories</button>
-                <button class="filter-btn" data-filter="flyer" data-testid="filter-flyers">Flyers</button>
-                <button class="filter-btn" data-filter="document" data-testid="filter-docs">Documents</button>
-                <button class="filter-btn" data-filter="video" data-testid="filter-video">Video</button>
-                <button class="filter-btn" data-filter="audio" data-testid="filter-audio">Audio</button>
+            <!-- Search -->
+            <div class="search-wrap">
+                <input class="search-input" type="search" id="search-input" placeholder="Search by title, organization, description…" data-testid="search-input" autocomplete="off">
+                <button class="search-clear" id="search-clear" aria-label="Clear search">&times;</button>
             </div>
 
-            <div class="records-grid" id="records-list">
-                <div class="loading"><div class="spinner"></div> Loading collections...</div>
+            <!-- Filter Panel -->
+            <div class="filter-panel" role="group" aria-label="Filter archives">
+
+                <!-- Media type -->
+                <div class="filter-group">
+                    <span class="filter-group-label">Media type</span>
+                    <div class="filter-row" id="type-filters">
+                        <button class="filter-btn active" data-group="type" data-value="all" data-testid="filter-all">All types</button>
+                        <button class="filter-btn" data-group="type" data-value="photograph" data-testid="filter-photos">Photograph</button>
+                        <button class="filter-btn" data-group="type" data-value="oral-history" data-testid="filter-oral">Oral history</button>
+                        <button class="filter-btn" data-group="type" data-value="flyer" data-testid="filter-flyers">Flyer</button>
+                        <button class="filter-btn" data-group="type" data-value="document" data-testid="filter-docs">Document</button>
+                        <button class="filter-btn" data-group="type" data-value="video" data-testid="filter-video">Video</button>
+                        <button class="filter-btn" data-group="type" data-value="audio" data-testid="filter-audio">Audio</button>
+                        <button class="filter-btn" data-group="type" data-value="other">Other</button>
+                    </div>
+                </div>
+
+                <!-- Decade / Era -->
+                <div class="filter-group">
+                    <span class="filter-group-label">Decade</span>
+                    <div class="filter-row" id="era-filters">
+                        <button class="filter-btn active" data-group="era" data-value="all">All years</button>
+                        <button class="filter-btn" data-group="era" data-value="1960s">1960s</button>
+                        <button class="filter-btn" data-group="era" data-value="1970s">1970s</button>
+                        <button class="filter-btn" data-group="era" data-value="1980s">1980s</button>
+                        <button class="filter-btn" data-group="era" data-value="1990s">1990s</button>
+                        <button class="filter-btn" data-group="era" data-value="2000s">2000s</button>
+                        <button class="filter-btn" data-group="era" data-value="2010s">2010s</button>
+                        <button class="filter-btn" data-group="era" data-value="2020s">2020s</button>
+                    </div>
+                </div>
+
+                <!-- Thematic tags (multi-select) -->
+                <div class="filter-group">
+                    <span class="filter-group-label">Theme <span style="opacity:0.5;font-size:0.6rem;">(select multiple)</span></span>
+                    <div class="filter-row" id="theme-filters">
+                        <button class="filter-btn" data-group="theme" data-value="activism">Activism</button>
+                        <button class="filter-btn" data-group="theme" data-value="celebration">Celebration</button>
+                        <button class="filter-btn" data-group="theme" data-value="cultural-identity">Cultural identity</button>
+                        <button class="filter-btn" data-group="theme" data-value="arts-performance">Arts &amp; performance</button>
+                        <button class="filter-btn" data-group="theme" data-value="student-org">Student orgs</button>
+                        <button class="filter-btn" data-group="theme" data-value="leadership">Leadership</button>
+                        <button class="filter-btn" data-group="theme" data-value="founding">Founding era</button>
+                        <button class="filter-btn" data-group="theme" data-value="protest">Protest</button>
+                        <button class="filter-btn" data-group="theme" data-value="food-community">Food &amp; community</button>
+                        <button class="filter-btn" data-group="theme" data-value="religion-spirituality">Religion &amp; spirituality</button>
+                        <button class="filter-btn" data-group="theme" data-value="music">Music</button>
+                        <button class="filter-btn" data-group="theme" data-value="dance">Dance</button>
+                        <button class="filter-btn" data-group="theme" data-value="sports">Sports</button>
+                        <button class="filter-btn" data-group="theme" data-value="family">Family</button>
+                        <button class="filter-btn" data-group="theme" data-value="education">Education</button>
+                        <button class="filter-btn" data-group="theme" data-value="policy-advocacy">Policy &amp; advocacy</button>
+                    </div>
+                </div>
+
+                <!-- Featured toggle + sort -->
+                <div class="filter-actions">
+                    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+                        <button class="filter-btn" data-group="featured" data-value="featured" data-testid="filter-featured">★ Featured only</button>
+                        <button class="filter-btn" data-group="submitter" data-value="has-file" data-testid="filter-has-file">Has file link</button>
+                    </div>
+                    <div class="sort-wrap">
+                        <span class="sort-label">Sort</span>
+                        <select class="sort-select" id="sort-select" aria-label="Sort archives">
+                            <option value="date-desc">Newest first</option>
+                            <option value="date-asc">Oldest first</option>
+                            <option value="title-asc">Title A–Z</option>
+                            <option value="title-desc">Title Z–A</option>
+                        </select>
+                        <button class="clear-all-btn" id="clear-all">Clear all</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="panel">
-                <h3>Tag once, show up everywhere</h3>
-                <p>Every item carries context so it can live in multiple narratives — the timeline, the map, and group collections.</p>
+            <!-- Active chips + result count -->
+            <div class="active-filters" id="active-filters" aria-live="polite" aria-label="Active filters"></div>
+            <div class="results-bar">
+                <span class="results-count" id="results-count"></span>
             </div>
-        </section>
 
-        <div class="land-acknowledgement">
-            <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
+            <!-- Records -->
+            <div class="records-grid" id="records-list" role="list">
+                <div class="loading"><div class="spinner"></div> Loading collections…</div>
+            </div>
+
+            <div class="land-acknowledgement">
+                <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
+            </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container footer-inner">
             <div>
-                <strong>La Casa Cultural · HP&E Archive</strong><br>
+                <strong>La Casa Cultural · HP&amp;E Archive</strong><br>
                 Memory is ours. Build it together.
             </div>
             <div class="footer-contact">
@@ -220,106 +399,247 @@
             </div>
         </div>
     </footer>
-    
     <div class="admin-access-bar">
         <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        var sbClient = window.supabase.createClient(
-            'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w'
-        );
-        
-        const recordsList = document.getElementById('records-list');
-        const searchInput = document.getElementById('search-input');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        
-        let allArchives = [];
-        let currentFilter = 'all';
-        
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-        
-        function renderRecords(archives) {
-            if (!archives || archives.length === 0) {
-                recordsList.innerHTML = '<div class="empty-state"><h4>No archives found</h4><p>Try a different search or filter.</p></div>';
-                return;
-            }
-            
-            recordsList.innerHTML = archives.map(archive => `
-                <div class="record" data-type="${archive.media_type || 'other'}">
-                    <div class="record-inner">
-                        <div class="thumb">
-                            ${archive.thumbnail_url 
-                                ? `<img src="${escapeHtml(archive.thumbnail_url)}" alt="${escapeHtml(archive.title)}" loading="lazy">` 
-                                : escapeHtml(archive.media_type || 'Archive')}
-                        </div>
-                                            <br>
-                            <div class="record-meta">${escapeHtml(archive.archive_date) || 'Date unknown'} · ${escapeHtml(archive.organization) || 'La Casa'}</div>
-                            <strong class="record-title">${escapeHtml(archive.title) || 'Untitled'}</strong>
-                            ${archive.description ? `<p class="record-desc">${escapeHtml(archive.description.substring(0, 150))}${archive.description.length > 150 ? '...' : ''}</p>` : ''}
-                        </div>
-                </div>
-            `).join('');
-        }
-        
-        function filterAndRender() {
-            const searchTerm = searchInput.value.toLowerCase();
-            let filtered = allArchives;
-            
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(a => a.media_type === currentFilter);
-            }
-            
-            if (searchTerm) {
-                filtered = filtered.filter(a => 
-                    (a.title && a.title.toLowerCase().includes(searchTerm)) ||
-                    (a.description && a.description.toLowerCase().includes(searchTerm)) ||
-                    (a.230
-                     && a.organization.toLowerCase().includes(searchTerm))
-                );
-            }
-            
-            renderRecords(filtered);
-        }
-        
-        async function loadArchives() {
-            const { data, error } = await sbClient
-                .from('archives')
-                .select('*')
-                .eq('status', 'published')
-                .order('archive_date', { ascending: false });
-            
-            if (error) {
-                recordsList.innerHTML = `<div class="empty-state"><h4>Error loading collections</h4><p>${error.message}</p></div>`;
-                return;
-            }
-            
-            allArchives = data || [];
-            renderRecords(allArchives);
-        }
-        
-        // Filter buttons
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                            filterBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
-                                        btn.setAttribute('aria-pressed', 'true');
-                currentFilter = btn.dataset.filter;
-                filterAndRender();
+    // ── Supabase client ───────────────────────────────────────────────
+    var sbClient = window.supabase.createClient(
+        'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w'
+    );
+
+    // ── State ──────────────────────────────────────────────────────────
+    var allArchives = [];
+    var filters = { type: 'all', era: 'all', themes: new Set(), featured: false, hasFile: false };
+    var sortBy = 'date-desc';
+    var searchTerm = '';
+
+    // ── Helpers ─────────────────────────────────────────────────────
+    function esc(v) { if (!v) return ''; return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function decadeOf(dateStr) {
+        if (!dateStr) return null;
+        var year = parseInt(dateStr.slice(0,4), 10);
+        if (isNaN(year)) return null;
+        return Math.floor(year / 10) * 10 + 's'; // e.g. "1970s"
+    }
+
+    // Parse tags field: stored as comma-separated string or JSON array
+    function parseTags(raw) {
+        if (!raw) return [];
+        if (Array.isArray(raw)) return raw.map(function(t){ return String(t).trim().toLowerCase(); });
+        try { var p = JSON.parse(raw); if (Array.isArray(p)) return p.map(function(t){ return String(t).trim().toLowerCase(); }); } catch(e) {}
+        return String(raw).split(',').map(function(t){ return t.trim().toLowerCase(); }).filter(Boolean);
+    }
+
+    // ── Sticky header ──────────────────────────────────────────────
+    (function(){
+        var h = document.getElementById('site-header');
+        window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    })();
+
+    // ── Filter + sort + render ────────────────────────────────────────
+    function applyFiltersAndRender() {
+        var list = allArchives.slice();
+
+        // text search
+        if (searchTerm) {
+            list = list.filter(function(a) {
+                var haystack = [(a.title||''),(a.description||''),(a.organization||''),(a.submitter_name||'')].join(' ').toLowerCase();
+                return haystack.includes(searchTerm);
             });
+        }
+        // type
+        if (filters.type !== 'all') list = list.filter(function(a){ return a.media_type === filters.type; });
+        // era
+        if (filters.era !== 'all') list = list.filter(function(a){ return decadeOf(a.archive_date) === filters.era; });
+        // themes (multi-select AND logic if multiple, OR acceptable too — using OR: any tag matches)
+        if (filters.themes.size > 0) {
+            list = list.filter(function(a) {
+                var tags = parseTags(a.tags);
+                return Array.from(filters.themes).some(function(theme) { return tags.includes(theme); });
+            });
+        }
+        // featured
+        if (filters.featured) list = list.filter(function(a){ return a.featured === true; });
+        // has file
+        if (filters.hasFile) list = list.filter(function(a){ return !!a.file_link; });
+
+        // sort
+        list.sort(function(a, b) {
+            if (sortBy === 'date-desc') return (b.archive_date||'').localeCompare(a.archive_date||'');
+            if (sortBy === 'date-asc')  return (a.archive_date||'').localeCompare(b.archive_date||'');
+            if (sortBy === 'title-asc') return (a.title||'').localeCompare(b.title||'');
+            if (sortBy === 'title-desc')return (b.title||'').localeCompare(a.title||'');
+            return 0;
         });
-        
-        // Search
-        searchInput.addEventListener('input', filterAndRender);
-        
-        // Init
-        loadArchives();
+
+        renderCount(list.length);
+        renderChips();
+        renderRecords(list);
+    }
+
+    function renderCount(n) {
+        var el = document.getElementById('results-count');
+        el.innerHTML = '<strong>' + n + '</strong> result' + (n !== 1 ? 's' : '');
+    }
+
+    function renderChips() {
+        var el = document.getElementById('active-filters');
+        var chips = [];
+        if (filters.type !== 'all') chips.push({ label: 'Type: ' + filters.type, remove: function(){ filters.type='all'; syncTypeButtons(); applyFiltersAndRender(); } });
+        if (filters.era !== 'all')  chips.push({ label: 'Era: ' + filters.era,  remove: function(){ filters.era='all';  syncEraButtons();  applyFiltersAndRender(); } });
+        filters.themes.forEach(function(t){
+            chips.push({ label: t.replace(/-/g,' '), remove: (function(theme){ return function(){ filters.themes.delete(theme); syncThemeButtons(); applyFiltersAndRender(); }; })(t) });
+        });
+        if (filters.featured) chips.push({ label: '\u2605 Featured', remove: function(){ filters.featured=false; syncToggleButtons(); applyFiltersAndRender(); } });
+        if (filters.hasFile)  chips.push({ label: 'Has file', remove: function(){ filters.hasFile=false; syncToggleButtons(); applyFiltersAndRender(); } });
+        if (searchTerm) chips.push({ label: '"' + searchTerm + '"', remove: function(){ document.getElementById('search-input').value=''; searchTerm=''; updateClearBtn(); applyFiltersAndRender(); } });
+
+        if (!chips.length) { el.innerHTML = ''; return; }
+        el.innerHTML = '<span class="active-filters-label">Active:</span> ' + chips.map(function(c, i){
+            return '<span class="active-chip" data-chip="'+i+'">'+esc(c.label)+'<button aria-label="Remove filter '+esc(c.label)+'">&times;</button></span>';
+        }).join('');
+        // bind remove
+        el.querySelectorAll('.active-chip button').forEach(function(btn, i){
+            btn.addEventListener('click', function(){ chips[i].remove(); });
+        });
+    }
+
+    function renderRecords(list) {
+        var el = document.getElementById('records-list');
+        if (!list.length) {
+            el.innerHTML = '<div class="empty-state"><h4>No archives found</h4><p>Try a different combination of filters, or <a href="submit.html">contribute an archive</a>.</p></div>';
+            return;
+        }
+        el.innerHTML = list.map(function(a) {
+            var tags   = parseTags(a.tags);
+            var decade = decadeOf(a.archive_date);
+            var typeTag = a.media_type ? '<span class="record-tag type-tag">'+esc(a.media_type)+'</span>' : '';
+            var eraTag  = decade ? '<span class="record-tag era-tag">'+esc(decade)+'</span>' : '';
+            var themeTags = tags.slice(0,4).map(function(t){ return '<span class="record-tag theme-tag">'+esc(t)+'</span>'; }).join('');
+            var thumb = a.thumbnail_url
+                ? '<img src="'+esc(a.thumbnail_url)+'" alt="'+esc(a.title)+'" loading="lazy">'
+                : esc(a.media_type||'Archive');
+            var fileLink = a.file_link ? '<a class="record-link" href="'+esc(a.file_link)+'" target="_blank" rel="noopener">View file &#8594;</a>' : '';
+            return '<div class="record" role="listitem">'
+                + '<div class="record-inner">'
+                + '<div class="thumb">'+thumb+'</div>'
+                + '<div class="record-body">'
+                + '<div class="record-tags">'+typeTag+eraTag+themeTags+'</div>'
+                + '<div class="record-meta">'+esc(a.archive_date||'Date unknown')+' &middot; '+esc(a.organization||'La Casa')+'</div>'
+                + '<strong class="record-title">'+esc(a.title||'Untitled')+'</strong>'
+                + (a.description ? '<p class="record-desc">'+esc(a.description.substring(0,160))+(a.description.length>160?'\u2026':'')+'</p>' : '')
+                + fileLink
+                + '</div></div></div>';
+        }).join('');
+    }
+
+    // ── Button sync helpers ─────────────────────────────────────────────
+    function syncTypeButtons() {
+        document.querySelectorAll('[data-group="type"]').forEach(function(b){
+            b.classList.toggle('active', b.dataset.value === filters.type);
+        });
+    }
+    function syncEraButtons() {
+        document.querySelectorAll('[data-group="era"]').forEach(function(b){
+            b.classList.toggle('active', b.dataset.value === filters.era);
+        });
+    }
+    function syncThemeButtons() {
+        document.querySelectorAll('[data-group="theme"]').forEach(function(b){
+            b.classList.toggle('active', filters.themes.has(b.dataset.value));
+        });
+    }
+    function syncToggleButtons() {
+        var featBtn = document.querySelector('[data-group="featured"]');
+        var fileBtn = document.querySelector('[data-group="submitter"]');
+        if (featBtn) featBtn.classList.toggle('active', filters.featured);
+        if (fileBtn) fileBtn.classList.toggle('active', filters.hasFile);
+    }
+
+    // ── Button click handlers ────────────────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var group = btn.dataset.group;
+            var value = btn.dataset.value;
+            if (group === 'type') {
+                filters.type = value; // radio: only one
+                syncTypeButtons();
+            } else if (group === 'era') {
+                filters.era = value; // radio
+                syncEraButtons();
+            } else if (group === 'theme') {
+                // multi-select toggle
+                if (filters.themes.has(value)) filters.themes.delete(value);
+                else filters.themes.add(value);
+                syncThemeButtons();
+            } else if (group === 'featured') {
+                filters.featured = !filters.featured;
+                syncToggleButtons();
+            } else if (group === 'submitter') {
+                filters.hasFile = !filters.hasFile;
+                syncToggleButtons();
+            }
+            applyFiltersAndRender();
+        });
+    });
+
+    // Sort
+    document.getElementById('sort-select').addEventListener('change', function() {
+        sortBy = this.value;
+        applyFiltersAndRender();
+    });
+
+    // Clear all
+    document.getElementById('clear-all').addEventListener('click', function() {
+        filters = { type: 'all', era: 'all', themes: new Set(), featured: false, hasFile: false };
+        sortBy = 'date-desc';
+        document.getElementById('sort-select').value = 'date-desc';
+        document.getElementById('search-input').value = '';
+        searchTerm = '';
+        updateClearBtn();
+        syncTypeButtons(); syncEraButtons(); syncThemeButtons(); syncToggleButtons();
+        applyFiltersAndRender();
+    });
+
+    // Search
+    function updateClearBtn() {
+        document.getElementById('search-clear').classList.toggle('visible', searchTerm.length > 0);
+    }
+    document.getElementById('search-input').addEventListener('input', function() {
+        searchTerm = this.value.trim().toLowerCase();
+        updateClearBtn();
+        applyFiltersAndRender();
+    });
+    document.getElementById('search-clear').addEventListener('click', function() {
+        document.getElementById('search-input').value = '';
+        searchTerm = '';
+        updateClearBtn();
+        applyFiltersAndRender();
+    });
+
+    // ── Load from Supabase ─────────────────────────────────────────────
+    async function loadArchives() {
+        var result = await sbClient
+            .from('archives')
+            .select('*')
+            .eq('status', 'published')
+            .order('archive_date', { ascending: false });
+
+        if (result.error) {
+            document.getElementById('records-list').innerHTML =
+                '<div class="empty-state"><h4>Error loading collections</h4><p>' + esc(result.error.message) + '</p></div>';
+            return;
+        }
+        allArchives = result.data || [];
+        applyFiltersAndRender();
+    }
+
+    loadArchives();
     </script>
 </body>
 </html>
