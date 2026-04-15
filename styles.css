@@ -22,10 +22,10 @@
     --space-4: 1rem;
     --space-6: 1.5rem;
     --space-8: 2rem;
-    --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Space Mono', 'Courier New', monospace; --transition: 0.2s ease;
     --radius: 0;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Space Mono', 'Courier New', monospace;
+    --transition: 0.2s ease;
 }
 
 /* --- Reset --- */
@@ -344,24 +344,13 @@ section { padding: 3rem 0; border-bottom: 1px solid var(--divider); }
 }
 
 /* ============================================
-   LAND ACKNOWLEDGEMENT
-   ============================================ */
-.land-acknowledgement {
-    padding: 2.5rem 0;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    max-width: 800px;
-    line-height: 1.75;
-}
-
-/* ============================================
    FOOTER
    ============================================ */
 .footer {
     background: var(--bg-footer);
     border-top: 3px solid var(--accent);
-    padding: 2.5rem 0;
-    margin-top: 2.5rem;
+    padding: 4rem 0;
+    margin-top: 4rem;
 }
 .footer-inner {
     display: flex;
@@ -381,7 +370,7 @@ section { padding: 3rem 0; border-bottom: 1px solid var(--divider); }
    ============================================ */
 .admin-access-bar {
     text-align: center;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     background: var(--bg-footer);
     border-top: 1px solid var(--border-soft);
 }
@@ -483,7 +472,6 @@ section { padding: 3rem 0; border-bottom: 1px solid var(--divider); }
     section { padding: 2rem 0; }
     .section-head { margin-bottom: 1.5rem; }
     .footer { padding: 2rem 0; margin-top: 2rem; }
-    .land-acknowledgement { padding: 2rem 0; }
     .card { padding: 1.5rem; }
 }
 @media (max-width: 480px) {
