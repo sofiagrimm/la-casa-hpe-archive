@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-<<<<<<< HEAD
         :root {
             --bg: #1a2e1f;
             --bg-soft: #223327;
@@ -39,9 +38,9 @@
         .brand-mark-text:hover { color: var(--accent); }
         .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
         .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; position: relative; padding: 0.25rem 0; transition: color var(--transition); }
-        .nav a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--accent); transition: width 0.25s; }
+        .nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
         .nav a:hover { color: var(--text-main); }
-        .nav a:hover::after, .nav a[aria-current="page"]::after { width:100%; }
+        .nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
         .nav a[aria-current="page"] { color: var(--text-main); }
 
         /* ---- Page header ---- */
@@ -111,7 +110,6 @@
             background: var(--accent);
             border-color: var(--accent);
         }
-        /* Filter panel footer row */
         .filter-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--divider); flex-wrap: wrap; gap: 0.75rem; }
         .sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
         .sort-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
@@ -164,7 +162,7 @@
             border-radius: 999px;
             animation: chip-in 0.2s ease;
         }
-        @keyframes chip-in { from { opacity:0; transform: scale(0.85); } to { opacity:1; transform: scale(1); } }
+        @keyframes chip-in { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
         .active-chip button {
             background: none; border: none; color: inherit; cursor: pointer;
             font-size: 0.75rem; line-height: 1; padding: 0; opacity: 0.7; transition: opacity 0.2s;
@@ -180,20 +178,24 @@
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .results-count {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
+        .results-count { font-size: 0.75rem; color: var(--text-muted); }
         .results-count strong { color: var(--text-main); }
+
+        /* ---- Skeleton ---- */
+        .skeleton-grid { display: grid; gap: 1px; background: var(--divider); border: 1px solid var(--divider); }
+        .skeleton-item { padding: 1.5rem; background: var(--bg); display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; align-items: start; }
+        .skel { background: linear-gradient(90deg, var(--bg-soft) 25%, var(--bg-soft-2) 50%, var(--bg-soft) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 2px; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .skel-thumb { width: 80px; height: 80px; flex-shrink: 0; }
+        .skel-line { height: 10px; margin-bottom: 0.5rem; }
+        .skel-line.w-40 { width: 40%; }
+        .skel-line.w-60 { width: 60%; }
+        .skel-line.w-80 { width: 80%; }
+        .skel-line.w-100 { width: 100%; }
 
         /* ---- Records ---- */
         .records-grid { display: grid; gap: 1px; background: var(--divider); border: 1px solid var(--divider); }
-        .record {
-            padding: 1.5rem;
-            background: var(--bg);
-            transition: background 0.2s;
-            position: relative;
-        }
+        .record { padding: 1.5rem; background: var(--bg); transition: background 0.2s; position: relative; cursor: default; }
         .record:hover { background: var(--bg-soft); }
         .record-inner { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: start; }
         .thumb {
@@ -210,18 +212,10 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-        .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .record-body { display: flex; flex-direction: column; gap: 0.4rem; }
         .record-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
-        .record-tag {
-            font-size: 0.62rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 0.15rem 0.45rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-soft);
-            color: var(--text-muted);
-        }
+        .record-tag { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.15rem 0.45rem; border-radius: 999px; border: 1px solid var(--border-soft); color: var(--text-muted); }
         .record-tag.type-tag { border-color: rgba(201,168,76,0.3); color: var(--accent); }
         .record-tag.theme-tag { border-color: rgba(154,171,151,0.35); color: #b6c9b3; }
         .record-tag.era-tag { border-color: rgba(242,234,216,0.2); color: var(--text-muted); }
@@ -243,13 +237,15 @@
         .record-link:hover { gap: 0.6rem; }
 
         /* ---- Utility ---- */
-        .loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: var(--text-muted); }
-        .spinner { width: 24px; height: 24px; border: 2px solid var(--border-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 0.75rem; }
-        @keyframes spin { to { transform: rotate(360deg); } }
         .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
         .empty-state h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); }
         .empty-state a { color: var(--accent); text-decoration: underline; }
 
+        /* ---- Land acknowledgement ---- */
+        .land-acknowledgement { padding: 4rem 0; font-size: 0.85rem; line-height: 1.8; color: var(--text-muted); margin-top: 2rem; }
+        .land-acknowledgement p { max-width: 800px; }
+
+        /* ---- Footer ---- */
         .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
         .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
         .footer-contact a { color: var(--accent); text-decoration: underline; }
@@ -261,117 +257,15 @@
             h2 { font-size: 2rem; }
             .record-inner { grid-template-columns: 64px 1fr; gap: var(--space-4); }
             .filter-panel { padding: 1rem; }
+            .skeleton-item { grid-template-columns: 64px 1fr; }
         }
-=======
-        :root{--bg:#1a2e1f;--bg-soft:#223327;--bg-soft-2:#2a3d2e;--bg-footer:#111a13;--text-main:#f2ead8;--text-muted:#9aab97;--accent:#c9a84c;--border-soft:rgba(242,234,216,0.12);--border-strong:rgba(242,234,216,0.3);--divider:rgba(242,234,216,0.15);--space-1:0.25rem;--space-2:0.5rem;--space-4:1rem;--space-6:1.5rem;--space-8:2rem;--transition:0.2s ease;}
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-        body{background:var(--bg);color:var(--text-main);font-family:'Space Mono',monospace;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-        .container{max-width:1200px;margin:0 auto;padding:0 var(--space-8);}
-        /* header */
-        .site-header{border-top:4px solid var(--accent);padding:var(--space-8) 0;background:rgba(26,46,31,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;transition:box-shadow .3s,padding .3s;}
-        .site-header.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.4);padding:.75rem 0;}
-        .header-inner{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:1rem;}
-        .brand-mark-text{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--text-main);text-decoration:none;letter-spacing:-.02em;transition:color .2s;}
-        .brand-mark-text:hover{color:var(--accent);}
-        .nav{display:flex;gap:var(--space-6);flex-wrap:wrap;}
-        .nav a{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);text-decoration:none;position:relative;padding:.25rem 0;transition:color var(--transition);}
-        .nav a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s;}
-        .nav a:hover{color:var(--text-main);}
-        .nav a:hover::after,.nav a[aria-current="page"]::after{width:100%;}
-        .nav a[aria-current="page"]{color:var(--text-main);}
-        /* page hero */
-        .page-hero{padding:4rem 0 2rem;}
-        .section-kicker{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:.5rem;}
-        h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1;}
-        h2{font-size:2.6rem;font-style:italic;font-weight:400;}
-        .page-intro{color:var(--text-muted);font-size:.95rem;max-width:56ch;margin-top:.75rem;line-height:1.7;}
-        /* search */
-        .search-wrap{position:relative;margin:2.5rem 0 0;}
-        .search-input{border:none;border-bottom:1px solid var(--border-strong);background:transparent;color:var(--text-main);font-family:'Space Mono',monospace;padding:.6rem 2.5rem .6rem 0;width:100%;outline:none;font-size:1rem;transition:border-color .2s;}
-        .search-input:focus{border-bottom-color:var(--accent);}
-        .search-input::placeholder{color:var(--text-muted);}
-        .search-clear{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.1rem;padding:.25rem;display:none;transition:color .2s;}
-        .search-clear:hover{color:var(--accent);}
-        .search-clear.visible{display:block;}
-        /* filter panel */
-        .filter-panel{margin:2rem 0;padding:1.5rem;background:var(--bg-soft);border:1px solid var(--border-soft);}
-        .filter-group{margin-bottom:1.25rem;}
-        .filter-group:last-child{margin-bottom:0;}
-        .filter-group-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-muted);margin-bottom:.6rem;display:block;}
-        .filter-row{display:flex;gap:.4rem;flex-wrap:wrap;}
-        .filter-btn{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--text-muted);padding:.28rem .65rem;border:1px solid var(--border-soft);background:transparent;cursor:pointer;transition:color .15s,border-color .15s,background .15s;letter-spacing:.02em;white-space:nowrap;}
-        .filter-btn:hover{color:var(--text-main);border-color:var(--border-strong);}
-        .filter-btn.active{color:#111a13;background:var(--accent);border-color:var(--accent);}
-        .filter-actions{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--divider);flex-wrap:wrap;gap:.75rem;}
-        .sort-wrap{display:flex;align-items:center;gap:.5rem;}
-        .sort-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);}
-        .sort-select{font-family:'Space Mono',monospace;font-size:.72rem;background:var(--bg-soft-2);border:1px solid var(--border-soft);color:var(--text-main);padding:.28rem .6rem;cursor:pointer;outline:none;transition:border-color .2s;}
-        .sort-select:focus{border-color:var(--accent);}
-        .sort-select option{background:var(--bg-soft-2);}
-        .clear-all-btn{font-family:'Space Mono',monospace;font-size:.7rem;background:none;border:none;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:color .2s;padding:0;}
-        .clear-all-btn:hover{color:var(--accent);}
-        /* chips */
-        .active-filters{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;min-height:1.8rem;}
-        .active-filters-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);}
-        .active-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;padding:.2rem .55rem;border:1px solid rgba(201,168,76,.4);background:rgba(201,168,76,.1);color:var(--accent);border-radius:999px;animation:chip-in .2s ease;}
-        @keyframes chip-in{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-        .active-chip button{background:none;border:none;color:inherit;cursor:pointer;font-size:.75rem;line-height:1;padding:0;opacity:.7;transition:opacity .2s;}
-        .active-chip button:hover{opacity:1;}
-        /* results */
-        .results-bar{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;}
-        .results-count{font-size:.75rem;color:var(--text-muted);}
-        .results-count strong{color:var(--text-main);}
-        /* skeleton */
-        .skeleton-grid{display:grid;gap:1px;background:var(--divider);border:1px solid var(--divider);}
-        .skeleton-item{padding:1.5rem;background:var(--bg);display:grid;grid-template-columns:80px 1fr;gap:1.5rem;align-items:start;}
-        .skel{background:linear-gradient(90deg,var(--bg-soft) 25%,var(--bg-soft-2) 50%,var(--bg-soft) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:2px;}
-        @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-        .skel-thumb{width:80px;height:80px;flex-shrink:0;}
-        .skel-line{height:10px;margin-bottom:.5rem;}
-        .skel-line.w-40{width:40%;}
-        .skel-line.w-60{width:60%;}
-        .skel-line.w-80{width:80%;}
-        .skel-line.w-100{width:100%;}
-        /* records */
-        .records-grid{display:grid;gap:1px;background:var(--divider);border:1px solid var(--divider);}
-        .record{padding:1.5rem;background:var(--bg);transition:background .2s;position:relative;cursor:default;}
-        .record:hover{background:var(--bg-soft);}
-        .record-inner{display:grid;grid-template-columns:80px 1fr;gap:var(--space-6);align-items:start;}
-        .thumb{aspect-ratio:1;background:var(--bg-soft);background-image:repeating-linear-gradient(45deg,rgba(242,234,216,.04) 0px,rgba(242,234,216,.04) 1px,transparent 1px,transparent 8px);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:.6rem;text-transform:uppercase;color:var(--text-muted);overflow:hidden;flex-shrink:0;}
-        .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-        .record-body{display:flex;flex-direction:column;gap:.4rem;}
-        .record-tags{display:flex;gap:.3rem;flex-wrap:wrap;}
-        .record-tag{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;padding:.15rem .45rem;border-radius:999px;border:1px solid var(--border-soft);color:var(--text-muted);}
-        .record-tag.type-tag{border-color:rgba(201,168,76,.3);color:var(--accent);}
-        .record-tag.theme-tag{border-color:rgba(154,171,151,.35);color:#b6c9b3;}
-        .record-tag.era-tag{border-color:rgba(242,234,216,.2);color:var(--text-muted);}
-        .record-meta{font-size:.73rem;color:var(--text-muted);}
-        .record-title{font-size:1.05rem;color:var(--text-main);font-family:'Playfair Display',serif;font-weight:600;}
-        .record-desc{font-size:.83rem;color:var(--text-muted);line-height:1.55;}
-        .record-link{margin-top:.5rem;display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);text-decoration:none;transition:gap .2s;}
-        .record-link:hover{gap:.6rem;}
-        /* empty */
-        .empty-state{text-align:center;padding:4rem 2rem;color:var(--text-muted);}
-        .empty-state h4{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;color:var(--text-main);}
-        .empty-state a{color:var(--accent);text-decoration:underline;}
-        /* footer */
-        .land-acknowledgement{padding:4rem 0;font-size:.85rem;line-height:1.8;color:var(--text-muted);margin-top:2rem;}
-        .land-acknowledgement p{max-width:800px;}
-        .footer{background:var(--bg-footer);border-top:3px solid var(--accent);padding:4rem 0;margin-top:4rem;}
-        .footer-inner{display:flex;justify-content:space-between;font-size:.75rem;color:var(--text-muted);align-items:flex-start;flex-wrap:wrap;gap:2rem;}
-        .footer-contact a{color:var(--accent);text-decoration:underline;}
-        .admin-access-bar{text-align:center;padding:1.5rem 0;background:var(--bg-footer);border-top:1px solid var(--border-soft);}
-        .admin-btn{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);text-decoration:none;padding:.4rem 1rem;border:1px solid var(--border-soft);transition:var(--transition);}
-        .admin-btn:hover{color:var(--accent);border-color:var(--accent);}
-        @media(max-width:768px){h2{font-size:2rem;}.record-inner{grid-template-columns:64px 1fr;gap:var(--space-4);}.filter-panel{padding:1rem;}.skeleton-item{grid-template-columns:64px 1fr;}}
->>>>>>> 2ac59a9f2211ec07f6c27b5b70920828716a1489
     </style>
 </head>
 <body>
     <header class="site-header" id="site-header">
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
                 <nav class="nav">
                     <a href="mission.html">Mission</a>
                     <a href="collections.html" aria-current="page">Collections</a>
@@ -388,10 +282,10 @@
             <div class="page-hero">
                 <span class="section-kicker">Collections</span>
                 <h2>Browse by memory.</h2>
-                <p class="page-intro">Filter by media type, decade, or theme. Every item carries context so it can live in multiple narratives — the timeline, the map, and group collections.</p>
+                <p class="page-intro">Filter by media type, decade, or theme. Every item carries context so it can live in multiple narratives &mdash; the timeline, the map, and group collections.</p>
             </div>
             <div class="search-wrap">
-                <input class="search-input" type="search" id="search-input" placeholder="Search by title, organization, description…" data-testid="search-input" autocomplete="off">
+                <input class="search-input" type="search" id="search-input" placeholder="Search by title, organization, description&hellip;" data-testid="search-input" autocomplete="off">
                 <button class="search-clear" id="search-clear" aria-label="Clear search">&times;</button>
             </div>
             <div class="filter-panel" role="group" aria-label="Filter archives">
@@ -452,8 +346,8 @@
                         <select class="sort-select" id="sort-select" aria-label="Sort archives">
                             <option value="date-desc">Newest first</option>
                             <option value="date-asc">Oldest first</option>
-                            <option value="title-asc">Title A–Z</option>
-                            <option value="title-desc">Title Z–A</option>
+                            <option value="title-asc">Title A&ndash;Z</option>
+                            <option value="title-desc">Title Z&ndash;A</option>
                         </select>
                         <button class="clear-all-btn" id="clear-all">Clear all</button>
                     </div>
@@ -463,10 +357,8 @@
             <div class="results-bar">
                 <span class="results-count" id="results-count"></span>
             </div>
-            <!-- Skeleton shown immediately, replaced on data load -->
             <div id="records-list">
                 <div class="skeleton-grid" id="skeleton-screen">
-                    <!-- 6 skeleton rows -->
                     <div class="skeleton-item"><div class="skel skel-thumb"></div><div style="flex:1"><div class="skel skel-line w-40" style="margin-bottom:.6rem"></div><div class="skel skel-line w-60" style="margin-bottom:.6rem"></div><div class="skel skel-line w-80" style="margin-bottom:.4rem"></div><div class="skel skel-line w-100"></div></div></div>
                     <div class="skeleton-item"><div class="skel skel-thumb"></div><div style="flex:1"><div class="skel skel-line w-40" style="margin-bottom:.6rem"></div><div class="skel skel-line w-60" style="margin-bottom:.6rem"></div><div class="skel skel-line w-80" style="margin-bottom:.4rem"></div><div class="skel skel-line w-100"></div></div></div>
                     <div class="skeleton-item"><div class="skel skel-thumb"></div><div style="flex:1"><div class="skel skel-line w-40" style="margin-bottom:.6rem"></div><div class="skel skel-line w-60" style="margin-bottom:.6rem"></div><div class="skel skel-line w-80" style="margin-bottom:.4rem"></div><div class="skel skel-line w-100"></div></div></div>
@@ -475,19 +367,17 @@
                     <div class="skeleton-item"><div class="skel skel-thumb"></div><div style="flex:1"><div class="skel skel-line w-40" style="margin-bottom:.6rem"></div><div class="skel skel-line w-60" style="margin-bottom:.6rem"></div><div class="skel skel-line w-80" style="margin-bottom:.4rem"></div><div class="skel skel-line w-100"></div></div></div>
                 </div>
             </div>
-<<<<<<< HEAD
-
-=======
             <div class="land-acknowledgement">
                 <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
             </div>
         </div>
->>>>>>> 2ac59a9f2211ec07f6c27b5b70920828716a1489
     </main>
     <footer class="footer">
-        <div class="container footer-inner">
-            <div><strong>La Casa Cultural · HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
-            <div class="footer-contact">Add to the archive → <a href="submit.html">Submit a contribution</a></div>
+        <div class="container">
+            <div class="footer-inner">
+                <div><strong>La Casa Cultural &middot; HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive &rarr; <a href="submit.html">Submit a contribution</a></div>
+            </div>
         </div>
     </footer>
     <div class="admin-access-bar"><a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a></div>
@@ -508,10 +398,10 @@
     list.sort(function(a,b){if(sortBy==='date-desc')return(b.archive_date||'').localeCompare(a.archive_date||'');if(sortBy==='date-asc')return(a.archive_date||'').localeCompare(b.archive_date||'');if(sortBy==='title-asc')return(a.title||'').localeCompare(b.title||'');if(sortBy==='title-desc')return(b.title||'').localeCompare(a.title||'');return 0;});
     renderCount(list.length);renderChips();renderRecords(list);}
     function renderCount(n){document.getElementById('results-count').innerHTML='<strong>'+n+'</strong> result'+(n!==1?'s':'');}
-    function renderChips(){var el=document.getElementById('active-filters');var chips=[];if(filters.type!=='all')chips.push({label:'Type: '+filters.type,remove:function(){filters.type='all';syncTypeButtons();applyFiltersAndRender();}});if(filters.era!=='all')chips.push({label:'Era: '+filters.era,remove:function(){filters.era='all';syncEraButtons();applyFiltersAndRender();}});filters.themes.forEach(function(t){chips.push({label:t.replace(/-/g,' '),remove:(function(theme){return function(){filters.themes.delete(theme);syncThemeButtons();applyFiltersAndRender();};})(t)});});if(filters.featured)chips.push({label:'★ Featured',remove:function(){filters.featured=false;syncToggleButtons();applyFiltersAndRender();}});if(filters.hasFile)chips.push({label:'Has file',remove:function(){filters.hasFile=false;syncToggleButtons();applyFiltersAndRender();}});if(searchTerm)chips.push({label:'"'+searchTerm+'"',remove:function(){document.getElementById('search-input').value='';searchTerm='';updateClearBtn();applyFiltersAndRender();}});
+    function renderChips(){var el=document.getElementById('active-filters');var chips=[];if(filters.type!=='all')chips.push({label:'Type: '+filters.type,remove:function(){filters.type='all';syncTypeButtons();applyFiltersAndRender();}});if(filters.era!=='all')chips.push({label:'Era: '+filters.era,remove:function(){filters.era='all';syncEraButtons();applyFiltersAndRender();}});filters.themes.forEach(function(t){chips.push({label:t.replace(/-/g,' '),remove:(function(theme){return function(){filters.themes.delete(theme);syncThemeButtons();applyFiltersAndRender();};})(t)});});if(filters.featured)chips.push({label:'\u2605 Featured',remove:function(){filters.featured=false;syncToggleButtons();applyFiltersAndRender();}});if(filters.hasFile)chips.push({label:'Has file',remove:function(){filters.hasFile=false;syncToggleButtons();applyFiltersAndRender();}});if(searchTerm)chips.push({label:'"'+searchTerm+'"',remove:function(){document.getElementById('search-input').value='';searchTerm='';updateClearBtn();applyFiltersAndRender();}});
     if(!chips.length){el.innerHTML='';return;}el.innerHTML='<span class="active-filters-label">Active:</span> '+chips.map(function(c,i){return'<span class="active-chip" data-chip="'+i+'">'+esc(c.label)+'<button aria-label="Remove filter '+esc(c.label)+'">&times;</button></span>';}).join('');el.querySelectorAll('.active-chip button').forEach(function(btn,i){btn.addEventListener('click',function(){chips[i].remove();});});}
     function renderRecords(list){var el=document.getElementById('records-list');if(!list.length){el.innerHTML='<div class="empty-state"><h4>No archives found</h4><p>Try a different combination of filters, or <a href="submit.html">contribute an archive</a>.</p></div>';return;}
-    el.innerHTML='<div class="records-grid">'+list.map(function(a){var tags=parseTags(a.tags);var decade=decadeOf(a.archive_date);var typeTag=a.media_type?'<span class="record-tag type-tag">'+esc(a.media_type)+'</span>':'';var eraTag=decade?'<span class="record-tag era-tag">'+esc(decade)+'</span>':'';var themeTags=tags.slice(0,4).map(function(t){return'<span class="record-tag theme-tag">'+esc(t)+'</span>';}).join('');var thumb=a.thumbnail_url?'<img src="'+esc(a.thumbnail_url)+'" alt="'+esc(a.title)+'" loading="lazy">':esc(a.media_type||'Archive');var fileLink=a.file_link?'<a class="record-link" href="'+esc(a.file_link)+'" target="_blank" rel="noopener">View file &#8594;</a>':'';return'<div class="record" role="listitem"><div class="record-inner"><div class="thumb">'+thumb+'</div><div class="record-body"><div class="record-tags">'+typeTag+eraTag+themeTags+'</div><div class="record-meta">'+esc(a.archive_date||'Date unknown')+' · '+esc(a.organization||'La Casa')+'</div><strong class="record-title">'+esc(a.title||'Untitled')+'</strong>'+(a.description?'<p class="record-desc">'+esc(a.description.substring(0,160))+(a.description.length>160?'…':'')+'</p>':'')+fileLink+'</div></div></div>';}).join('')+'</div>';}
+    el.innerHTML='<div class="records-grid">'+list.map(function(a){var tags=parseTags(a.tags);var decade=decadeOf(a.archive_date);var typeTag=a.media_type?'<span class="record-tag type-tag">'+esc(a.media_type)+'</span>':'';var eraTag=decade?'<span class="record-tag era-tag">'+esc(decade)+'</span>':'';var themeTags=tags.slice(0,4).map(function(t){return'<span class="record-tag theme-tag">'+esc(t)+'</span>';}).join('');var thumb=a.thumbnail_url?'<img src="'+esc(a.thumbnail_url)+'" alt="'+esc(a.title)+'" loading="lazy">':esc(a.media_type||'Archive');var fileLink=a.file_link?'<a class="record-link" href="'+esc(a.file_link)+'" target="_blank" rel="noopener">View file &#8594;</a>':'';return'<div class="record" role="listitem"><div class="record-inner"><div class="thumb">'+thumb+'</div><div class="record-body"><div class="record-tags">'+typeTag+eraTag+themeTags+'</div><div class="record-meta">'+esc(a.archive_date||'Date unknown')+'\u00b7 '+esc(a.organization||'La Casa')+'</div><strong class="record-title">'+esc(a.title||'Untitled')+'</strong>'+(a.description?'<p class="record-desc">'+esc(a.description.substring(0,160))+(a.description.length>160?'\u2026':'')+'</p>':'')+fileLink+'</div></div></div>';}).join('')+'</div>';}
     function syncTypeButtons(){document.querySelectorAll('[data-group="type"]').forEach(function(b){b.classList.toggle('active',b.dataset.value===filters.type);});}
     function syncEraButtons(){document.querySelectorAll('[data-group="era"]').forEach(function(b){b.classList.toggle('active',b.dataset.value===filters.era);});}
     function syncThemeButtons(){document.querySelectorAll('[data-group="theme"]').forEach(function(b){b.classList.toggle('active',filters.themes.has(b.dataset.value));});}
