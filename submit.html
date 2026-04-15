@@ -74,7 +74,6 @@
         .type-tile { padding: 0.75rem 0.5rem; border: 1px solid var(--border-soft); background: transparent; color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s; text-align: center; }
         .type-tile:hover { border-color: var(--border-strong); color: var(--text-main); }
         .type-tile.selected { border-color: var(--accent); background: rgba(201,168,76,0.1); color: var(--accent); }
-        .type-tile-icon { display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
 
         /* ---- Submit card / form ---- */
         .submit-card { background: var(--bg-soft); padding: 2.25rem; border: 1px solid var(--border-soft); }
@@ -141,22 +140,22 @@
 
     <div class="marquee-strip" aria-hidden="true">
         <div class="marquee-inner">
-            <span>La Casa Cultural</span><span class="marquee-sep">✦</span>
-            <span>Est. 1969</span><span class="marquee-sep">✦</span>
-            <span>301 Crown Street</span><span class="marquee-sep">✦</span>
-            <span>Preservation &amp; Education</span><span class="marquee-sep">✦</span>
-            <span>Oral Histories</span><span class="marquee-sep">✦</span>
-            <span>Five Decades of Latine Life</span><span class="marquee-sep">✦</span>
-            <span>Community Archive</span><span class="marquee-sep">✦</span>
-            <span>Memory is a Communal Act</span><span class="marquee-sep">✦</span>
-            <span>La Casa Cultural</span><span class="marquee-sep">✦</span>
-            <span>Est. 1969</span><span class="marquee-sep">✦</span>
-            <span>301 Crown Street</span><span class="marquee-sep">✦</span>
-            <span>Preservation &amp; Education</span><span class="marquee-sep">✦</span>
-            <span>Oral Histories</span><span class="marquee-sep">✦</span>
-            <span>Five Decades of Latine Life</span><span class="marquee-sep">✦</span>
-            <span>Community Archive</span><span class="marquee-sep">✦</span>
-            <span>Memory is a Communal Act</span><span class="marquee-sep">✦</span>
+            <span>La Casa Cultural</span><span class="marquee-sep">&starf;</span>
+            <span>Est. 1969</span><span class="marquee-sep">&starf;</span>
+            <span>301 Crown Street</span><span class="marquee-sep">&starf;</span>
+            <span>Preservation &amp; Education</span><span class="marquee-sep">&starf;</span>
+            <span>Oral Histories</span><span class="marquee-sep">&starf;</span>
+            <span>Five Decades of Latine Life</span><span class="marquee-sep">&starf;</span>
+            <span>Community Archive</span><span class="marquee-sep">&starf;</span>
+            <span>Memory is a Communal Act</span><span class="marquee-sep">&starf;</span>
+            <span>La Casa Cultural</span><span class="marquee-sep">&starf;</span>
+            <span>Est. 1969</span><span class="marquee-sep">&starf;</span>
+            <span>301 Crown Street</span><span class="marquee-sep">&starf;</span>
+            <span>Preservation &amp; Education</span><span class="marquee-sep">&starf;</span>
+            <span>Oral Histories</span><span class="marquee-sep">&starf;</span>
+            <span>Five Decades of Latine Life</span><span class="marquee-sep">&starf;</span>
+            <span>Community Archive</span><span class="marquee-sep">&starf;</span>
+            <span>Memory is a Communal Act</span><span class="marquee-sep">&starf;</span>
         </div>
     </div>
 
@@ -189,12 +188,12 @@
                     <div class="submit-card reveal reveal-delay-2">
                         <h3>Share your history</h3>
                         <div class="type-tiles" id="type-tiles">
-                            <button class="type-tile" data-type="photograph"><span class="type-tile-icon">📷</span>Photo</button>
-                            <button class="type-tile" data-type="oral-history"><span class="type-tile-icon">🎙️</span>Oral history</button>
-                            <button class="type-tile" data-type="flyer"><span class="type-tile-icon">📄</span>Flyer</button>
-                            <button class="type-tile" data-type="video"><span class="type-tile-icon">🎬</span>Video</button>
-                            <button class="type-tile" data-type="audio"><span class="type-tile-icon">🔊</span>Audio</button>
-                            <button class="type-tile" data-type="other"><span class="type-tile-icon">✦</span>Other</button>
+                            <button class="type-tile" data-type="photograph">Photo</button>
+                            <button class="type-tile" data-type="oral-history">Oral history</button>
+                            <button class="type-tile" data-type="flyer">Flyer</button>
+                            <button class="type-tile" data-type="video">Video</button>
+                            <button class="type-tile" data-type="audio">Audio</button>
+                            <button class="type-tile" data-type="other">Other</button>
                         </div>
                         <div class="form-progress-bar"><div class="form-progress-fill" id="form-progress"></div></div>
                         <div id="form-success" class="form-success">
@@ -219,7 +218,7 @@
                             <div class="form-group"><label for="title">Title / Caption</label><input type="text" name="title" id="title" placeholder="Brief title for your submission" required data-testid="submit-title"></div>
                             <div class="form-group">
                                 <label for="description">Description * <span id="char-count" class="char-count">0 / 500</span></label>
-                                <textarea name="description" id="description" rows="4" placeholder="Tell us about the item(s) you are sharing…" required data-testid="submit-desc" maxlength="500"></textarea>
+                                <textarea name="description" id="description" rows="4" placeholder="Tell us about the item(s) you are sharing&hellip;" required data-testid="submit-desc" maxlength="500"></textarea>
                             </div>
                             <div class="form-group"><label for="submission-link">Link to Files</label><input type="text" name="link" id="submission-link" placeholder="Google Drive, Dropbox, or Box link" data-testid="submit-link"></div>
                             <button type="submit" class="cta-button" id="submit-btn" data-testid="submit-btn">Submit Contribution</button>
