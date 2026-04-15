@@ -8,172 +8,126 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #1a2e1f;
-            --bg-soft: #223327;
-            --bg-soft-2: #2a3d2e;
-            --bg-footer: #111a13;
-            --text-main: #f2ead8;
-            --text-muted: #9aab97;
-            --accent: #c9a84c;
-            --border-soft: rgba(242, 234, 216, 0.12);
-            --border-strong: rgba(242, 234, 216, 0.3);
-            --divider: rgba(242, 234, 216, 0.15);
-            --success: #28a745;
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-4: 1rem;
-            --space-6: 1.5rem;
-            --space-8: 2rem;
-            --transition: 0.2s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Space Mono', monospace; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
-        .site-header { border-top: 4px solid var(--accent); padding: var(--space-8) 0; background: transparent; }
-        .header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
-        .brand-mark-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
-        .nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
-        .nav a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-        .nav a:hover { color: var(--text-main); text-decoration: underline; }
-        section { padding: 4rem 0; border-bottom: 1px solid var(--divider); }
-        .section-head { margin-bottom: 3rem; }
-        .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
-        h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
-        .submit-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            align-items: start;
-        }
-        .submit-info p { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-muted); }
-        /* Card sits flush at top so its h3 aligns with the section h2 above */
-        .submit-card {
-            background: var(--bg-soft);
-            padding: 3rem;
-            border: 1px solid var(--border-soft);
-            /* Pull card up so its h3 top-edge matches the h2 top-edge on the left */
-            margin-top: calc(-2.6rem * 1.1 - 3rem - 0.5rem);
-        }
-        .submit-card h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .form-group input,
-        .form-group select,
-        .form-group textarea { 
-            width: 100%; 
-            background: var(--bg-soft-2); 
-            border: 1px solid var(--border-soft); 
-            color: var(--text-main); 
-            font-family: 'Space Mono', monospace; 
-            font-size: 0.9rem; 
-            padding: 0.75rem 1rem; 
-            transition: border-color var(--transition); 
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus { outline: none; border-color: var(--accent); }
-        .form-group select option { background: var(--bg-soft-2); }
-        .cta-button { 
-            display: inline-block; 
-            background-color: var(--accent); 
-            color: #111a13; 
-            text-decoration: none; 
-            padding: 1rem 2rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.1em; 
-            font-size: 0.85rem; 
-            transition: opacity 0.2s; 
-            border: none; 
-            cursor: pointer; 
-            font-family: 'Space Mono', monospace; 
-        }
-        .cta-button:hover { opacity: 0.9; }
-        .cta-button:disabled { opacity: 0.5; cursor: not-allowed; }
-        .form-success { 
-            display: none; 
-            background: var(--bg-soft); 
-            border: 1px solid var(--success); 
-            padding: 2rem; 
-            text-align: center; 
-            color: var(--text-main); 
-        }
-        .form-success h4 { font-family: 'Playfair Display', serif; color: var(--success); margin-bottom: 0.5rem; }
-        .land-acknowledgement { padding: 4rem 0; color: var(--text-muted); font-size: 0.85rem; max-width: 800px; }
-        .footer { background: var(--bg-footer); border-top: 3px solid var(--accent); padding: 4rem 0; margin-top: 4rem; }
-        .footer-inner { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 2rem; }
-        .footer-contact a { color: var(--accent); text-decoration: underline; }
-        .admin-access-bar {
-            text-align: center;
-            padding: 1.5rem 0;
-            background: var(--bg-footer);
-            border-top: 1px solid var(--border-soft);
-        }
-        .admin-btn {
-            display: inline-block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 0.4rem 1rem;
-            border: 1px solid var(--border-soft);
-            transition: var(--transition);
-        }
-        .admin-btn:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-        @media (max-width: 768px) { 
-            .submit-content { grid-template-columns: 1fr; gap: 2rem; }
-            /* Reset the negative margin on mobile — stacks vertically */
-            .submit-card { margin-top: 0; }
-            h2 { font-size: 2rem; } 
-        }
+        :root{--bg:#1a2e1f;--bg-soft:#223327;--bg-soft-2:#2a3d2e;--bg-footer:#111a13;--text-main:#f2ead8;--text-muted:#9aab97;--accent:#c9a84c;--border-soft:rgba(242,234,216,0.12);--border-strong:rgba(242,234,216,0.3);--divider:rgba(242,234,216,0.15);--success:#28a745;--space-4:1rem;--space-6:1.5rem;--space-8:2rem;--transition:0.2s ease;}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        body{background:var(--bg);color:var(--text-main);font-family:'Space Mono',monospace;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+        .container{max-width:1200px;margin:0 auto;padding:0 var(--space-8);}
+        .site-header{border-top:4px solid var(--accent);padding:var(--space-8) 0;background:rgba(26,46,31,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;transition:box-shadow .3s,padding .3s;}
+        .site-header.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.4);padding:.75rem 0;}
+        .header-inner{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:1rem;}
+        .brand-mark-text{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--text-main);text-decoration:none;letter-spacing:-.02em;transition:color .2s;}
+        .brand-mark-text:hover{color:var(--accent);}
+        .nav{display:flex;gap:var(--space-6);flex-wrap:wrap;}
+        .nav a{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);text-decoration:none;position:relative;padding:.25rem 0;transition:color var(--transition);}
+        .nav a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s;}
+        .nav a:hover{color:var(--text-main);}
+        .nav a:hover::after,.nav a[aria-current="page"]::after{width:100%;}
+        .nav a[aria-current="page"]{color:var(--text-main);}
+        /* reveal */
+        .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+        .reveal.is-visible{opacity:1;transform:translateY(0);}
+        .reveal-delay-1{transition-delay:.1s;}.reveal-delay-2{transition-delay:.2s;}
+        /* progress bar */
+        .form-progress-bar{height:3px;background:var(--divider);margin-bottom:2rem;border-radius:99px;overflow:hidden;}
+        .form-progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .4s ease;width:0%;}
+        section{padding:4rem 0;border-bottom:1px solid var(--divider);}
+        .section-kicker{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:.5rem;}
+        h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.1;}
+        h2{font-size:2.6rem;font-style:italic;font-weight:400;}
+        .submit-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:start;}
+        .submit-info p{margin-bottom:1.5rem;font-size:1rem;color:var(--text-muted);}
+        /* contribution type tiles */
+        .type-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:2rem;}
+        .type-tile{padding:.85rem .5rem;border:1px solid var(--border-soft);background:transparent;color:var(--text-muted);font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center;}
+        .type-tile:hover{border-color:var(--border-strong);color:var(--text-main);}
+        .type-tile.selected{border-color:var(--accent);background:rgba(201,168,76,.1);color:var(--accent);}
+        .type-tile-icon{display:block;font-size:1.2rem;margin-bottom:.3rem;}
+        .submit-card{background:var(--bg-soft);padding:3rem;border:1px solid var(--border-soft);margin-top:calc(-2.6rem * 1.1 - 3rem - 0.5rem);}
+        .submit-card h3{font-size:1.8rem;margin-bottom:1rem;}
+        .form-group{margin-bottom:1.5rem;}
+        .form-group label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.5rem;}
+        .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg-soft-2);border:1px solid var(--border-soft);color:var(--text-main);font-family:'Space Mono',monospace;font-size:.9rem;padding:.75rem 1rem;transition:border-color var(--transition),box-shadow var(--transition);}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,168,76,.12);}
+        .form-group select option{background:var(--bg-soft-2);}
+        .char-count{font-size:.65rem;color:var(--text-muted);text-align:right;margin-top:.25rem;transition:color .2s;}
+        .char-count.warn{color:var(--accent);}
+        .cta-button{display:inline-block;background-color:var(--accent);color:#111a13;text-decoration:none;padding:1rem 2rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;transition:opacity .2s,transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'Space Mono',monospace;}
+        .cta-button:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,.3);}
+        .cta-button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+        .form-success{display:none;background:var(--bg-soft);border:1px solid var(--success);padding:2rem;text-align:center;color:var(--text-main);}
+        .form-success h4{font-family:'Playfair Display',serif;color:var(--success);margin-bottom:.5rem;}
+        /* contact cards */
+        .contact-cards{display:grid;gap:1rem;margin-top:3rem;}
+        .contact-card{background:var(--bg-soft);border:1px solid var(--border-soft);padding:1.25rem 1.5rem;transition:border-color .2s;}
+        .contact-card:hover{border-color:rgba(201,168,76,.4);}
+        .contact-card-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;}
+        .contact-card-value{font-size:.9rem;color:var(--text-main);}
+        .contact-card-value a{color:var(--accent);text-decoration:underline;}
+        .land-acknowledgement{padding:4rem 0;color:var(--text-muted);font-size:.85rem;max-width:800px;}
+        .footer{background:var(--bg-footer);border-top:3px solid var(--accent);padding:4rem 0;margin-top:4rem;}
+        .footer-inner{display:flex;justify-content:space-between;font-size:.75rem;color:var(--text-muted);flex-wrap:wrap;gap:2rem;}
+        .footer-contact a{color:var(--accent);text-decoration:underline;}
+        .admin-access-bar{text-align:center;padding:1.5rem 0;background:var(--bg-footer);border-top:1px solid var(--border-soft);}
+        .admin-btn{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);text-decoration:none;padding:.4rem 1rem;border:1px solid var(--border-soft);transition:var(--transition);}
+        .admin-btn:hover{color:var(--accent);border-color:var(--accent);}
+        @media(max-width:768px){.submit-content{grid-template-columns:1fr;gap:2rem;}.submit-card{margin-top:0;}.type-tiles{grid-template-columns:repeat(2,1fr);}h2{font-size:2rem;}}
     </style>
 </head>
 <body>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" class="brand-mark-text">LA CASA HP&E</a>
+                <a href="index.html" class="brand-mark-text">LA CASA HP&amp;E</a>
                 <nav class="nav">
                     <a href="mission.html">Mission</a>
                     <a href="collections.html">Collections</a>
                     <a href="map.html">Map</a>
                     <a href="timeline.html">Timeline</a>
                     <a href="groups.html">Groups</a>
-                    <a href="submit.html">Contribute</a>
+                    <a href="submit.html" aria-current="page">Contribute</a>
                 </nav>
             </div>
         </div>
     </header>
-    
     <main>
         <section>
             <div class="container">
-                <div class="section-head">
+                <div class="section-head reveal">
                     <span class="section-kicker">Participation</span>
                     <h2>Memory is a communal act.</h2>
                 </div>
                 <div class="submit-content">
-                    <div class="submit-info">
-                        <p>The La Casa HP&E Archive is built by students, alumni, and community members. We are looking for documents, photographs, flyers, and oral histories that reflect the vibrant life of the Latine community at Yale since 1969.</p>
+                    <div class="submit-info reveal reveal-delay-1">
+                        <p>The La Casa HP&amp;E Archive is built by students, alumni, and community members. We are looking for documents, photographs, flyers, and oral histories that reflect the vibrant life of the Latine community at Yale since 1969.</p>
                         <p>Whether you have a single photo from a meeting or a box of records from a student organization, your contribution helps us remember properly.</p>
-                        
-                        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--divider);">
-                            <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">Contact Us</h3>
-                            <p style="margin-bottom: 1rem;">Have questions about contributing or want to learn more about the archive?</p>
-                            <p style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Email</strong><br><a href="mailto:lacasaspecialprojects@gmail.com" style="color: var(--accent); text-decoration: underline;">lacasaspecialprojects@gmail.com</a></p>
-                            <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Location</strong><br>La Casa Cultural<br>301 Crown Street<br>New Haven, CT 06511</p>
-                            <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">HP&E Committee</strong><br>Historical Preservation &amp; Education<br>La Casa Cultural at Yale University</p>
+                        <div class="contact-cards">
+                            <div class="contact-card">
+                                <div class="contact-card-label">Email</div>
+                                <div class="contact-card-value"><a href="mailto:lacasaspecialprojects@gmail.com">lacasaspecialprojects@gmail.com</a></div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-card-label">Location</div>
+                                <div class="contact-card-value">La Casa Cultural · 301 Crown Street · New Haven, CT 06511</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-card-label">HP&amp;E Committee</div>
+                                <div class="contact-card-value">Historical Preservation &amp; Education · La Casa Cultural at Yale University</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="submit-card">
+                    <div class="submit-card reveal reveal-delay-2">
                         <h3>Share your history</h3>
+                        <!-- Contribution type visual selector -->
+                        <div class="type-tiles" id="type-tiles">
+                            <button class="type-tile" data-type="photograph"><span class="type-tile-icon">📷</span>Photo</button>
+                            <button class="type-tile" data-type="oral-history"><span class="type-tile-icon">🎙️</span>Oral history</button>
+                            <button class="type-tile" data-type="flyer"><span class="type-tile-icon">📄</span>Flyer</button>
+                            <button class="type-tile" data-type="video"><span class="type-tile-icon">🎬</span>Video</button>
+                            <button class="type-tile" data-type="audio"><span class="type-tile-icon">🔊</span>Audio</button>
+                            <button class="type-tile" data-type="other"><span class="type-tile-icon">✦</span>Other</button>
+                        </div>
+                        <!-- Progress bar -->
+                        <div class="form-progress-bar"><div class="form-progress-fill" id="form-progress"></div></div>
                         <div id="form-success" class="form-success">
                             <h4>Thank you!</h4>
                             <p>Your submission has been received. Our team will review it and add it to the archive.</p>
@@ -207,8 +161,8 @@
                                 <input type="text" name="title" id="title" placeholder="Brief title for your submission" required data-testid="submit-title">
                             </div>
                             <div class="form-group">
-                                <label for="description">Description *</label>
-                                <textarea name="description" id="description" rows="4" placeholder="Tell us about the item(s) you are sharing..." required data-testid="submit-desc"></textarea>
+                                <label for="description">Description * <span id="char-count" class="char-count">0 / 500</span></label>
+                                <textarea name="description" id="description" rows="4" placeholder="Tell us about the item(s) you are sharing…" required data-testid="submit-desc" maxlength="500"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="submission-link">Link to Files</label>
@@ -221,72 +175,63 @@
             </div>
         </section>
         <div class="container">
-            <div class="land-acknowledgement">
+            <div class="land-acknowledgement reveal">
                 <p>Yale University acknowledges that indigenous peoples and nations, including Mohegan, Mashantucket Pequot, Eastern Pequot, Schaghticoke, Golden Hill Paugussett, Niantic, and the Quinnipiac and other Algonquian speaking peoples, have stewarded through generations the lands and waterways of what is now the state of Connecticut. We honor and respect the enduring relationship that exists between these peoples and nations and this land.</p>
             </div>
         </div>
     </main>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-inner">
-                <div>
-                    <strong>La Casa Cultural · HP&E Archive</strong><br>
-                    Memory is ours. Build it together.
-                </div>
-                <div class="footer-contact">
-                    Add to the archive → <a href="submit.html">Submit a contribution</a>
-                </div>
+                <div><strong>La Casa Cultural · HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
+                <div class="footer-contact">Add to the archive → <a href="submit.html">Submit a contribution</a></div>
             </div>
         </div>
     </footer>
-    
-    <div class="admin-access-bar">
-        <a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a>
-    </div>
+    <div class="admin-access-bar"><a href="admin.html" class="admin-btn" data-testid="admin-btn">Admin</a></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        (function() {
-            var sbClient = window.supabase.createClient(
-                'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w'
-            );
-            
-            var form = document.getElementById('submission-form');
-            var submitBtn = document.getElementById('submit-btn');
-            var formSuccess = document.getElementById('form-success');
-            
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Submitting...';
-                
-                var submission = {
-                    title: document.getElementById('title').value || document.getElementById('name').value + "'s contribution",
-                    description: document.getElementById('description').value,
-                    media_type: document.getElementById('contribution-type').value,
-                    submitter_name: document.getElementById('name').value,
-                    organization: document.getElementById('organization').value || null,
-                    submitter_email: document.getElementById('email').value,
-                    file_link: document.getElementById('submission-link').value || null,
-                    status: 'pending',
-                    featured: false
-                };
-                
-                var result = await sbClient.from('archives').insert([submission]);
-                
-                if (result.error) {
-                    alert('There was an error submitting your form. Please email us directly at lacasaspecialprojects@gmail.com');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Contribution';
-                } else {
-                    form.style.display = 'none';
-                    formSuccess.style.display = 'block';
-                }
-            });
-        })();
+    // sticky header
+    (function(){var h=document.getElementById('site-header');window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>40);},{passive:true});})();
+    // scroll reveal
+    (function(){var els=document.querySelectorAll('.reveal');var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{threshold:.1});els.forEach(function(el){io.observe(el);});})();
+    // type tile selector syncs hidden select
+    document.querySelectorAll('.type-tile').forEach(function(tile){
+        tile.addEventListener('click',function(){
+            document.querySelectorAll('.type-tile').forEach(function(t){t.classList.remove('selected');});
+            tile.classList.add('selected');
+            document.getElementById('contribution-type').value=tile.dataset.type;
+            updateProgress();
+        });
+    });
+    // progress bar: count filled required fields
+    var requiredFields=['name','email','title','description'];
+    function updateProgress(){
+        var filled=requiredFields.filter(function(id){return document.getElementById(id).value.trim().length>0;}).length;
+        var pct=Math.round((filled/requiredFields.length)*100);
+        document.getElementById('form-progress').style.width=pct+'%';
+    }
+    requiredFields.forEach(function(id){document.getElementById(id).addEventListener('input',updateProgress);});
+    // char counter
+    document.getElementById('description').addEventListener('input',function(){
+        var len=this.value.length;
+        var el=document.getElementById('char-count');
+        el.textContent=len+' / 500';
+        el.classList.toggle('warn',len>420);
+        updateProgress();
+    });
+    // form submit
+    var sbClient=window.supabase.createClient('https://bdvaqrzsnzjnlufvkxqa.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyMDE4MzksImV4cCI6MjA5MTc3NzgzOX0.a9pQyOH0kNRm5K_8NcLT40QkrUt0iCaLUrUtKn0WV_w');
+    document.getElementById('submission-form').addEventListener('submit',async function(e){
+        e.preventDefault();
+        var btn=document.getElementById('submit-btn');
+        btn.disabled=true;btn.textContent='Submitting…';
+        var submission={title:document.getElementById('title').value||document.getElementById('name').value+"'s contribution",description:document.getElementById('description').value,media_type:document.getElementById('contribution-type').value,submitter_name:document.getElementById('name').value,organization:document.getElementById('organization').value||null,submitter_email:document.getElementById('email').value,file_link:document.getElementById('submission-link').value||null,status:'pending',featured:false};
+        var result=await sbClient.from('archives').insert([submission]);
+        if(result.error){alert('There was an error submitting your form. Please email us directly at lacasaspecialprojects@gmail.com');btn.disabled=false;btn.textContent='Submit Contribution';}
+        else{document.getElementById('submission-form').style.display='none';document.getElementById('form-success').style.display='block';document.getElementById('form-progress').style.width='100%';}
+    });
     </script>
 </body>
 </html>
