@@ -9,26 +9,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .page-hero { padding: 4rem 0 2rem; }
-        h2 { font-size: 2.6rem; }
-        .page-intro { color: var(--text-muted); font-size: 0.95rem; max-width: 56ch; margin-top: 0.75rem; line-height: 1.7; }
-        .mission-body { max-width: 720px; }
-        .mission-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.8; }
-        .mission-body h3 { font-size: 1.4rem; margin: 2.5rem 0 1rem; color: var(--text-main); }
-        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
-        .pillar-card { background: var(--bg-soft); padding: 2rem; border: 1px solid var(--border-soft); }
-        .pillar-card h4 { font-family: var(--font-display); font-size: 1rem; color: var(--accent); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
-        .pillar-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-        @media (max-width: 768px) { h2 { font-size: 2rem; } }
+        /* ---- Quote hero ---- */
+        .quote-hero { padding: 4rem 0 2rem; position: relative; overflow: hidden; }
+        .quote-glow { position: absolute; top: -80px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%); pointer-events: none; animation: glow-pulse 6s ease-in-out infinite; }
+        .quote-text { font-family: var(--font-display); font-size: clamp(1.35rem, 0.9rem + 1.8vw, 2rem); font-style: italic; line-height: 1.35; margin-bottom: 1.25rem; max-width: 860px; color: var(--text-main); position: relative; z-index: 1; min-height: 2em; }
+        .quote-text.done::after { content: '|'; color: var(--accent); animation: blink 0.9s step-end infinite; margin-left: 2px; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .quote-attribution { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.25rem; }
+        .quote-source { color: var(--text-muted); font-size: 0.75rem; font-style: italic; max-width: 600px; }
+
+        /* ---- Marquee ---- */
+        .marquee-strip { overflow: hidden; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); padding: 0.5rem 0; background: var(--bg-soft); }
+        .marquee-inner { display: flex; gap: 2.5rem; white-space: nowrap; animation: marquee 28s linear infinite; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
+        .marquee-inner:hover { animation-play-state: paused; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .marquee-sep { color: var(--accent); }
+
+        /* ---- Mission layout ---- */
+        .mission-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+        .mission-text p { margin-bottom: 1.25rem; font-size: 0.95rem; color: var(--text-muted); }
+        .feature-list { display: grid; gap: 1rem; }
+        .feature-item { background: var(--bg-soft); padding: 1.5rem; border: 1px solid var(--border-soft); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, background 0.25s; position: relative; overflow: hidden; }
+        .feature-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(201,168,76,0.07) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.5s ease; pointer-events: none; }
+        .feature-item:hover::before { transform: translateX(100%); }
+        .feature-item:hover { background: var(--bg-soft-2); border-color: rgba(201,168,76,0.5); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .feature-item h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .feature-item p { color: var(--text-muted); font-size: 0.83rem; }
+
+        /* ---- Principles ---- */
+        .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
+        .principle { text-align: center; padding: 1.5rem 1.25rem; border: 1px solid var(--border-soft); position: relative; }
+        .principle-num { font-family: var(--font-display); font-size: 3rem; font-style: italic; color: rgba(201,168,76,0.15); position: absolute; top: 0.5rem; left: 0.75rem; line-height: 1; }
+        .principle h3 { font-size: 0.95rem; margin-bottom: 0.4rem; position: relative; z-index: 1; }
+        .principle p { font-size: 0.78rem; color: var(--text-muted); position: relative; z-index: 1; }
+
+        @media (max-width: 768px) {
+            .mission-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .principles { grid-template-columns: 1fr; gap: 1rem; }
+            .quote-hero { padding: 2rem 0 1.5rem; }
+        }
     </style>
 </head>
 <body>
-    <header class="site-header" id="site-header">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" role="banner" id="site-header">
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" aria-label="La Casa HP&amp;E Archive home">
-                    <img src="logo.png" alt="La Casa HP&amp;E Archive" class="brand-logo">
-                </a>
+                <a href="index.html" class="brand-mark-text" aria-label="La Casa HP&E Archive home">LA CASA HP&amp;E</a>
                 <nav class="nav" aria-label="Primary navigation">
                     <a href="mission.html" aria-current="page">Mission</a>
                     <a href="collections.html">Collections</a>
@@ -41,46 +69,64 @@
         </div>
     </header>
 
-    <main>
+    <div class="marquee-strip" aria-hidden="true">
+        <div class="marquee-inner">
+            <span>La Casa Cultural</span><span class="marquee-sep">✦</span>
+            <span>Est. 1969</span><span class="marquee-sep">✦</span>
+            <span>301 Crown Street</span><span class="marquee-sep">✦</span>
+            <span>Preservation &amp; Education</span><span class="marquee-sep">✦</span>
+            <span>Oral Histories</span><span class="marquee-sep">✦</span>
+            <span>Five Decades of Latine Life</span><span class="marquee-sep">✦</span>
+            <span>Community Archive</span><span class="marquee-sep">✦</span>
+            <span>Memory is a Communal Act</span><span class="marquee-sep">✦</span>
+            <span>La Casa Cultural</span><span class="marquee-sep">✦</span>
+            <span>Est. 1969</span><span class="marquee-sep">✦</span>
+            <span>301 Crown Street</span><span class="marquee-sep">✦</span>
+            <span>Preservation &amp; Education</span><span class="marquee-sep">✦</span>
+            <span>Oral Histories</span><span class="marquee-sep">✦</span>
+            <span>Five Decades of Latine Life</span><span class="marquee-sep">✦</span>
+            <span>Community Archive</span><span class="marquee-sep">✦</span>
+            <span>Memory is a Communal Act</span><span class="marquee-sep">✦</span>
+        </div>
+    </div>
+
+    <main id="main-content">
         <div class="container">
-            <div class="page-hero">
-                <span class="section-kicker">About the Archive</span>
-                <h2>Why we preserve.</h2>
-                <p class="page-intro">The HP&amp;E Archive exists to ensure that the history of the Latine community at Yale is never again at risk of erasure.</p>
+            <div class="quote-hero">
+                <div class="quote-glow" aria-hidden="true"></div>
+                <p class="quote-text reveal" id="typed-quote"></p>
+                <p class="quote-attribution reveal reveal-delay-1">&mdash; La Casa Cultural</p>
+                <p class="quote-source reveal reveal-delay-2">Quoted in <em>Understanding the History of the Consolidation of La Casa Cultural</em>, Yale Historical Review (2021)</p>
             </div>
         </div>
 
         <section>
             <div class="container">
-                <div class="mission-body">
-                    <p>La Casa Cultural de Julia de Burgos was founded in 1969 through the direct advocacy of Puerto Rican and Chicano students who demanded institutional recognition and space. What followed was five decades of organizing, cultural production, and community building that shaped the university in profound ways.</p>
-                    <p>The Historical Preservation &amp; Education (HP&amp;E) committee was established to ensure that this legacy is documented, accessible, and taught to future generations. Too much has already been lost to the transience of student life and the indifference of institutional memory.</p>
-                    <p>This archive is a corrective act.</p>
-                    <h3>Our commitments</h3>
+                <div class="section-head reveal">
+                    <span class="section-kicker">Mission</span>
+                    <h2>Keep it accessible. Keep it real.</h2>
                 </div>
-                <div class="pillar-grid">
-                    <div class="pillar-card">
-                        <h4>Preservation</h4>
-                        <p>Digitizing and cataloguing physical materials — flyers, photographs, meeting minutes — before they are lost to time.</p>
+                <div class="mission-grid">
+                    <div class="mission-text reveal reveal-delay-1">
+                        <p>The La Casa HP&amp;E Archive is a community-centered project dedicated to preserving the history of Latine life at Yale. We believe that history is not just found in textbooks, but in the everyday experiences, activism, and joy of our community.</p>
+                        <p>Our archive is built for students, alumni, and community members to explore their heritage and ensure that future generations can learn from the labor and triumphs of those who came before.</p>
                     </div>
-                    <div class="pillar-card">
-                        <h4>Access</h4>
-                        <p>Making the archive freely available to current students, alumni, researchers, and the broader community.</p>
+                    <div class="feature-list">
+                        <div class="feature-item reveal reveal-delay-1"><h3>Multimedia Focus</h3><p>We collect photographs, oral histories, audio clips, flyers, and documents to provide a rich, multi-layered view of our community&rsquo;s past.</p></div>
+                        <div class="feature-item reveal reveal-delay-2"><h3>Radical Accessibility</h3><p>Every label and prompt is designed for clarity, ensuring that even a first-year student can navigate the archive with ease.</p></div>
+                        <div class="feature-item reveal reveal-delay-3"><h3>Living Archive</h3><p>The archive grows as the community contributes. Submit photographs, oral histories, or documents and become part of the permanent record.</p></div>
                     </div>
-                    <div class="pillar-card">
-                        <h4>Education</h4>
-                        <p>Developing programming, guides, and curricula that connect the archive to living questions of identity and justice.</p>
-                    </div>
-                    <div class="pillar-card">
-                        <h4>Community</h4>
-                        <p>Centering the voices of those who lived this history, not just the institutions that recorded it.</p>
-                    </div>
+                </div>
+                <div class="principles">
+                    <div class="principle reveal reveal-delay-1"><span class="principle-num">01</span><h3>Remember</h3><p>Surface what was buried. Name what was unnamed. Keep the record complete.</p></div>
+                    <div class="principle reveal reveal-delay-2"><span class="principle-num">02</span><h3>Represent</h3><p>Every identity in our community deserves a place in the historical account.</p></div>
+                    <div class="principle reveal reveal-delay-3"><span class="principle-num">03</span><h3>Return</h3><p>History belongs to the people it describes. We give it back.</p></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-inner">
                 <div><strong>La Casa Cultural &middot; HP&amp;E Archive</strong><br>Memory is ours. Build it together.</div>
@@ -93,10 +139,15 @@
     </div>
 
     <script>
-        (function(){
-            var h = document.getElementById('site-header');
-            window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-        })();
+    (function(){ var h = document.getElementById('site-header'); window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true }); })();
+    (function(){ var els = document.querySelectorAll('.reveal'); var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } }); }, { threshold: 0.1 }); els.forEach(function(el){ io.observe(el); }); })();
+    (function(){
+        var el = document.getElementById('typed-quote');
+        var text = '\u201cOur community members are from various racial and ethnic identities, social classes, genders, sexualities, and so much more, and specificity matters. La Casa continues to evolve as our student communities shift. And yet, the sense of community, support, and understanding remains.\u201d';
+        var i = 0;
+        function type(){ if (i <= text.length){ el.textContent = text.slice(0, i); i++; setTimeout(type, i < 4 ? 0 : 16); } else { el.classList.add('done', 'is-visible'); } }
+        setTimeout(type, 350);
+    })();
     </script>
 </body>
 </html>
