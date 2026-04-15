@@ -1,67 +1,72 @@
 # La Casa HP&E Archive — PRD
 
 ## Original Problem Statement
-Analyze and improve the La Casa HP&E Archive GitHub repository (https://github.com/sofiagrimm/la-casa-hpe-archive). A digital community archive for La Casa Cultural's Historical Preservation & Education committee at Yale University.
+Analyze and improve the La Casa HP&E Archive GitHub repository (sofiagrimm/la-casa-hpe-archive). A digital community archive for La Casa Cultural's Historical Preservation & Education committee at Yale University. Transform into a secure, accessible, production-quality digital archive.
 
 ## Architecture
 - **Stack**: Static HTML/CSS/JS + Supabase (database + auth)
+- **Shared CSS**: `styles.css` (design system tokens, components)
+- **Shared JS**: `supabase-init.js` (single Supabase client init)
 - **Fonts**: Playfair Display (headers), Space Mono (body/UI)
 - **Design System**: Forest green (#1a2e1f) + Gold (#c9a84c) + Cream (#f2ead8)
-- **Hosting**: Static file server (serve)
-- **Map**: Leaflet.js with CartoDB Dark Matter tiles
-- **Forms**: Supabase insert for submissions
+- **Map**: Leaflet.js with CartoDB Dark Matter tiles (20 locations)
+- **Hosting**: Railway (serve) / GitHub Pages
 
-## Pages
-| Page | File | Description |
-|------|------|-------------|
-| Homepage | index.html | Hero, quote, featured carousel, nav cards |
-| Collections | collections.html | Searchable/filterable archive browser (Supabase) |
-| Map | map.html | Interactive Leaflet map with 11 Yale landmarks |
-| Timeline | timeline.html | Horizontal draggable timeline (1969–Present) |
-| Groups | groups.html | Student organization cards (6 groups) |
-| Mission | mission.html | Project philosophy and features |
-| Storytelling | storytelling.html | Community quotes and oral histories |
-| Hub | hub.html | Resource links and preservation toolkit |
-| Submit | submit.html | Contribution form (writes to Supabase) |
-| Admin | admin.html | Dashboard with CRUD (Supabase Auth) |
+## What's Been Implemented
 
-## User Personas
-- **Students/Alumni**: Browse collections, read stories, explore timeline/map
-- **Contributors**: Submit archival materials via the Submit page
-- **Admins**: Manage archive entries, approve submissions, feature items
+### Security (Jan 2026)
+- Removed all hardcoded passwords from admin.html
+- Implemented Supabase Auth (email/password) for admin login
+- Zero secrets in any tracked file (confirmed via security scan)
+- Only Supabase public anon key in frontend (safe by design)
 
-## What's Been Implemented (Jan 2026)
-- Fixed all 10 malformed HTML files (corrupted footer/CSS fragments)
-- Upgraded admin auth from hardcoded password → Supabase Auth (email/password)
-- Connected Collections page to Supabase with live search + type filters
-- Connected Submit page to Supabase (submissions go to DB as "pending")
-- Built full admin dashboard: stats, tabs (All Archives / Pending / Add New), edit modal
-- Admin CRUD: add, edit, approve, feature/unfeature, delete archives
-- Fixed JavaScript variable conflicts (Supabase double-declaration)
-- Added data-testid attributes across all pages
-- Improved responsive design (flex-wrap on nav, mobile breakpoints)
-- Added Despierta Boricua group card and third storytelling quote
-- Enhanced Hub page with resource cards grid
+### Code Quality
+- Created shared `styles.css` design system (tokens, components, accessibility)
+- Created shared `supabase-init.js` (single Supabase initialization)
+- Fixed all 10 malformed HTML files
+- Added semantic HTML (`header`, `nav`, `main`, `section`, `footer`, roles)
+- Added skip-link for keyboard navigation
+- Added ARIA labels, roles, aria-live regions
+- Added focus-visible styles for keyboard users
+- Added meta descriptions
 
-## Prioritized Backlog
-### P0 (Critical)
-- Configure valid Supabase API keys (current key from original repo may be expired)
-- Create admin user in Supabase dashboard
+### Features
+- Homepage: Bold hero, featured carousel, card grid, CTA
+- Collections: Live search + type filters from Supabase
+- Map: 20 interactive Yale campus locations
+- Timeline: Draggable horizontal timeline (1969–Present)
+- Groups: 12 student organizations with external links
+- Submit: Full form with all fields required, Contact Us sidebar
+- Admin: Full CRUD dashboard (add/edit/approve/feature/delete)
+- Storytelling: 3 community voice blocks
+- Hub: 4 resource cards
 
-### P1 (High)
-- Add file upload support (Supabase Storage) for direct archive submissions
-- Image gallery/lightbox view on Collections page
-- Connect timeline events to Supabase for dynamic content
+### UX Improvements
+- Informative empty states (not just "No results")
+- Loading spinners for async content
+- Toast notifications in admin
+- Cards lift on hover with shadow
+- Gold accent on interactive elements
+- Footer links to submit page across all pages
 
-### P2 (Medium)
-- Add Supabase Realtime for live dashboard updates
-- Implement archive detail page (individual item view)
-- Add alumni directory or contributor credits page
-- Search across all pages (global search)
+## Remaining TODOs
+### P0
+- Configure valid Supabase API keys (current key may need updating)
+- Create admin user in Supabase Auth dashboard
+- Enable Row-Level Security (RLS) on archives table
 
-## Next Tasks
-1. Set up valid Supabase project with proper API keys
-2. Create `archives` table schema in Supabase if not already done
-3. Seed initial archive data
-4. Create admin user for Supabase Auth
-5. Add file upload to Submit and Admin forms
+### P1
+- Add file upload via Supabase Storage
+- Build individual archive detail pages
+- Add remaining pages to shared styles.css (reduce inline styles)
+
+### P2
+- Audio/oral history player on Storytelling page
+- Global search across all content
+- "This Day in La Casa History" homepage widget
+
+## Manual Setup Steps
+1. Go to Supabase dashboard → Authentication → Users → Add admin user
+2. Create `archives` table with schema documented in README.md
+3. Enable RLS policies on the archives table
+4. Update Supabase URL/key in `supabase-init.js` if using a new project
