@@ -213,10 +213,6 @@
                                 <input type="text" id="site-tagline" value="Memory is ours. Build it together.">
                             </div>
                             <div class="form-group">
-                                <label for="land-acknowledgement-text">Land Acknowledgement Text</label>
-                                <textarea id="land-acknowledgement-text" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-soft); border-radius: 4px; background: var(--bg-soft); color: var(--text-main);">Yale University acknowledges that indigenous peoples and nations...</textarea>
-                            </div>
-                            <div class="form-group">
                                 <label for="contact-email">Contact Email</label>
                                 <input type="email" id="contact-email" value="contact@lacasa.yale.edu">
                             </div>
@@ -354,14 +350,17 @@
             el.innerHTML = data.map(a => renderItem(a, true)).join('');
         }
 
-        function renderItem(a, showApprove = false) {
+        
+                            <button class="btn btn-sm" onclick="duplicateArchive('${escapeHtml(a.id)}')">📋 Duplicate</button>
+                    <button class="btn btn-sm" onclick="exportArchive('${escapeHtml(a.id)}')">⬇ Export</button>(a, showApprove = false) {
             const badges = [
                 a.status === 'pending'   ? '<span class="badge badge-pending">Pending</span>'    : '',
                 a.status === 'published' ? '<span class="badge badge-published">Published</span>' : '',
                 a.featured               ? '<span class="badge badge-featured">Featured</span>'   : '',
             ].join(' ');
             return `
-                <div class="archive-item" data-id="${escapeHtml(String(a.id))}">
+                
+                            <input type="checkbox" class="archive-checkbox" data-id="${escapeHtml(a.id)}" data-type="${a.media_type || ''}" onchange="updateBulkDeleteButton()" style="margin-right: 0.5rem; width: 18px; height: 18px;"> data-id="${escapeHtml(String(a.id))}">
                     <div class="archive-meta">
                         <span>${escapeHtml(a.media_type || 'Archive')}</span>
                         <span>${escapeHtml(a.archive_date || 'Date unknown')}</span>
@@ -541,7 +540,6 @@
             const settings = {
                 site_title: document.getElementById('site-title').value,
                 site_tagline: document.getElementById('site-tagline').value,
-                land_acknowledgement: document.getElementById('land-acknowledgement-text').value,
                 contact_email: document.getElementById('contact-email').value
             };
             
@@ -562,7 +560,6 @@
             const settings = JSON.parse(localStorage.getItem('site_settings') || '{}');
             if (settings.site_title) document.getElementById('site-title').value = settings.site_title;
             if (settings.site_tagline) document.getElementById('site-tagline').value = settings.site_tagline;
-            if (settings.land_acknowledgement) document.getElementById('land-acknowledgement-text').value = settings.land_acknowledgement;
             if (settings.contact_email) document.getElementById('contact-email').value = settings.contact_email;
         } catch (error) {
             console.error('Load settings error:', error);
@@ -576,3 +573,121 @@
     }</script>
 </body>
 </html>
+
+    // ===== ADDITIONAL EDITING PRIVILEGES =====
+    
+    // Duplicate/Clone Archive
+    window.duplicateArchive = async function(id) {
+        try {
+            const { data: original, error } = await sb.from('archives').select('*').eq('id', id).single();
+            if (error) throw error;
+            
+            // Remove id and created_at, mark as draft
+            const duplicate = { ...original };
+            delete duplicate.id;
+            delete duplicate.created_at;
+            duplicate.title = `${original.title} (Copy)`;
+            duplicate.status = 'pending';
+            
+            const { error: insertError } = await sb.from('archives').insert([duplicate]);
+            if (insertError) throw insertError;
+            
+            showToast('Archive duplicated successfully!', 'success');
+            loadDashboard();
+        } catch (error) {
+            console.error('Duplicate error:', error);
+            showToast('Failed to duplicate archive', 'error');
+        }
+    };
+    
+    // Export Single Archive as JSON
+    window.exportArchive = async function(id) {
+        try {
+            const { data, error } = await sb.from('archives').select('*').eq('id', id).single();
+            if (error) throw error;
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `archive_${id}_${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('Archive exported!', 'success');
+        } catch (error) {
+            console.error('Export error:', error);
+            showToast('Failed to export archive', 'error');
+        }
+    };
+    
+    // Export All Archives as CSV
+    window.exportAllArchives = async function() {
+        try {
+            const { data, error } = await sb.from('archives').select('*').order('created_at', { ascending: false });
+            if (error) throw error;
+            
+            // Convert to CSV
+            const headers = Object.keys(data[0] || {});
+            const csv = [
+                headers.join(','),
+                ...data.map(row => headers.map(h => JSON.stringify(row[h] || '')).join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `all_archives_${Date.now()}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast(`Exported ${data.length} archives!`, 'success');
+        } catch (error) {
+            console.error('Export all error:', error);
+            showToast('Failed to export archives', 'error');
+        }
+    };
+    
+    // Bulk Edit - Change status or type for selected archives
+    window.bulkEdit = async function() {
+        const checkedBoxes = document.querySelectorAll('.archive-checkbox:checked');
+        const ids = Array.from(checkedBoxes).map(cb => cb.dataset.id);
+        
+        if (ids.length === 0) {
+            showToast('No archives selected', 'error');
+            return;
+        }
+        
+        const action = prompt('Choose action:\n1. Change Status (pending/published)\n2. Change Media Type\nEnter 1 or 2:');
+        
+        if (action === '1') {
+            const status = prompt('Enter new status (pending or published):');
+            if (!status || !['pending', 'published'].includes(status)) return;
+            
+            try {
+                for (const id of ids) {
+                    await sb.from('archives').update({ status }).eq('id', id);
+                }
+                showToast(`Updated ${ids.length} archive(s)`, 'success');
+                loadDashboard();
+            } catch (error) {
+                console.error('Bulk edit error:', error);
+                showToast('Failed to update archives', 'error');
+            }
+        } else if (action === '2') {
+            const type = prompt('Enter media type (photo/video/audio/document/flyer):');
+            if (!type) return;
+            
+            try {
+                for (const id of ids) {
+                    await sb.from('archives').update({ media_type: type }).eq('id', id);
+                }
+                showToast(`Updated ${ids.length} archive(s)`, 'success');
+                loadDashboard();
+            } catch (error) {
+                console.error('Bulk edit error:', error);
+                showToast('Failed to update archives', 'error');
+            }
+        }
+    };
