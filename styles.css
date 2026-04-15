@@ -2,6 +2,12 @@
    La Casa HP&E Archive — Design System
    ============================================ */
 
+/*
+   FONT NOTE: This file uses 'Space Mono' for all text.
+   Each HTML page must load the font independently via:
+   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+*/
+
 /* --- Tokens --- */
 :root {
     --bg: #1a2e1f;
