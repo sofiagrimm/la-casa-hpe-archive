@@ -415,7 +415,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = window.supabase.createClient(
+        var sbClient = window.supabase.createClient(
             'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ'
         );
@@ -479,7 +479,7 @@
         }
         
         async function loadFeaturedArchives() {
-            const { data, error } = await supabase
+            const { data, error } = await sbClient
                 .from('archives')
                 .select('title, description, organization, archive_date, media_type, thumbnail_url')
                 .eq('featured', true)

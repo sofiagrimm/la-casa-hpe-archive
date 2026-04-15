@@ -220,43 +220,45 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = window.supabase.createClient(
-            'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ'
-        );
-        
-        const form = document.getElementById('submission-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const formSuccess = document.getElementById('form-success');
-        
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
+        (function() {
+            var sbClient = window.supabase.createClient(
+                'https://bdvaqrzsnzjnlufvkxqa.supabase.co',
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdmFxcnpzbnpqbmx1ZnZreHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2NzcxMjEsImV4cCI6MjA2MDI1MzEyMX0.SsGTRvNfSsLPOv9A6XjOCEkMfzW6I5CqQlE7v3vGhYQ'
+            );
             
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
+            var form = document.getElementById('submission-form');
+            var submitBtn = document.getElementById('submit-btn');
+            var formSuccess = document.getElementById('form-success');
             
-            const submission = {
-                title: document.getElementById('title').value || document.getElementById('name').value + "'s contribution",
-                description: document.getElementById('description').value,
-                media_type: document.getElementById('contribution-type').value,
-                submitter_name: document.getElementById('name').value,
-                submitter_email: document.getElementById('email').value,
-                file_link: document.getElementById('submission-link').value || null,
-                status: 'pending',
-                featured: false
-            };
-            
-            const { error } = await supabase.from('archives').insert([submission]);
-            
-            if (error) {
-                alert('There was an error submitting your form. Please email us directly at lacasaspecialprojects@gmail.com');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Contribution';
-            } else {
-                form.style.display = 'none';
-                formSuccess.style.display = 'block';
-            }
-        });
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+                
+                var submission = {
+                    title: document.getElementById('title').value || document.getElementById('name').value + "'s contribution",
+                    description: document.getElementById('description').value,
+                    media_type: document.getElementById('contribution-type').value,
+                    submitter_name: document.getElementById('name').value,
+                    submitter_email: document.getElementById('email').value,
+                    file_link: document.getElementById('submission-link').value || null,
+                    status: 'pending',
+                    featured: false
+                };
+                
+                var result = await sbClient.from('archives').insert([submission]);
+                
+                if (result.error) {
+                    alert('There was an error submitting your form. Please email us directly at lacasaspecialprojects@gmail.com');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Contribution';
+                } else {
+                    form.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                }
+            });
+        })();
     </script>
 </body>
 </html>
