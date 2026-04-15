@@ -468,36 +468,34 @@
         const cancelEditBtn = document.getElementById('cancel-edit');
         
         // Check auth on load
-        async function checkAuth() {
-            const { data: { session } } = await sbClient.auth.getSession();
-            if (session) {
+        function checkAuth() {
+            if (sessionStorage.getItem('lacasa_admin') === 'true') {
                 showAdmin();
                 loadDashboard();
             }
         }
         
         // Login
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const password = document.getElementById('admin-pass').value;
             
             loginError.style.display = 'none';
             
-            const { data, error } = await sbClient.auth.signInWithPassword({ email: 'admin@lacasa.yale.edu', password });
-            
-            if (error) {
-                loginError.textContent = error.message || 'Invalid credentials. Please try again.';
-                loginError.style.display = 'block';
-            } else {
+            if (password === 'HayleySerpa2468') {
+                sessionStorage.setItem('lacasa_admin', 'true');
                 showAdmin();
                 loadDashboard();
+            } else {
+                loginError.textContent = 'Invalid password. Please try again.';
+                loginError.style.display = 'block';
             }
         });
         
         // Logout
-        logoutBtn.addEventListener('click', async (e) => {
+        logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            await sbClient.auth.signOut();
+            sessionStorage.removeItem('lacasa_admin');
             loginOverlay.style.display = 'flex';
             adminContent.style.display = 'none';
         });
