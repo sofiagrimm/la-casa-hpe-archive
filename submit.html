@@ -41,9 +41,22 @@
         .section-kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.1; }
         h2 { font-size: 2.6rem; font-style: italic; font-weight: 400; }
-        .submit-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; align-items: start; }
+        .submit-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
         .submit-info p { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-muted); }
-        .submit-card { background: var(--bg-soft); padding: 3rem; border: 1px solid var(--border-soft); }
+        /* Card sits flush at top so its h3 aligns with the section h2 above */
+        .submit-card {
+            background: var(--bg-soft);
+            padding: 3rem;
+            border: 1px solid var(--border-soft);
+            /* Pull card up so its h3 top-edge matches the h2 top-edge on the left */
+            margin-top: calc(-2.6rem * 1.1 - 3rem - 0.5rem);
+        }
         .submit-card h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; }
@@ -115,7 +128,9 @@
             border-color: var(--accent);
         }
         @media (max-width: 768px) { 
-            .submit-content { grid-template-columns: 1fr; gap: 2rem; } 
+            .submit-content { grid-template-columns: 1fr; gap: 2rem; }
+            /* Reset the negative margin on mobile — stacks vertically */
+            .submit-card { margin-top: 0; }
             h2 { font-size: 2rem; } 
         }
     </style>
@@ -154,7 +169,7 @@
                             <p style="margin-bottom: 1rem;">Have questions about contributing or want to learn more about the archive?</p>
                             <p style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Email</strong><br><a href="mailto:lacasaspecialprojects@gmail.com" style="color: var(--accent); text-decoration: underline;">lacasaspecialprojects@gmail.com</a></p>
                             <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Location</strong><br>La Casa Cultural<br>301 Crown Street<br>New Haven, CT 06511</p>
-                            <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">HP&E Committee</strong><br>Historical Preservation & Education<br>La Casa Cultural at Yale University</p>
+                            <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">HP&E Committee</strong><br>Historical Preservation &amp; Education<br>La Casa Cultural at Yale University</p>
                         </div>
                     </div>
                     <div class="submit-card">
@@ -182,11 +197,11 @@
                                     <option value="audio">Audio</option>
                                     <option value="other">Other</option>
                                 </select>
-                            </d
-                                            <div class="form-group">
-                    <label for="organization">Organization / Group (Optional)</label>
-                    <input type="text" name="organization" id="organization" placeholder="e.g., MEChA de Yale, La Casa Cultural" data-testid="submit-org">
-                </div>iv>
+                            </div>
+                            <div class="form-group">
+                                <label for="organization">Organization / Group (Optional)</label>
+                                <input type="text" name="organization" id="organization" placeholder="e.g., MEChA de Yale, La Casa Cultural" data-testid="submit-org">
+                            </div>
                             <div class="form-group">
                                 <label for="title">Title / Caption</label>
                                 <input type="text" name="title" id="title" placeholder="Brief title for your submission" required data-testid="submit-title">
@@ -253,7 +268,7 @@
                     description: document.getElementById('description').value,
                     media_type: document.getElementById('contribution-type').value,
                     submitter_name: document.getElementById('name').value,
-                                organization: document.getElementById('organization').value || null,
+                    organization: document.getElementById('organization').value || null,
                     submitter_email: document.getElementById('email').value,
                     file_link: document.getElementById('submission-link').value || null,
                     status: 'pending',
